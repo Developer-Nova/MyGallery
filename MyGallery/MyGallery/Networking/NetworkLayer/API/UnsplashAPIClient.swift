@@ -1,5 +1,5 @@
 //
-//  UnSplashAPIClient.swift
+//  UnsplashAPIClient.swift
 //  MyGallery
 //
 //  Created by Nova on 6/2/24.
@@ -8,16 +8,16 @@
 import Foundation
 
 final class UnsplashAPIClient: APIClient {
-    private let baseURL: URL
+    private let baseURL: String
     private let session: URLSession
     
-    init(baseURL: URL, session: URLSession = .shared) {
+    init(baseURL: String, session: URLSession = .shared) {
         self.baseURL = baseURL
         self.session = session
     }
     
-    func sendRequest<T>(endpoint: String, method: HTTPMethod, completion: @escaping (Result<T, APIError>) -> Void) where T : Decodable {
-        guard let url = URL(string: endpoint, relativeTo: baseURL) else {
+    func sendRequest<T: Decodable>(endpoint: String, method: HTTPMethod, completion: @escaping (Result<[T], APIError>) -> Void) {
+        guard let url = URL(string: baseURL + endpoint) else {
             completion(.failure(.invalidURL))
             return
         }
@@ -26,14 +26,20 @@ final class UnsplashAPIClient: APIClient {
         request.httpMethod = method.rawValue
         
         let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
+            if error != nil {
                 completion(.failure(.requestFailed))
                 return
             }
             
-            guard let response = response else { return }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(.unknown))
+                return
+            }
             
-            // todo: 각 response 처리 필요
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(.badResponse(statusCode: httpResponse.statusCode)))
+                return
+            }
             
             guard let data = data else {
                 completion(.failure(.invalidResponse))
@@ -42,10 +48,10 @@ final class UnsplashAPIClient: APIClient {
             
             do {
                 let decoder = JSONDecoder()
-                let decodedData = try decoder.decode(T.self, from: data)
+                let decodedData = try decoder.decode([T].self, from: data)
                 completion(.success(decodedData))
-            } catch {
-                completion(.failure(.decodingFailed))
+            } catch let error {
+                completion(.failure(.decodingFailed(error)))
             }
         }
         

@@ -15,7 +15,7 @@
 		3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745302C0C960E0036BD42 /* HTTPMethod.swift */; };
 		3C6745332C0C98CB0036BD42 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745322C0C98CB0036BD42 /* APIError.swift */; };
 		3C6745372C0C9B320036BD42 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745362C0C9B320036BD42 /* APIClient.swift */; };
-		3C6745392C0C9D6F0036BD42 /* UnSplashAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745382C0C9D6F0036BD42 /* UnSplashAPIClient.swift */; };
+		3C6745392C0C9D6F0036BD42 /* UnsplashAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745382C0C9D6F0036BD42 /* UnsplashAPIClient.swift */; };
 		3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +29,7 @@
 		3C6745302C0C960E0036BD42 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		3C6745322C0C98CB0036BD42 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		3C6745362C0C9B320036BD42 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		3C6745382C0C9D6F0036BD42 /* UnSplashAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSplashAPIClient.swift; sourceTree = "<group>"; };
+		3C6745382C0C9D6F0036BD42 /* UnsplashAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIClient.swift; sourceTree = "<group>"; };
 		3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,8 +102,8 @@
 			children = (
 				3C6745302C0C960E0036BD42 /* HTTPMethod.swift */,
 				3C6745342C0C98CF0036BD42 /* Error */,
-				3C6745352C0C9AD70036BD42 /* API */,
 				3C67453A2C0C9E130036BD42 /* EndPoint */,
+				3C6745352C0C9AD70036BD42 /* API */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				3C6745362C0C9B320036BD42 /* APIClient.swift */,
-				3C6745382C0C9D6F0036BD42 /* UnSplashAPIClient.swift */,
+				3C6745382C0C9D6F0036BD42 /* UnsplashAPIClient.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -203,7 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6745392C0C9D6F0036BD42 /* UnSplashAPIClient.swift in Sources */,
+				3C6745392C0C9D6F0036BD42 /* UnsplashAPIClient.swift in Sources */,
 				3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */,
 				3C2B893F2C09F9BA0069CCA6 /* PhotoElement.swift in Sources */,
 				3C2B89322C09F06A0069CCA6 /* ContentView.swift in Sources */,
