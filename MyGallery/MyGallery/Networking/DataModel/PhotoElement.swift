@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - PhotoElement
-struct PhotoElement: Codable {
+struct PhotoElement: Decodable {
     let id: String
     let alternativeSlugs: AlternativeSlug
     let createdAt: String
@@ -24,7 +24,7 @@ struct PhotoElement: Codable {
     let assetType: AssetType
     let user: User
     
-    enum AssetType: String, Codable {
+    enum AssetType: String, Decodable {
         case photo = "photo"
     }
     
@@ -47,12 +47,12 @@ struct PhotoElement: Codable {
 }
 
 // MARK: - AlternativeSlug
-struct AlternativeSlug: Codable {
+struct AlternativeSlug: Decodable {
     let ko: String
 }
 
 // MARK: - Urls
-struct Urls: Codable {
+struct Urls: Decodable {
     let raw: String
     let full: String
     let regular: String
@@ -71,7 +71,7 @@ struct Urls: Codable {
 }
 
 // MARK: - Links
-struct Links: Codable {
+struct Links: Decodable {
     let downloadLocation: String
     
     private enum CodingKeys: String, CodingKey {
@@ -80,7 +80,7 @@ struct Links: Codable {
 }
 
 // MARK: - User
-struct User: Codable {
+struct User: Decodable {
     let id: String
     let username: String
     let name: String
@@ -107,7 +107,7 @@ struct User: Codable {
 }
 
 // MARK: - UserLinks
-struct UserLinks: Codable {
+struct UserLinks: Decodable {
     let linksSelf: String
     let html: String
     let photos: String
@@ -128,14 +128,14 @@ struct UserLinks: Codable {
 }
 
 // MARK: - ProfileImage
-struct ProfileImage: Codable {
+struct ProfileImage: Decodable {
     let small: String
     let medium: String
     let large: String
 }
 
 // MARK: - Social
-struct Social: Codable {
+struct Social: Decodable {
     let instagramUsername: String?
     let twitterUsername: String?
     
