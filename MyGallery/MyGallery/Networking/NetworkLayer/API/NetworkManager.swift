@@ -1,5 +1,5 @@
 //
-//  UnsplashAPIClient.swift
+//  NetworkManager.swift
 //  MyGallery
 //
 //  Created by Nova on 6/2/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class UnsplashAPIClient: APIClient {
+final class NetworkManager: APIClient {
     private let baseURL: String
     private let session: URLSession
     
