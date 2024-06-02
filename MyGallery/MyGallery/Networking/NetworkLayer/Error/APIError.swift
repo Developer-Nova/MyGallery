@@ -9,5 +9,7 @@ enum APIError: Error {
     case invalidURL
     case requestFailed
     case invalidResponse
-    case decodingFailed
+    case decodingFailed(Error)
+    case badResponse(statusCode: Int)
+    case unknown
 }
