@@ -10,7 +10,7 @@ import Foundation
 // MARK: - PhotoElement
 struct PhotoElement: Codable {
     let id: String
-    let alternativeSlugs: AlternativeSlugs
+    let alternativeSlugs: AlternativeSlug
     let createdAt: Date
     let width: Int
     let height: Int
@@ -23,8 +23,12 @@ struct PhotoElement: Codable {
     let likes: Int
     let assetType: AssetType
     let user: User
-
-    enum CodingKeys: String, CodingKey {
+    
+    enum AssetType: String, Codable {
+        case photo = "photo"
+    }
+    
+    private enum CodingKeys: String, CodingKey {
         case id
         case alternativeSlugs = "alternative_slugs"
         case createdAt = "created_at"
@@ -42,13 +46,9 @@ struct PhotoElement: Codable {
     }
 }
 
-// MARK: - AlternativeSlugs
-struct AlternativeSlugs: Codable {
+// MARK: - AlternativeSlug
+struct AlternativeSlug: Codable {
     let ko: String
-}
-
-enum AssetType: String, Codable {
-    case photo = "photo"
 }
 
 // MARK: - Urls
@@ -59,8 +59,8 @@ struct Urls: Codable {
     let small: String
     let thumb: String
     let smallS3: String
-
-    enum CodingKeys: String, CodingKey {
+    
+    private enum CodingKeys: String, CodingKey {
         case raw
         case full
         case regular
@@ -73,8 +73,8 @@ struct Urls: Codable {
 // MARK: - Links
 struct Links: Codable {
     let downloadLocation: String
-
-    enum CodingKeys: String, CodingKey {
+    
+    private enum CodingKeys: String, CodingKey {
         case downloadLocation = "download_location"
     }
 }
@@ -91,8 +91,8 @@ struct User: Codable {
     let totalPhotos: Int
     let totalIllustrations: Int
     let social: Social
-
-    enum CodingKeys: String, CodingKey {
+    
+    private enum CodingKeys: String, CodingKey {
         case id
         case username
         case name
@@ -115,8 +115,8 @@ struct UserLinks: Codable {
     let portfolio: String
     let following: String
     let followers: String
-
-    enum CodingKeys: String, CodingKey {
+    
+    private enum CodingKeys: String, CodingKey {
         case linksSelf = "self"
         case html
         case photos
@@ -138,8 +138,8 @@ struct ProfileImage: Codable {
 struct Social: Codable {
     let instagramUsername: String?
     let twitterUsername: String?
-
-    enum CodingKeys: String, CodingKey {
+    
+    private enum CodingKeys: String, CodingKey {
         case instagramUsername = "instagram_username"
         case twitterUsername = "twitter_username"
     }
