@@ -11,7 +11,7 @@ import Foundation
 struct PhotoElement: Codable {
     let id: String
     let alternativeSlugs: AlternativeSlug
-    let createdAt: Date
+    let createdAt: String
     let width: Int
     let height: Int
     let color: String
