@@ -6,5 +6,5 @@
 //
 
 protocol APIClient {
-    func sendRequest<T: Decodable>(endpoint: String, method: HTTPMethod, completion: @escaping (Result<T, APIError>) -> Void)
+    func sendRequest<T: Decodable>(endpoint: String, method: HTTPMethod, completion: @escaping (Result<[T], APIError>) -> Void)
 }
