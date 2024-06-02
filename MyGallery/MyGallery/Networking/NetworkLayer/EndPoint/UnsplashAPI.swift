@@ -8,7 +8,7 @@
 import Foundation
 
 struct UnsplashAPI {
-    static let baseURL = URL(string: "https://api.unsplash.com")
+    static let baseURL = "https://api.unsplash.com"
     
     struct Endpoints {
         static let photos = "/photos"
