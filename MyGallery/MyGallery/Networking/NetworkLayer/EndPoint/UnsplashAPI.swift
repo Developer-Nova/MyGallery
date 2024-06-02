@@ -12,5 +12,6 @@ struct UnsplashAPI {
     
     struct Endpoints {
         static let photos = "/photos"
+        static let random = "/photos/random"
     }
 }
