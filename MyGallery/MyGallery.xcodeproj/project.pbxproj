@@ -31,6 +31,8 @@
 		3C6745362C0C9B320036BD42 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		3C6745382C0C9D6F0036BD42 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
+		3CD8399F2C0DD5FE005BC2F0 /* APIKey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKey.xcconfig; sourceTree = "<group>"; };
+		3CD839A02C0DD66C005BC2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 		3C2B89232C09F06A0069CCA6 = {
 			isa = PBXGroup;
 			children = (
+				3CD8399F2C0DD5FE005BC2F0 /* APIKey.xcconfig */,
 				3C2B892E2C09F06A0069CCA6 /* MyGallery */,
 				3C2B892D2C09F06A0069CCA6 /* Products */,
 			);
@@ -63,6 +66,7 @@
 		3C2B892E2C09F06A0069CCA6 /* MyGallery */ = {
 			isa = PBXGroup;
 			children = (
+				3CD839A02C0DD66C005BC2F0 /* Info.plist */,
 				3C2B892F2C09F06A0069CCA6 /* MyGalleryApp.swift */,
 				3C2B89312C09F06A0069CCA6 /* ContentView.swift */,
 				3C2B893D2C09F9A00069CCA6 /* Networking */,
@@ -102,7 +106,7 @@
 			children = (
 				3C6745302C0C960E0036BD42 /* HTTPMethod.swift */,
 				3C6745342C0C98CF0036BD42 /* Error */,
-				3C67453A2C0C9E130036BD42 /* EndPoint */,
+				3C67453A2C0C9E130036BD42 /* Endpoint */,
 				3C6745352C0C9AD70036BD42 /* API */,
 			);
 			path = NetworkLayer;
@@ -125,12 +129,12 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		3C67453A2C0C9E130036BD42 /* EndPoint */ = {
+		3C67453A2C0C9E130036BD42 /* Endpoint */ = {
 			isa = PBXGroup;
 			children = (
 				3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */,
 			);
-			path = EndPoint;
+			path = Endpoint;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +286,7 @@
 		};
 		3C2B89392C09F06B0069CCA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CD8399F2C0DD5FE005BC2F0 /* APIKey.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -347,6 +352,7 @@
 				DEVELOPMENT_TEAM = DX425N2A26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyGallery/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "마이갤러리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -383,6 +389,7 @@
 				DEVELOPMENT_TEAM = DX425N2A26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyGallery/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "마이갤러리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
