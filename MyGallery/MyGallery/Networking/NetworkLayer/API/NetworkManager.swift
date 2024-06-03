@@ -8,16 +8,16 @@
 import Foundation
 
 final class NetworkManager: APIClient {
-    private let baseURL: String
+    private let baseURL: URL
     private let session: URLSession
     
-    init(baseURL: String, session: URLSession = .shared) {
+    init(baseURL: URL, session: URLSession = .shared) {
         self.baseURL = baseURL
         self.session = session
     }
     
     func sendRequest<T: Decodable>(endpoint: String, method: HTTPMethod, completion: @escaping (Result<[T], APIError>) -> Void) {
-        guard let url = URL(string: baseURL + endpoint) else {
+        guard let url = URL(string: endpoint, relativeTo: baseURL) else {
             completion(.failure(.invalidURL))
             return
         }
