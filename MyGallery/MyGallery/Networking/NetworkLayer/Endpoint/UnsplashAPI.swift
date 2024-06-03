@@ -8,10 +8,17 @@
 import Foundation
 
 struct UnsplashAPI {
-    static var baseURL = URL(string: "https://api.unsplash.com")
+    static let baseURL = URL(string: "https://api.unsplash.com")
+    private static var accessKey: String {
+        guard let key = Bundle.main.infoDictionary?["UnsplashAPIKey"] as? String else {
+            fatalError("APIKey is incorrect.")
+        }
+        
+        return key
+    }
     
     struct Endpoints {
-        static let photos = "/photos"
-        static let random = "/photos/random"
+        static let photos = "/photos + \(UnsplashAPI.accessKey)"
+        static let random = "/photos/random + \(UnsplashAPI.accessKey)"
     }
 }
