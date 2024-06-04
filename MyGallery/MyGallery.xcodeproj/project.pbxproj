@@ -21,6 +21,7 @@
 		3CD839A42C0F1F9B005BC2F0 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A32C0F1F9B005BC2F0 /* Responsable.swift */; };
 		3CD839A72C0F23FC005BC2F0 /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */; };
 		3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A82C0F26DA005BC2F0 /* URLError.swift */; };
+		3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		3CD839A32C0F1F9B005BC2F0 /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
 		3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
 		3CD839A82C0F26DA005BC2F0 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
+		3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */,
 				3CD839A12C0F1F3D005BC2F0 /* Requestable.swift */,
 				3CD839A32C0F1F9B005BC2F0 /* Responsable.swift */,
+				3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */,
 			);
 			path = Endpoint;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 				3C6745392C0C9D6F0036BD42 /* NetworkManager.swift in Sources */,
 				3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */,
 				3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */,
+				3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */,
 				3C2B893F2C09F9BA0069CCA6 /* PhotoObject.swift in Sources */,
 				3CD839A22C0F1F3D005BC2F0 /* Requestable.swift in Sources */,
 				3C2B89322C09F06A0069CCA6 /* ContentView.swift in Sources */,
