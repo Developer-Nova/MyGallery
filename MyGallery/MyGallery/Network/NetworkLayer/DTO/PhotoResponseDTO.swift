@@ -1,5 +1,5 @@
 //
-//  PhotoObject.swift
+//  PhotoResponseDTO.swift
 //  MyGallery
 //
 //  Created by Nova on 5/31/24.
@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - PhotoObject
-struct PhotoObject: Decodable {
+struct PhotoResponseDTO: Decodable {
     let id: String
     let alternativeSlugs: AlternativeSlug
     let createdAt: String
