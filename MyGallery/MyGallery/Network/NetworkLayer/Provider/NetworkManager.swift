@@ -16,7 +16,7 @@ final class NetworkManager: APIClient {
         self.session = session
     }
     
-    func sendRequest<T: Decodable>(endpoint: String, method: HTTPMethod, completion: @escaping (Result<[T], APIError>) -> Void) {
+    func request<T>(endpoint: String, method: HTTPMethod = .get, completion: @escaping (Result<T, APIError>) -> Void) where T: Decodable {
         guard let url = URL(string: endpoint, relativeTo: baseURL) else {
             completion(.failure(.invalidURL))
             return
@@ -25,8 +25,8 @@ final class NetworkManager: APIClient {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
-        let task = session.dataTask(with: request) { data, response, error in
-            if error != nil {
+        session.dataTask(with: request) { data, response, error in
+            guard error == nil else {
                 completion(.failure(.requestFailed))
                 return
             }
@@ -46,15 +46,13 @@ final class NetworkManager: APIClient {
                 return
             }
             
-            do {
-                let decoder = JSONDecoder()
-                let decodedData = try decoder.decode([T].self, from: data)
-                completion(.success(decodedData))
-            } catch let error {
-                completion(.failure(.decodingFailed(error)))
+            
+            guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
+                completion(.failure(.decodingFailed))
+                return
             }
-        }
-        
-        task.resume()
+            
+            completion(.success(decodedData))
+        }.resume()
     }
 }
