@@ -22,6 +22,7 @@
 		3CD839A72C0F23FC005BC2F0 /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */; };
 		3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A82C0F26DA005BC2F0 /* URLError.swift */; };
 		3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */; };
+		3CD839AD2C0F3138005BC2F0 /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AC2C0F3138005BC2F0 /* Provider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
 		3CD839A82C0F26DA005BC2F0 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
 		3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		3CD839AC2C0F3138005BC2F0 /* Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			children = (
 				3C6745362C0C9B320036BD42 /* APIClient.swift */,
 				3C6745382C0C9D6F0036BD42 /* NetworkManager.swift */,
+				3CD839AC2C0F3138005BC2F0 /* Provider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			files = (
 				3C6745392C0C9D6F0036BD42 /* NetworkManager.swift in Sources */,
 				3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */,
+				3CD839AD2C0F3138005BC2F0 /* Provider.swift in Sources */,
 				3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */,
 				3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */,
 				3C2B893F2C09F9BA0069CCA6 /* PhotoObject.swift in Sources */,

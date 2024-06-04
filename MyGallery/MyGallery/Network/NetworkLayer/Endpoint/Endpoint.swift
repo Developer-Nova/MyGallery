@@ -5,12 +5,11 @@
 //  Created by Nova on 6/4/24.
 //
 
-import Foundation
-
 protocol RequestResponsable: Requestable, Responsable { }
 
-class Endpoint<Response>: RequestResponsable {
-    typealias Response = Response
+struct Endpoint<R>: RequestResponsable {
+    typealias Response = R
+    
     var baseURL: String
     var path: String
     var method: HTTPMethod
