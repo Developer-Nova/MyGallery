@@ -4,6 +4,7 @@
 //
 //  Created by Nova on 6/2/24.
 //
+import Foundation
 
 enum APIError: Error {
     case invalidURL
@@ -11,7 +12,7 @@ enum APIError: Error {
     case invalidResponse
     case decodingFailed
     case badResponse(statusCode: Int)
-    case isEmpty
+    case emptyData
     case unknown
 }
 
