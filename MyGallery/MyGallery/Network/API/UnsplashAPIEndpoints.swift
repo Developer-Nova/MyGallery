@@ -5,8 +5,6 @@
 //  Created by Nova on 6/5/24.
 //
 
-import Foundation
-
 enum UnsplashAPIEndpoints {
     // MARK: - Host
     private static let baseURL = UnsplashAPI.baseURL
