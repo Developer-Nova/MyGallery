@@ -37,7 +37,7 @@ struct ProviderImpl: Provider {
             }
             
             guard let data = data else {
-                completion(.failure(.invalidResponse))
+                completion(.failure(.isEmpty))
                 return
             }
             
