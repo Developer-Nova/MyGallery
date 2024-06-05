@@ -1,12 +1,12 @@
 //
-//  APIError.swift
+//  NetworkError.swift
 //  MyGallery
 //
 //  Created by Nova on 6/2/24.
 //
 import Foundation
 
-enum APIError: Error {
+enum NetworkError: Error {
     case invalidURL
     case requestFailed
     case invalidResponse
@@ -16,7 +16,7 @@ enum APIError: Error {
     case unknown
 }
 
-extension APIError: LocalizedError {
+extension NetworkError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:

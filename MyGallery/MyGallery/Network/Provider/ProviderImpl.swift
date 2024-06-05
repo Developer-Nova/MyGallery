@@ -14,7 +14,7 @@ struct ProviderImpl: Provider {
         self.session = session
     }
     
-    func request<R: Decodable, E: RequestResponsable>(endpoint: E, completion: @escaping (Result<R, APIError>) -> Void) where E.Response == R  {
+    func request<R: Decodable, E: RequestResponsable>(endpoint: E, completion: @escaping (Result<R, NetworkError>) -> Void) where E.Response == R  {
         guard let urlRequest = try? endpoint.createURLRequest() else {
             completion(.failure(.requestFailed))
             return
@@ -45,7 +45,7 @@ struct ProviderImpl: Provider {
                 let decoded = try JSONDecoder().decode(R.self, from: data)
                 completion(.success(decoded))
             } catch {
-                completion(.failure(APIError.decodingFailed))
+                completion(.failure(NetworkError.decodingFailed))
             }
             
         }.resume()

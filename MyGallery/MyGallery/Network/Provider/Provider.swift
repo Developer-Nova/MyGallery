@@ -6,5 +6,5 @@
 //
 
 protocol Provider {
-    func request<R: Decodable, E: RequestResponsable>(endpoint: E, completion: @escaping (Result<R, APIError>) -> Void) where E.Response == R
+    func request<R: Decodable, E: RequestResponsable>(endpoint: E, completion: @escaping (Result<R, NetworkError>) -> Void) where E.Response == R
 }
