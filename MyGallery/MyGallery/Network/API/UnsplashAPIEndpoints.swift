@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UnsplashAPIEndpoints {
+enum UnsplashAPIEndpoints {
     // MARK: - Host
     private static let baseURL = UnsplashAPI.baseURL
     
@@ -17,8 +17,6 @@ struct UnsplashAPIEndpoints {
     // MARK: - Path
     private static let photos = UnsplashAPI.Path.photos
     private static let randoms = UnsplashAPI.Path.random
-    
-    private init() { }
     
     static func getNewPhotoList(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
         return Endpoint(
