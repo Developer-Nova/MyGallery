@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - PhotoObject
+// MARK: - PhotoResponseDTO
 struct PhotoResponseDTO: Decodable {
     let id: String
     let alternativeSlugs: AlternativeSlug
