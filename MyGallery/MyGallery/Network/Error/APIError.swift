@@ -11,5 +11,6 @@ enum APIError: Error {
     case invalidResponse
     case decodingFailed
     case badResponse(statusCode: Int)
+    case isEmpty
     case unknown
 }
