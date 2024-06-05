@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProviderImpl: Provider {
+struct NetworkProvider: Providable {
     let session: URLSession
     
     init(session: URLSession = .shared) {
