@@ -1,5 +1,5 @@
 //
-//  Provider.swift
+//  Providable.swift
 //  MyGallery
 //
 //  Created by Nova on 6/4/24.

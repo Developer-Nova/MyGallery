@@ -1,5 +1,5 @@
 //
-//  ProviderImpl.swift
+//  NetworkProvider.swift
 //  MyGallery
 //
 //  Created by Nova on 6/4/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkProvider: Providable {
+final class NetworkProvider: Providable {
     let session: URLSession
     
     init(session: URLSession = .shared) {
