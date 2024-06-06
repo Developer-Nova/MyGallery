@@ -42,8 +42,8 @@ final class NetworkProvider: Providable {
             }
             
             do {
-                let decoded = try JSONDecoder().decode(R.self, from: data)
-                completion(.success(decoded))
+                let decodedData = try JSONDecoder().decode(R.self, from: data)
+                completion(.success(decodedData))
             } catch {
                 completion(.failure(NetworkError.decodingFailed))
             }
