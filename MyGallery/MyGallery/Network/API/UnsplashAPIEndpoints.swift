@@ -16,7 +16,7 @@ enum UnsplashAPIEndpoints {
     private static let photos = UnsplashAPI.Path.photos
     private static let randoms = UnsplashAPI.Path.random
     
-    static func getNewPhotoList(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
+    static func getNewPhotoListEndpoint(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
         return Endpoint(
             baseURL: baseURL,
             path: photos,
@@ -26,7 +26,7 @@ enum UnsplashAPIEndpoints {
         )
     }
     
-    static func getRandomPhotoList(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
+    static func getRandomPhotoListEndpoint(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
         return Endpoint(
             baseURL: baseURL,
             path: randoms,
