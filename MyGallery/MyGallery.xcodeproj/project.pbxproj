@@ -11,6 +11,19 @@
 		3C2B89322C09F06A0069CCA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B89312C09F06A0069CCA6 /* ContentView.swift */; };
 		3C2B89342C09F06B0069CCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2B89332C09F06B0069CCA6 /* Assets.xcassets */; };
 		3C2B89372C09F06B0069CCA6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2B89362C09F06B0069CCA6 /* Preview Assets.xcassets */; };
+		3C2B893F2C09F9BA0069CCA6 /* PhotoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B893E2C09F9BA0069CCA6 /* PhotoResponseDTO.swift */; };
+		3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745302C0C960E0036BD42 /* HTTPMethod.swift */; };
+		3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745322C0C98CB0036BD42 /* NetworkError.swift */; };
+		3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */; };
+		3CD839A22C0F1F3D005BC2F0 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A12C0F1F3D005BC2F0 /* Requestable.swift */; };
+		3CD839A42C0F1F9B005BC2F0 /* Responsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A32C0F1F9B005BC2F0 /* Responsable.swift */; };
+		3CD839A72C0F23FC005BC2F0 /* Encodable+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */; };
+		3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A82C0F26DA005BC2F0 /* URLError.swift */; };
+		3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */; };
+		3CD839AD2C0F3138005BC2F0 /* Providable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AC2C0F3138005BC2F0 /* Providable.swift */; };
+		3CD839AF2C0F5B08005BC2F0 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */; };
+		3CD839B12C0F5BFD005BC2F0 /* PhotoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */; };
+		3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +32,21 @@
 		3C2B89312C09F06A0069CCA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3C2B89332C09F06B0069CCA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C2B89362C09F06B0069CCA6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3C2B893E2C09F9BA0069CCA6 /* PhotoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponseDTO.swift; sourceTree = "<group>"; };
+		3C6745302C0C960E0036BD42 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		3C6745322C0C98CB0036BD42 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
+		3CD8399F2C0DD5FE005BC2F0 /* APIKey.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = APIKey.xcconfig; sourceTree = "<group>"; };
+		3CD839A02C0DD66C005BC2F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3CD839A12C0F1F3D005BC2F0 /* Requestable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		3CD839A32C0F1F9B005BC2F0 /* Responsable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responsable.swift; sourceTree = "<group>"; };
+		3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+.swift"; sourceTree = "<group>"; };
+		3CD839A82C0F26DA005BC2F0 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
+		3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		3CD839AC2C0F3138005BC2F0 /* Providable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Providable.swift; sourceTree = "<group>"; };
+		3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequestDTO.swift; sourceTree = "<group>"; };
+		3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIEndpoints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +81,10 @@
 			children = (
 				3C2B892F2C09F06A0069CCA6 /* MyGalleryApp.swift */,
 				3C2B89312C09F06A0069CCA6 /* ContentView.swift */,
+				3C2B893D2C09F9A00069CCA6 /* Network */,
+				3CD839A52C0F23D1005BC2F0 /* Extensions */,
+				3CD839B52C108C02005BC2F0 /* Secret */,
+				3CD839A02C0DD66C005BC2F0 /* Info.plist */,
 				3C2B89332C09F06B0069CCA6 /* Assets.xcassets */,
 				3C2B89352C09F06B0069CCA6 /* Preview Content */,
 			);
@@ -65,6 +97,81 @@
 				3C2B89362C09F06B0069CCA6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3C2B893D2C09F9A00069CCA6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3C67452E2C0C94250036BD42 /* DTO */,
+				3C6745342C0C98CF0036BD42 /* Error */,
+				3C67453A2C0C9E130036BD42 /* Endpoint */,
+				3C6745352C0C9AD70036BD42 /* Provider */,
+				3CD839B22C108209005BC2F0 /* API */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3C67452E2C0C94250036BD42 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */,
+				3C2B893E2C09F9BA0069CCA6 /* PhotoResponseDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		3C6745342C0C98CF0036BD42 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				3C6745322C0C98CB0036BD42 /* NetworkError.swift */,
+				3CD839A82C0F26DA005BC2F0 /* URLError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		3C6745352C0C9AD70036BD42 /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				3CD839AC2C0F3138005BC2F0 /* Providable.swift */,
+				3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
+		3C67453A2C0C9E130036BD42 /* Endpoint */ = {
+			isa = PBXGroup;
+			children = (
+				3C6745302C0C960E0036BD42 /* HTTPMethod.swift */,
+				3CD839A12C0F1F3D005BC2F0 /* Requestable.swift */,
+				3CD839A32C0F1F9B005BC2F0 /* Responsable.swift */,
+				3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */,
+			);
+			path = Endpoint;
+			sourceTree = "<group>";
+		};
+		3CD839A52C0F23D1005BC2F0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3CD839A62C0F23FC005BC2F0 /* Encodable+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3CD839B22C108209005BC2F0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */,
+				3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		3CD839B52C108C02005BC2F0 /* Secret */ = {
+			isa = PBXGroup;
+			children = (
+				3CD8399F2C0DD5FE005BC2F0 /* APIKey.xcconfig */,
+			);
+			path = Secret;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +244,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */,
+				3CD839AD2C0F3138005BC2F0 /* Providable.swift in Sources */,
+				3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */,
+				3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */,
+				3C2B893F2C09F9BA0069CCA6 /* PhotoResponseDTO.swift in Sources */,
+				3CD839A22C0F1F3D005BC2F0 /* Requestable.swift in Sources */,
 				3C2B89322C09F06A0069CCA6 /* ContentView.swift in Sources */,
+				3CD839A72C0F23FC005BC2F0 /* Encodable+.swift in Sources */,
+				3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */,
+				3CD839AF2C0F5B08005BC2F0 /* NetworkProvider.swift in Sources */,
+				3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */,
+				3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */,
 				3C2B89302C09F06A0069CCA6 /* MyGalleryApp.swift in Sources */,
+				3CD839B12C0F5BFD005BC2F0 /* PhotoRequestDTO.swift in Sources */,
+				3CD839A42C0F1F9B005BC2F0 /* Responsable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +330,7 @@
 		};
 		3C2B89392C09F06B0069CCA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3CD8399F2C0DD5FE005BC2F0 /* APIKey.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -275,6 +396,7 @@
 				DEVELOPMENT_TEAM = DX425N2A26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyGallery/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "마이갤러리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -311,6 +433,7 @@
 				DEVELOPMENT_TEAM = DX425N2A26;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyGallery/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "마이갤러리";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
