@@ -8,5 +8,9 @@
 import Foundation
 
 final class HomeViewModel: ObservableObject {
+    @Published var selectedTab: Tab
     
+    init(selectedTab: Tab = .search) {
+        self.selectedTab = selectedTab
+    }
 }

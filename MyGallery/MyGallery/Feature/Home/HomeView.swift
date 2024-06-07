@@ -13,7 +13,17 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
-            
+            TabView(selection: $homeViewModel.selectedTab) {
+                SearchView()
+                    .tabItem {
+                        Image(
+                            homeViewModel.selectedTab == .search
+                            ? "search"
+                            : "search_selected"
+                        )
+                    }
+                    .tag(Tab.search)
+            } //: TabView
         } //: NavigationStack
     }
 }
