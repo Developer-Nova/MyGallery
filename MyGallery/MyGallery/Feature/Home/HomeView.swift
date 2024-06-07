@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var pathModel = Path()
+    @StateObject private var homeViewModel = HomeViewModel()
+    
     var body: some View {
-        VStack {
-           Text("HomeView")
-        }
-        .padding()
+        NavigationStack(path: $pathModel.paths) {
+            
+        } //: NavigationStack
     }
 }
 
