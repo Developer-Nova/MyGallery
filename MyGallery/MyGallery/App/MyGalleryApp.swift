@@ -12,6 +12,7 @@ struct MyGalleryApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .environment(\.backgroundColor, .customBlack0)
         }
     }
 }
