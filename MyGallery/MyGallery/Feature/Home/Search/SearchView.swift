@@ -15,4 +15,5 @@ struct SearchView: View {
 
 #Preview {
     SearchView()
+        .environment(\.backgroundColor, .customBlack0)
 }
