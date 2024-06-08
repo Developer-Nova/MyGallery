@@ -30,4 +30,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environment(\.backgroundColor, .customBlack0)
 }
