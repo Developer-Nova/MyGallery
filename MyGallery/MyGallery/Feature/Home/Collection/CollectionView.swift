@@ -9,10 +9,14 @@ import SwiftUI
 
 struct CollectionView: View {
     var body: some View {
-        Text("CollectionView")
+        VStack {
+            Text("CollectionView")
+        }
+        .applyBackgroundColor()
     }
 }
 
 #Preview {
     CollectionView()
+        .environment(\.backgroundColor, .customBlack0)
 }
