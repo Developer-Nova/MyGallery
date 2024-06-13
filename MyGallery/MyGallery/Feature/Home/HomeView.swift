@@ -36,6 +36,8 @@ struct HomeView: View {
     }
 }
 
+
+// MARK: - CustomTabBar
 private struct CustomTabBar: View {
     @ObservedObject private var homeViewModel: HomeViewModel
     
