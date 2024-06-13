@@ -12,24 +12,10 @@ enum UnsplashAPIEndpoints {
     // MARK: - APIKey
     private static let accessKey = UnsplashAPI.accessKey
     
-    // MARK: - Path
-    private static let photos = UnsplashAPI.Path.photos
-    private static let randoms = UnsplashAPI.Path.random
-    
-    static func getNewPhotoListEndpoint(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
+    static func getPhotoListEndpoint(query photoRequestDTO: PhotoRequestDTO? = nil, path: String) -> Endpoint<[PhotoResponseDTO]> {
         return Endpoint(
             baseURL: baseURL,
-            path: photos,
-            method: .get,
-            queryParameters: photoRequestDTO,
-            headers: accessKey
-        )
-    }
-    
-    static func getRandomPhotoListEndpoint(query photoRequestDTO: PhotoRequestDTO? = nil) -> Endpoint<[PhotoResponseDTO]> {
-        return Endpoint(
-            baseURL: baseURL,
-            path: randoms,
+            path: path,
             method: .get,
             queryParameters: photoRequestDTO,
             headers: accessKey
