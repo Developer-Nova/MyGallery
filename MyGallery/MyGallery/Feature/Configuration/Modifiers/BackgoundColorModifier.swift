@@ -12,7 +12,7 @@ struct BackgroundColorModifier: ViewModifier {
     
     func body(content: Content) -> some View {
         ZStack {
-            backgroundColor.edgesIgnoringSafeArea(.top)
+            backgroundColor.edgesIgnoringSafeArea(.vertical)
             content
         }
     }
