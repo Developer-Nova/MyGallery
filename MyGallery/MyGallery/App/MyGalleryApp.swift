@@ -11,7 +11,8 @@ import SwiftUI
 struct MyGalleryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
+                .environment(\.backgroundColor, .customBlack0)
         }
     }
 }
