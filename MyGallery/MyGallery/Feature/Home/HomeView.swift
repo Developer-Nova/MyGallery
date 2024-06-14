@@ -11,6 +11,10 @@ struct HomeView: View {
     @StateObject private var pathModel = Path()
     @StateObject private var homeViewModel = HomeViewModel()
     
+    init() {
+        UITabBar.appearance().backgroundImage = UIImage()
+    }
+    
     var body: some View {
         NavigationStack(path: $pathModel.paths) {
             ZStack {
