@@ -38,6 +38,7 @@
 		3CD839AF2C0F5B08005BC2F0 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */; };
 		3CD839B12C0F5BFD005BC2F0 /* PhotoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */; };
 		3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */; };
+		3CE0829B2C1B099000D72857 /* UnsplashAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0829A2C1B099000D72857 /* UnsplashAPIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequestDTO.swift; sourceTree = "<group>"; };
 		3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIEndpoints.swift; sourceTree = "<group>"; };
+		3CE0829A2C1B099000D72857 /* UnsplashAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +302,7 @@
 			children = (
 				3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */,
 				3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */,
+				3CE0829A2C1B099000D72857 /* UnsplashAPIManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */,
 				3C52241F2C173071007934F3 /* DetailView.swift in Sources */,
 				3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */,
+				3CE0829B2C1B099000D72857 /* UnsplashAPIManager.swift in Sources */,
 				3C38AD932C1366C2002A23CB /* SearchViewModel.swift in Sources */,
 				3C2B89302C09F06A0069CCA6 /* MyGalleryApp.swift in Sources */,
 				3CD337D22C14CCAC004B1744 /* Environment+.swift in Sources */,
