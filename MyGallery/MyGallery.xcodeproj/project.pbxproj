@@ -35,10 +35,9 @@
 		3CD839A92C0F26DA005BC2F0 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839A82C0F26DA005BC2F0 /* URLError.swift */; };
 		3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */; };
 		3CD839AD2C0F3138005BC2F0 /* Providable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AC2C0F3138005BC2F0 /* Providable.swift */; };
-		3CD839AF2C0F5B08005BC2F0 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */; };
 		3CD839B12C0F5BFD005BC2F0 /* PhotoRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */; };
 		3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */; };
-		3CE0829B2C1B099000D72857 /* UnsplashAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0829A2C1B099000D72857 /* UnsplashAPIManager.swift */; };
+		3CE0829B2C1B099000D72857 /* UnsplashNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0829A2C1B099000D72857 /* UnsplashNetworkProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,10 +72,9 @@
 		3CD839A82C0F26DA005BC2F0 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
 		3CD839AA2C0F3066005BC2F0 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		3CD839AC2C0F3138005BC2F0 /* Providable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Providable.swift; sourceTree = "<group>"; };
-		3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		3CD839B02C0F5BFD005BC2F0 /* PhotoRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRequestDTO.swift; sourceTree = "<group>"; };
 		3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIEndpoints.swift; sourceTree = "<group>"; };
-		3CE0829A2C1B099000D72857 /* UnsplashAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPIManager.swift; sourceTree = "<group>"; };
+		3CE0829A2C1B099000D72857 /* UnsplashNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashNetworkProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				3CD839AC2C0F3138005BC2F0 /* Providable.swift */,
-				3CD839AE2C0F5B08005BC2F0 /* NetworkProvider.swift */,
 			);
 			path = Provider;
 			sourceTree = "<group>";
@@ -302,7 +299,7 @@
 			children = (
 				3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */,
 				3CD839B32C108769005BC2F0 /* UnsplashAPIEndpoints.swift */,
-				3CE0829A2C1B099000D72857 /* UnsplashAPIManager.swift */,
+				3CE0829A2C1B099000D72857 /* UnsplashNetworkProvider.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -400,12 +397,11 @@
 				3C2B89322C09F06A0069CCA6 /* HomeView.swift in Sources */,
 				3CD839A72C0F23FC005BC2F0 /* Encodable+.swift in Sources */,
 				3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */,
-				3CD839AF2C0F5B08005BC2F0 /* NetworkProvider.swift in Sources */,
 				3C38AD8C2C13641B002A23CB /* Tab.swift in Sources */,
 				3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */,
 				3C52241F2C173071007934F3 /* DetailView.swift in Sources */,
 				3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */,
-				3CE0829B2C1B099000D72857 /* UnsplashAPIManager.swift in Sources */,
+				3CE0829B2C1B099000D72857 /* UnsplashNetworkProvider.swift in Sources */,
 				3C38AD932C1366C2002A23CB /* SearchViewModel.swift in Sources */,
 				3C2B89302C09F06A0069CCA6 /* MyGalleryApp.swift in Sources */,
 				3CD337D22C14CCAC004B1744 /* Environment+.swift in Sources */,
