@@ -12,11 +12,58 @@ struct SearchView: View {
     
     var body: some View {
         VStack {
-            // Todo - SearchBar 구현
+            SearchBarView(searchViewModel: searchViewModel)
             
             PhotoScrollView(searchViewModel: searchViewModel)
         } //: VStack
         .applyBackgroundColor()
+    }
+}
+
+// MARK: - SearchBarView
+private struct SearchBarView: View {
+    @ObservedObject private var searchViewModel: SearchViewModel
+    
+    fileprivate init(searchViewModel: SearchViewModel) {
+        self.searchViewModel = searchViewModel
+    }
+    
+    fileprivate var body: some View {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(Color.customGray2)
+            
+            TextField(
+                "Search",
+                text: $searchViewModel.searchText,
+                prompt: Text("Search for photos")
+                            .foregroundStyle(Color.customGray2)
+            )
+            .foregroundStyle(Color.customGray2)
+            .submitLabel(.search)
+            .onSubmit {
+                searchViewModel.getSearchPhotoList()
+            }
+            
+            if !searchViewModel.searchText.isEmpty {
+                Button(
+                    action: {
+                        searchViewModel.searchText = ""
+                        hideKeyboard()
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(Color.customGray2)
+                    }
+                )
+            }
+            
+        } //: HStack
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 25)
+                .foregroundStyle(Color.customGray1)
+        )
+        .padding()
     }
 }
 
