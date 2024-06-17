@@ -33,9 +33,10 @@ struct HomeView: View {
                     Spacer()
                     
                     CustomTabBar(homeViewModel: homeViewModel)
-                        .padding(.bottom, 5)
+                        .padding(.bottom)
                 } //: VStack
             } //: ZStack
+            .ignoresSafeArea(.keyboard)
         } //: NavigationStack
     }
 }
