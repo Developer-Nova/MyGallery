@@ -1,11 +1,11 @@
 //
-//  PhotoRequestDTO.swift
+//  NewPhotoListRequestDTO.swift
 //  MyGallery
 //
 //  Created by Nova on 6/4/24.
 //
 
-struct PhotoRequestDTO: Encodable { 
+struct NewPhotoListRequestDTO: RequestDTO {
     let page: Int = 1
     var perPage: Int = 30
     var orderBy: OrderBy = .popular
@@ -15,10 +15,10 @@ struct PhotoRequestDTO: Encodable {
         case perPage = "per_page"
         case orderBy = "order_by"
     }
-}
-
-enum OrderBy: String, Encodable {
-    case latest
-    case oldest
-    case popular
+    
+    enum OrderBy: String, Encodable {
+        case latest
+        case oldest
+        case popular
+    }
 }
