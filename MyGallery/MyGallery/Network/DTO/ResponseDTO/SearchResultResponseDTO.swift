@@ -27,7 +27,7 @@ struct SearchResultResponseDTO: ResponseDTO {
         let width: Int
         let height: Int
         let color: String
-        let blurHash: String
+        let blurHash: String?
         let description: String?
         let altDescription: String
         let urls: Urls
