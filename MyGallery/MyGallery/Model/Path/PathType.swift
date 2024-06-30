@@ -6,5 +6,5 @@
 //
 
 enum PathType: Hashable {
-    case descriptionView(photo: Photo)
+    case photoDescriptionView(photo: Photo)
 }
