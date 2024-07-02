@@ -6,9 +6,13 @@
 //
 
 struct NewPhotoListRequestDTO: RequestDTO {
-    let page: Int = 1
+    var page: Int? = 1
     var perPage: Int = 30
     var orderBy: OrderBy = .popular
+    
+    init(page: Int? = nil) {
+        self.page = page
+    }
     
     private enum CodingKeys: String, CodingKey {
         case page
