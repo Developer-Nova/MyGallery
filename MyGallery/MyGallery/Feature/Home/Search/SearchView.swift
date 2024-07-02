@@ -72,6 +72,7 @@ private struct SearchBarView: View {
 
 // MARK: - PhotoScrollView
 private struct PhotoScrollView: View {
+    @EnvironmentObject private var pathModel: Path
     @ObservedObject private var searchViewModel: SearchViewModel
     
     fileprivate init(searchViewModel: SearchViewModel) {
@@ -79,37 +80,27 @@ private struct PhotoScrollView: View {
     }
     
     fileprivate var body: some View {
-        ScrollView(.vertical) {
-            LazyVGrid(columns: searchViewModel.columns, spacing: 3) {
-                ForEach(searchViewModel.photoList, id: \.id) { item in
-                    GeometryReader { geometry in
-                        AsyncImage(url: URL(string: item.urls.regular)) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                    .frame(width: geometry.size.width, height: geometry.size.height)
-                            case .success(let image):
-                                image
+        if !searchViewModel.isEmptyImage {
+            ScrollView(.vertical) {
+                LazyVGrid(columns: searchViewModel.columns, spacing: 3) {
+                    ForEach(searchViewModel.photoList, id: \.id) { photo in
+                        Rectangle()
+                            .overlay {
+                                Image(uiImage: photo.image)
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: geometry.size.width, height: geometry.size.height)
-                                    .clipped()
-                            case .failure(_):
-                                Image(systemName: "xmark.circle")
-                                    .foregroundStyle(Color.red)
-                                    .frame(width: geometry.size.width, height: geometry.size.height)
-                            @unknown default:
-                                EmptyView()
                             }
-                        } //: AsyncImage
-                        .background(Color.gray)
-                    } //: GeometryReader
-                    .aspectRatio(0.7, contentMode: .fill)
-                } //: ForEach
-            } //: LazyVGrid
-        } //: ScrollView
-        .onAppear {
-            searchViewModel.getNewPhotoList()
+                            .aspectRatio(0.7, contentMode: .fill)
+                            .clipped()
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                pathModel.paths.append(.photoDescriptionView(photo: photo))
+                            }
+                    } //: ForEach
+                } //: LazyVGrid
+            } //: ScrollView
+        } else {
+            NoImagesView()
         }
     }
 }
