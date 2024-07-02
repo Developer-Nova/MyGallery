@@ -41,22 +41,25 @@ private struct SearchBarView: View {
             )
             .foregroundStyle(Color.customGray2)
             .submitLabel(.search)
+            .autocorrectionDisabled()
+            .onChange(of: searchViewModel.searchText) { _, newValue in
+                if newValue.isEmpty {
+                    searchViewModel.getNewPhotoList()
+                }
+            }
             .onSubmit {
                 searchViewModel.getSearchPhotoList()
             }
             
             if !searchViewModel.searchText.isEmpty {
-                Button(
-                    action: {
-                        searchViewModel.searchText = ""
-                        hideKeyboard()
-                    }, label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundStyle(Color.customGray2)
-                    }
-                )
+                Button(action: {
+                    searchViewModel.clearSearchBarAndLoadImages()
+                    hideKeyboard()
+                }, label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundStyle(Color.customGray2)
+                })
             }
-            
         } //: HStack
         .padding()
         .background(
