@@ -20,5 +20,5 @@ struct PhotoDescriptionView: View {
 }
 
 #Preview {
-    PhotoDescriptionView(photo: Photo(image: UIImage()))
+    PhotoDescriptionView(photo: .init(image: UIImage(systemName: "star.fill")!))
 }
