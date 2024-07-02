@@ -8,7 +8,11 @@
 import SwiftUI
 
 final class SearchViewModel: ObservableObject {
-    @Published var photoList = [PhotoResponseDTO]()
+    @Published var photoList = [Photo]()
+    @Published var searchText = ""
+    @Published private(set) var isLoading = false
+    @Published private(set) var isEmptyImage = false
+    
     private let networkProvider = NetworkProvider()
     
     var columns: [GridItem] {
