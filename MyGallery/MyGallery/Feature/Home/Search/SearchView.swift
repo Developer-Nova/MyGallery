@@ -8,14 +8,29 @@
 import SwiftUI
 
 struct SearchView: View {
+    @EnvironmentObject private var pathModel: Path
     @StateObject private var searchViewModel = SearchViewModel()
     
     var body: some View {
         VStack {
             SearchBarView(searchViewModel: searchViewModel)
-            
-            PhotoScrollView(searchViewModel: searchViewModel)
+        
+            if !searchViewModel.isLoading {
+                PhotoScrollView(searchViewModel: searchViewModel)
+            } else {
+                Spacer()
+                
+                ProgressView()
+                
+                Spacer()
+                
+                // Todo - custom progressview 에서 위아래 spacer 주기
+            }
         } //: VStack
+        .onAppear {
+            searchViewModel.clearSearchBarAndLoadImages()
+            searchViewModel.getNewPhotoList()
+        }
         .applyBackgroundColor()
     }
 }
