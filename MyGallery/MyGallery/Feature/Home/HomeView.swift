@@ -28,6 +28,14 @@ struct HomeView: View {
                     } //: Group
                     .toolbar(.hidden, for: .tabBar)
                 } //: TabView
+                .navigationDestination(for: PathType.self) { path in
+                    switch path {
+                    case .photoDescriptionView(let photo):
+                        PhotoDescriptionView(photo: photo) // Todo - photo 객체 넘겨주기
+
+                        // Todo - homeView 의 이미지를 선택했을때도 photo 객체 넘겨주기 DetailView 를 재사용하기 위함
+                    }
+                }
                 
                 VStack {
                     Spacer()
@@ -38,6 +46,7 @@ struct HomeView: View {
             } //: ZStack
             .ignoresSafeArea(.keyboard)
         } //: NavigationStack
+        .environmentObject(pathModel)
     }
 }
 
@@ -54,8 +63,7 @@ private struct CustomTabBar: View {
         HStack {
             Spacer()
             
-            Button (
-                action: {
+            Button (action: {
                     homeViewModel.selectedTab = .search
                 }, label: {
                     Image(
@@ -63,13 +71,11 @@ private struct CustomTabBar: View {
                         ? "search_selected"
                         : "search"
                     )
-                }
-            ) //: Button
+                }) //: Button
             
             Spacer()
             
-            Button (
-                action: {
+            Button (action: {
                     homeViewModel.selectedTab = .collection
                 }, label: {
                     Image(
@@ -77,8 +83,7 @@ private struct CustomTabBar: View {
                         ? "collection_selected"
                         : "collection"
                     )
-                }
-            ) //: Button
+                }) //: Button
             
             Spacer()
         } //: HStack
@@ -87,7 +92,7 @@ private struct CustomTabBar: View {
             RoundedRectangle(cornerRadius: 24)
                 .stroke(Color.white, lineWidth: 1.5)
                 .fill(Color.customBlack1)
-                .shadow(color: .white.opacity(0.1), radius: 8, y: 1)
+                .shadow(color: .white.opacity(0.5), radius: 4, y: 1)
         }
         .padding(.horizontal)
     }
