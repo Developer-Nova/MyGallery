@@ -21,6 +21,11 @@ final class SearchViewModel: ObservableObject {
         Array(repeating: .init(.flexible(), spacing: 3), count: 3)
     }
     
+    func clearSearchBarAndLoadImages() {
+        self.searchText = ""
+        self.isEmptyImage = false
+    }
+    
     func getNewPhotoList() {
         let requestDTO = NewPhotoListRequestDTO()
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos, type: [PhotoResponseDTO].self)
