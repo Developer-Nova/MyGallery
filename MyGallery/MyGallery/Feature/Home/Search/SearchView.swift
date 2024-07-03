@@ -14,17 +14,11 @@ struct SearchView: View {
     var body: some View {
         VStack {
             SearchBarView(searchViewModel: searchViewModel)
-        
+            
             if !searchViewModel.isLoading {
                 PhotoScrollView(searchViewModel: searchViewModel)
             } else {
-                Spacer()
-                
-                ProgressView()
-                
-                Spacer()
-                
-                // Todo - custom progressview 에서 위아래 spacer 주기
+                CustomProgressView()
             }
         } //: VStack
         .onAppear {
