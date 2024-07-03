@@ -8,7 +8,7 @@
 struct NewPhotoListRequestDTO: RequestDTO {
     var page: Int? = 1
     var perPage: Int = 30
-    var orderBy: OrderBy = .popular
+    var orderBy: OrderBy = .latest
     
     init(page: Int? = nil) {
         self.page = page

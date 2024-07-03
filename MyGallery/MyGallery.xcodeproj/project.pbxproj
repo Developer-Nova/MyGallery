@@ -29,6 +29,7 @@
 		3C5224212C17307E007934F3 /* PhotoDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5224202C17307E007934F3 /* PhotoDescriptionViewModel.swift */; };
 		3C623DE22C34296800E28A51 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C623DE12C34296800E28A51 /* NetworkService.swift */; };
 		3C623DE52C354A7500E28A51 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C623DE42C354A7500E28A51 /* CustomProgressView.swift */; };
+		3C623DE72C358FC800E28A51 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C623DE62C358FC800E28A51 /* Selection.swift */; };
 		3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745302C0C960E0036BD42 /* HTTPMethod.swift */; };
 		3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745322C0C98CB0036BD42 /* NetworkError.swift */; };
 		3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */; };
@@ -71,6 +72,7 @@
 		3C5224202C17307E007934F3 /* PhotoDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDescriptionViewModel.swift; sourceTree = "<group>"; };
 		3C623DE12C34296800E28A51 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3C623DE42C354A7500E28A51 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		3C623DE62C358FC800E28A51 /* Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		3C6745302C0C960E0036BD42 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		3C6745322C0C98CB0036BD42 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		3C2D9CB62C2174DE00415E73 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				3C623DE62C358FC800E28A51 /* Selection.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				3C2B89302C09F06A0069CCA6 /* MyGalleryApp.swift in Sources */,
 				3CD337D22C14CCAC004B1744 /* Environment+.swift in Sources */,
 				3CD839B12C0F5BFD005BC2F0 /* NewPhotoListRequestDTO.swift in Sources */,
+				3C623DE72C358FC800E28A51 /* Selection.swift in Sources */,
 				3C2D9CAD2C207B8900415E73 /* RequestDTO.swift in Sources */,
 				3C38AD962C137BE0002A23CB /* CollectionViewModel.swift in Sources */,
 				3CD337D02C14CA48004B1744 /* BackgroundColorKey.swift in Sources */,
