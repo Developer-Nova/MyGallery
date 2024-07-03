@@ -27,6 +27,7 @@
 		3C38AD982C137BEA002A23CB /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C38AD972C137BEA002A23CB /* CollectionView.swift */; };
 		3C52241F2C173071007934F3 /* PhotoDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C52241E2C173071007934F3 /* PhotoDescriptionView.swift */; };
 		3C5224212C17307E007934F3 /* PhotoDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5224202C17307E007934F3 /* PhotoDescriptionViewModel.swift */; };
+		3C623DE22C34296800E28A51 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C623DE12C34296800E28A51 /* NetworkService.swift */; };
 		3C6745312C0C960E0036BD42 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745302C0C960E0036BD42 /* HTTPMethod.swift */; };
 		3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6745322C0C98CB0036BD42 /* NetworkError.swift */; };
 		3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */; };
@@ -67,6 +68,7 @@
 		3C38AD972C137BEA002A23CB /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		3C52241E2C173071007934F3 /* PhotoDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDescriptionView.swift; sourceTree = "<group>"; };
 		3C5224202C17307E007934F3 /* PhotoDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDescriptionViewModel.swift; sourceTree = "<group>"; };
+		3C623DE12C34296800E28A51 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		3C6745302C0C960E0036BD42 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		3C6745322C0C98CB0036BD42 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		3C67453B2C0C9E4B0036BD42 /* UnsplashAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashAPI.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				3C1E8ADA2C13536300DF7172 /* App */,
 				3C1E8ADB2C13544300DF7172 /* Feature */,
+				3C623DE02C34294000E28A51 /* Service */,
 				3C2B893D2C09F9A00069CCA6 /* Network */,
 				3C38AD842C135F19002A23CB /* Model */,
 				3CD839A52C0F23D1005BC2F0 /* Extensions */,
@@ -266,6 +269,14 @@
 				3C5224202C17307E007934F3 /* PhotoDescriptionViewModel.swift */,
 			);
 			path = PhotoDescription;
+			sourceTree = "<group>";
+		};
+		3C623DE02C34294000E28A51 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				3C623DE12C34296800E28A51 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		3C67452E2C0C94250036BD42 /* DTO */ = {
@@ -457,6 +468,7 @@
 				3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */,
 				3C38AD8C2C13641B002A23CB /* Tab.swift in Sources */,
 				3C2D9CB52C20886F00415E73 /* SearchResultResponseDTO.swift in Sources */,
+				3C623DE22C34296800E28A51 /* NetworkService.swift in Sources */,
 				3CD839B42C108769005BC2F0 /* UnsplashAPIEndpoints.swift in Sources */,
 				3C52241F2C173071007934F3 /* PhotoDescriptionView.swift in Sources */,
 				3C6745332C0C98CB0036BD42 /* NetworkError.swift in Sources */,
