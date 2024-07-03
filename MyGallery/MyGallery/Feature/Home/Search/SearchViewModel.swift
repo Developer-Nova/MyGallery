@@ -14,7 +14,7 @@ final class SearchViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var isEmptyImage = false
     
-    private let networkProvider = NetworkProvider()
+    private let networkService = NetworkService.shared
     private var cancellables = Set<AnyCancellable>()
     
     var columns: [GridItem] {
@@ -27,15 +27,9 @@ final class SearchViewModel: ObservableObject {
     }
     
     func getNewPhotoList() {
-        let requestDTO = NewPhotoListRequestDTO()
-        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos, type: [PhotoResponseDTO].self)
-        
         self.isLoading = true
-        self.networkProvider.request(endpoint: endpoint)
-            .flatMap { photos in
-                Publishers.MergeMany(photos.map { self.conversionImage(with: $0.urls.small) })
-                    .collect()
-            }
+        
+        networkService.getNewPhotoList()
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -52,26 +46,9 @@ final class SearchViewModel: ObservableObject {
     }
     
     func getSearchPhotoList() {
-        let requestDTO = SearchPhotoListRequestDTO(query: searchText)
-        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.search, type: SearchResultResponseDTO.self)
-        
         self.isLoading = true
-        self.networkProvider.request(endpoint: endpoint)
-            .receive(on: DispatchQueue.main)
-            .flatMap { searchResult -> AnyPublisher<[UIImage], NetworkError> in
-                if searchResult.results.isEmpty {
-                    self.isEmptyImage = true
-                    return Just([])
-                        .setFailureType(to: NetworkError.self)
-                        .eraseToAnyPublisher()
-                }
-                
-                self.isEmptyImage = false
-                
-                return Publishers.MergeMany(searchResult.results.map { self.conversionImage(with: $0.urls.small)})
-                    .collect()
-                    .eraseToAnyPublisher()
-            }
+        
+        networkService.getSearchPhotoList(about: searchText)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -82,27 +59,14 @@ final class SearchViewModel: ObservableObject {
                     self.isLoading = false
                 }
             } receiveValue: { images in
-                self.photoList = images.map { Photo(image: $0) }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func conversionImage(with urlString: String) -> AnyPublisher<UIImage, NetworkError> {
-        guard let url = URL(string: urlString) else {
-            return Fail(error: NetworkError.invalidResponse).eraseToAnyPublisher()
-        }
-     
-        return networkProvider.request(url: url)
-            .tryMap { data in
-                guard let image = UIImage(data: data) else {
-                    throw NetworkError.invalidResponse
+                guard !images.isEmpty else {
+                    self.isEmptyImage = true
+                    return
                 }
                 
-                return image
+                self.isEmptyImage = false
+                self.photoList = images.map { Photo(image: $0) } // Todo - photo 객체 수정하기
             }
-            .mapError { _ in
-                NetworkError.unknown
-            }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
     }
 }
