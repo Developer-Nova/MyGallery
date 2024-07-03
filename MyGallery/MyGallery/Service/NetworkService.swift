@@ -15,8 +15,8 @@ final class NetworkService {
     
     private init() { }
     
-    func getNewPhotoList() -> AnyPublisher<[UIImage], NetworkError> {
-        let requestDTO = NewPhotoListRequestDTO()
+    func fetchNewPhotoList(page: Int) -> AnyPublisher<[UIImage], NetworkError> {
+        let requestDTO = NewPhotoListRequestDTO(page: page)
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos, type: [PhotoResponseDTO].self)
         
         return self.networkProvider.request(endpoint: endpoint)
@@ -27,8 +27,8 @@ final class NetworkService {
             .eraseToAnyPublisher()
     }
     
-    func getSearchPhotoList(about searchText: String) -> AnyPublisher<[UIImage], NetworkError> {
-        let requestDTO = SearchPhotoListRequestDTO(query: searchText)
+    func fetchSearchPhotoList(about searchText: String, page: Int) -> AnyPublisher<[UIImage], NetworkError> {
+        let requestDTO = SearchPhotoListRequestDTO(query: searchText, page: page)
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.search, type: SearchResultResponseDTO.self)
         
         return self.networkProvider.request(endpoint: endpoint)
@@ -54,7 +54,7 @@ final class NetworkService {
         return networkProvider.request(url: url)
             .tryMap { data in
                 guard let image = UIImage(data: data) else {
-                    throw NetworkError.invalidResponse
+                    throw NetworkError.unknown
                 }
                 
                 return image
