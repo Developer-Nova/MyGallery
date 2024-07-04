@@ -16,8 +16,8 @@ struct CustomProgressView: View {
             
             Circle()
                 .trim(from: 0.0, to: 0.6)
-                .stroke(Color.gray, lineWidth: 5)
-                .frame(width: 40, height: 40)
+                .stroke(Color.gray, lineWidth: 3)
+                .frame(width: 25, height: 25)
                 .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
                 .onAppear {
                     withAnimation(
