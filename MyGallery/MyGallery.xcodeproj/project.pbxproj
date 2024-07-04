@@ -284,12 +284,12 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		3C623DE32C354A6200E28A51 /* Custom */ = {
+		3C623DE32C354A6200E28A51 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
 				3C623DE42C354A7500E28A51 /* CustomProgressView.swift */,
 			);
-			path = Custom;
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 		3C67452E2C0C94250036BD42 /* DTO */ = {
@@ -359,7 +359,7 @@
 		3CD337CE2C14CA2B004B1744 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				3C623DE32C354A6200E28A51 /* Custom */,
+				3C623DE32C354A6200E28A51 /* CustomView */,
 				3CD337CC2C14CA07004B1744 /* Environment */,
 				3CD337CD2C14CA16004B1744 /* Modifier */,
 			);
