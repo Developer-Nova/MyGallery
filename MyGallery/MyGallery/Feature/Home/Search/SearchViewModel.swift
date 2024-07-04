@@ -75,13 +75,15 @@ extension SearchViewModel {
             .sink { completion in
                 switch completion {
                 case .finished:
-                    self.isLoading.toggle()
+                    break
                 case .failure(let error):
                     print(error)
-                    self.isLoading.toggle()
                 }
             } receiveValue: { images in
-                self.photoList.append(contentsOf: images.map { Photo(image: $0) })
+                withAnimation {
+                    self.isLoading.toggle()
+                    self.photoList.append(contentsOf: images.map { Photo(image: $0) })
+                }
             }
             .store(in: &cancellables)
     }
@@ -95,13 +97,15 @@ extension SearchViewModel {
             .sink { completion in
                 switch completion {
                 case .finished:
-                    self.isLoading.toggle()
+                    break
                 case .failure(let error):
                     print(error)
-                    self.isLoading.toggle()
                 }
             } receiveValue: { images in
-                self.photoList.append(contentsOf: images.map { Photo(image: $0) }) // Todo - photo 객체 수정하기
+                withAnimation {
+                    self.isLoading.toggle()
+                    self.photoList.append(contentsOf: images.map { Photo(image: $0) })
+                }
             }
             .store(in: &cancellables)
     }
