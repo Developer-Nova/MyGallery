@@ -15,16 +15,25 @@ struct SearchView: View {
     var body: some View {
         VStack {
             SearchBarView(searchViewModel: searchViewModel)
-            
-            if !searchViewModel.isLoading {
-                PhotoScrollView(searchViewModel: searchViewModel)
-            } else {
+        
+            if searchViewModel.isLoading && searchViewModel.photoList.isEmpty {
                 CustomProgressView()
+            } else if searchViewModel.photoList.isEmpty {
+                NoImagesView()
+            } else {
+                PhotoScrollView(searchViewModel: searchViewModel)
             }
         } //: VStack
         .onAppear {
-            searchViewModel.clearSearchBarAndLoadImages()
-            searchViewModel.getNewPhotoList()
+            if searchViewModel.isInitialAppear {
+                searchViewModel.changeInitialAppear()
+                searchViewModel.clearSearchBarAndLoadImages()
+            }
+        }
+        .onChange(of: homeViewModel.selectedTab) { oldValue, newValue in
+            if newValue == .search {
+                searchViewModel.clearSearchBarAndLoadImages()
+            }
         }
         .applyBackgroundColor()
     }
