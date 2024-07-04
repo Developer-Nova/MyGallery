@@ -61,12 +61,8 @@ private struct SearchBarView: View {
             .foregroundStyle(Color.customGray2)
             .submitLabel(.search)
             .autocorrectionDisabled()
-            .onChange(of: searchViewModel.searchText) { _, newValue in
-                if newValue.isEmpty {
-                    searchViewModel.getNewPhotoList()
-                }
-            }
             .onSubmit {
+                searchViewModel.photoList.removeAll()
                 searchViewModel.getSearchPhotoList()
             }
             
