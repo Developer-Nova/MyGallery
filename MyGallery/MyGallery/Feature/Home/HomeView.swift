@@ -42,7 +42,7 @@ struct HomeView: View {
                 VStack {
                     Spacer()
                     
-                    CustomTabBar(homeViewModel: homeViewModel)
+                    CustomTabBarView(homeViewModel: homeViewModel)
                         .padding(.bottom, -10)
                 } //: VStack
             } //: ZStack
@@ -53,7 +53,7 @@ struct HomeView: View {
 
 
 // MARK: - CustomTabBar
-private struct CustomTabBar: View {
+private struct CustomTabBarView: View {
     @ObservedObject private var homeViewModel: HomeViewModel
     
     fileprivate init(homeViewModel: HomeViewModel) {
