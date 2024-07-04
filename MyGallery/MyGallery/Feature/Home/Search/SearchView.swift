@@ -132,7 +132,7 @@ private struct PhotoScrollView: View {
             .padding(.top, 20)
             
             Spacer()
-                .frame(height: 90)
+                .frame(height: 85)
         } //: ScrollView
     }
 }
