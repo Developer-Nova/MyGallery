@@ -125,16 +125,14 @@ private struct PhotoScrollView: View {
                             searchViewModel.morePhotoList(of: searchViewModel.selection)
                         }
                     }, label: {
-                        VStack {
-                            Image("synchronization")
-                        } //: VStack
+                        Image("synchronization")
                     })
                 }
             } //: Group
-            .padding(.top, 20)
+            .padding(.top, 30)
             
             Spacer()
-                .frame(height: 85)
+                .frame(height: 80)
         } //: ScrollView
     }
 }
