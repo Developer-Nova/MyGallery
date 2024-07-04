@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @EnvironmentObject private var pathModel: Path
+    @EnvironmentObject private var homeViewModel: HomeViewModel
     @StateObject private var searchViewModel = SearchViewModel()
     
     var body: some View {
@@ -147,6 +148,7 @@ private struct NoImagesView: View {
     SearchView()
         .environment(\.backgroundColor, .customBlack0)
         .environmentObject(Path())
+        .environmentObject(HomeViewModel())
 }
 
 #Preview("NoImagesView") {
