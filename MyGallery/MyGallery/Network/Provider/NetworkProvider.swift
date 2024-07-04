@@ -4,50 +4,58 @@
 //
 //  Created by Nova on 6/4/24.
 //
-
 import Foundation
+import Combine
 
 final class NetworkProvider: Providable {
-    let session: URLSession
+    private var session: URLSession
     
     init(session: URLSession = .shared) {
         self.session = session
     }
     
-    func request<R: Decodable, E: RequestResponsable>(endpoint: E, completion: @escaping (Result<R, NetworkError>) -> Void) where E.Response == R  {
+    func request<R: Decodable, E: RequestResponsable>(endpoint: E) -> AnyPublisher<R, NetworkError> where E.Response == R  {
         guard let urlRequest = try? endpoint.createURLRequest() else {
-            completion(.failure(.requestFailed))
-            return
+            return Fail(error: NetworkError.invalidResponse).eraseToAnyPublisher()
         }
         
-        session.dataTask(with: urlRequest) { data, response, error in
-            guard error == nil else {
-                completion(.failure(.requestFailed))
-                return
+        return session.dataTaskPublisher(for: urlRequest)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw NetworkError.unknown
+                }
+                
+                guard (200...299).contains(httpResponse.statusCode) else {
+                    throw NetworkError.badResponse(statusCode: httpResponse.statusCode)
+                }
+                
+                return data
             }
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                completion(.failure(.unknown))
-                return
+            .decode(type: R.self, decoder: JSONDecoder())
+            .mapError { error in
+                print(error)
+                return NetworkError.decodingFailed
             }
-            
-            guard (200...299).contains(httpResponse.statusCode) else {
-                completion(.failure(.badResponse(statusCode: httpResponse.statusCode)))
-                return
+            .eraseToAnyPublisher()
+    }
+    
+    func request(url: URL) -> AnyPublisher<Data, NetworkError> {
+        return session.dataTaskPublisher(for: url)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    throw NetworkError.unknown
+                }
+                
+                guard (200...299).contains(httpResponse.statusCode) else {
+                    throw NetworkError.badResponse(statusCode: httpResponse.statusCode)
+                }
+                
+                return data
             }
-            
-            guard let data = data else {
-                completion(.failure(.emptyData))
-                return
+            .mapError { error in
+                print(error)
+                return NetworkError.requestFailed
             }
-            
-            do {
-                let decodedData = try JSONDecoder().decode(R.self, from: data)
-                completion(.success(decodedData))
-            } catch {
-                completion(.failure(NetworkError.decodingFailed))
-            }
-            
-        }.resume()
+            .eraseToAnyPublisher()
     }
 }
