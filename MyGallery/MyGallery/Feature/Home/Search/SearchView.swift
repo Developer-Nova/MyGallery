@@ -30,7 +30,7 @@ struct SearchView: View {
                 searchViewModel.clearSearchBarAndLoadImages()
             }
         }
-        .onChange(of: homeViewModel.selectedTab) { oldValue, newValue in
+        .onChange(of: homeViewModel.selectedTab) { _, newValue in
             if newValue == .search {
                 searchViewModel.clearSearchBarAndLoadImages()
             }
