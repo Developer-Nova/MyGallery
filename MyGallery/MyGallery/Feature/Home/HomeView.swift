@@ -28,6 +28,8 @@ struct HomeView: View {
                     } //: Group
                     .toolbar(.hidden, for: .tabBar)
                 } //: TabView
+                .environmentObject(pathModel)
+                .environmentObject(homeViewModel)
                 .navigationDestination(for: PathType.self) { path in
                     switch path {
                     case .photoDescriptionView(let photo):
@@ -41,12 +43,11 @@ struct HomeView: View {
                     Spacer()
                     
                     CustomTabBar(homeViewModel: homeViewModel)
-                        .padding(.bottom, -15)
+                        .padding(.bottom, -10)
                 } //: VStack
             } //: ZStack
             .ignoresSafeArea(.keyboard)
         } //: NavigationStack
-        .environmentObject(pathModel)
     }
 }
 
