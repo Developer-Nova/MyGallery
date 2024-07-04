@@ -95,28 +95,45 @@ private struct PhotoScrollView: View {
     }
     
     fileprivate var body: some View {
-        if !searchViewModel.isEmptyImage {
-            ScrollView(.vertical) {
-                LazyVGrid(columns: searchViewModel.columns, spacing: 3) {
-                    ForEach(searchViewModel.photoList, id: \.id) { photo in
-                        Rectangle()
-                            .overlay {
-                                Image(uiImage: photo.image)
-                                    .resizable()
-                                    .scaledToFill()
-                            }
-                            .aspectRatio(0.7, contentMode: .fill)
-                            .clipped()
-                            .contentShape(Rectangle())
-                            .onTapGesture {
-                                pathModel.paths.append(.photoDescriptionView(photo: photo))
-                            }
-                    } //: ForEach
-                } //: LazyVGrid
-            } //: ScrollView
-        } else {
-            NoImagesView()
-        }
+        ScrollView(.vertical) {
+            LazyVGrid(columns: searchViewModel.columns, spacing: 3) {
+                ForEach(searchViewModel.photoList, id: \.id) { photo in
+                    Rectangle()
+                        .overlay {
+                            Image(uiImage: photo.image)
+                                .resizable()
+                                .scaledToFill()
+                        }
+                        .background(
+                            Color.gray
+                        )
+                        .aspectRatio(0.7, contentMode: .fill)
+                        .clipped()
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            pathModel.paths.append(.photoDescriptionView(photo: photo))
+                        }
+                } //: ForEach
+            } //: LazyVGrid
+            
+            Group {
+                if searchViewModel.isLoading {
+                    CustomProgressView()
+                } else {
+                    Button(action: {
+                        searchViewModel.morePhotoList(of: searchViewModel.selection)
+                    }, label: {
+                        VStack {
+                            Image("synchronization")
+                        } //: VStack
+                    })
+                }
+            } //: Group
+            .padding(.top, 20)
+            
+            Spacer()
+                .frame(height: 90)
+        } //: ScrollView
     }
 }
 
