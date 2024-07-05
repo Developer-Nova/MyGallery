@@ -25,7 +25,7 @@ struct MainView: View {
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
-                            mainViewModel.showSplashView.toggle()
+                            mainViewModel.changeShowSplashView()
                         }
                     }
                 }
