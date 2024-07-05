@@ -17,7 +17,7 @@ struct PhotoResponseDTO: ResponseDTO {
     let color: String
     let blurHash: String?
     let description: String?
-    let altDescription: String
+    let altDescription: String?
     let urls: Urls
     let links: Links
     let likes: Int
