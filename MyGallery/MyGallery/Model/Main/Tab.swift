@@ -8,6 +8,7 @@
 import Foundation
 
 enum Tab {
+    case home
     case search
     case collection
 }
