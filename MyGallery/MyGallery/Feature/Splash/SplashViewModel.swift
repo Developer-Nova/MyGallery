@@ -8,11 +8,17 @@
 import Foundation
 
 final class SplashViewModel: ObservableObject {
-    @Published var isAnimating: Bool
+    @Published private(set) var isAnimating: Bool
     
     init(
         isAnimating: Bool = false
     ) {
         self.isAnimating = isAnimating
+    }
+}
+
+extension SplashViewModel {
+    func changeAnimating() {
+        self.isAnimating.toggle()
     }
 }
