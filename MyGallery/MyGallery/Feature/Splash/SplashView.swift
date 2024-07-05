@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State private var splashViewModel = SplashViewModel()
+    @StateObject private var splashViewModel = SplashViewModel()
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,7 +29,7 @@ struct SplashView: View {
         .opacity(splashViewModel.isAnimating ? 1 : 0)
         .onAppear {
             withAnimation(.easeInOut(duration: 0.8)) {
-                splashViewModel.isAnimating.toggle()
+                splashViewModel.changeAnimating()
             }
         }
         .applyBackgroundColor()
