@@ -9,8 +9,13 @@ import Foundation
 
 final class MainViewModel: ObservableObject {
     @Published var selectedTab: Tab
+    @Published var showSplashView: Bool
     
-    init(selectedTab: Tab = .search) {
+    init(
+        selectedTab: Tab = .home,
+        showSplashView: Bool = false
+    ) {
         self.selectedTab = selectedTab
+        self.showSplashView = showSplashView
     }
 }
