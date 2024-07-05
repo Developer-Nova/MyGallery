@@ -9,13 +9,19 @@ import Foundation
 
 final class MainViewModel: ObservableObject {
     @Published var selectedTab: Tab
-    @Published var showSplashView: Bool
+    @Published private(set) var showSplashView: Bool
     
     init(
         selectedTab: Tab = .home,
-        showSplashView: Bool = false
+        showSplashView: Bool = true
     ) {
         self.selectedTab = selectedTab
         self.showSplashView = showSplashView
+    }
+}
+
+extension MainViewModel {
+    func changeShowSplashView() {
+        self.showSplashView.toggle()
     }
 }
