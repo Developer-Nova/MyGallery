@@ -16,10 +16,40 @@ struct MainView: View {
     }
     
     var body: some View {
+        if !mainViewModel.showSplashView {
+            NavigationStackAndTabView(mainViewModel: mainViewModel)
+                .environmentObject(pathModel)
+        } else {
+            SplashView()
+                .transition(.opacity)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        withAnimation {
+                            mainViewModel.showSplashView.toggle()
+                        }
+                    }
+                }
+        }
+    }
+}
+
+// MARK: - NavigationStackAndTabView
+private struct NavigationStackAndTabView: View {
+    @EnvironmentObject private var pathModel: Path
+    @ObservedObject private var mainViewModel: MainViewModel
+    
+    fileprivate init(mainViewModel: MainViewModel) {
+        self.mainViewModel = mainViewModel
+    }
+    
+    fileprivate var body: some View {
         NavigationStack(path: $pathModel.paths) {
             ZStack {
                 TabView(selection: $mainViewModel.selectedTab) {
                     Group {
+                        HomeView()
+                            .tag(Tab.home)
+                        
                         SearchView()
                             .tag(Tab.search)
                         
@@ -33,16 +63,16 @@ struct MainView: View {
                 .navigationDestination(for: PathType.self) { path in
                     switch path {
                     case .photoDescriptionView(let photo):
-                        PhotoDescriptionView(photo: photo) // Todo - photo 객체 넘겨주기
+                        PhotoDescriptionView(photo: photo)
 
-                        // Todo - homeView 의 이미지를 선택했을때도 photo 객체 넘겨주기 DetailView 를 재사용하기 위함
+                        // Todo - homeView 의 이미지를 선택했을때도 photo 객체 넘겨주기 PhotoDescriptionView 를 재사용하기 위함
                     }
                 }
                 
                 VStack {
                     Spacer()
                     
-                    CustomTabBarView(homeViewModel: mainViewModel)
+                    CustomTabBarView(mainViewModel: mainViewModel)
                         .padding(.bottom, -10)
                 } //: VStack
             } //: ZStack
@@ -54,10 +84,10 @@ struct MainView: View {
 
 // MARK: - CustomTabBar
 private struct CustomTabBarView: View {
-    @ObservedObject private var homeViewModel: MainViewModel
+    @ObservedObject private var mainViewModel: MainViewModel
     
-    fileprivate init(homeViewModel: MainViewModel) {
-        self.homeViewModel = homeViewModel
+    fileprivate init(mainViewModel: MainViewModel) {
+        self.mainViewModel = mainViewModel
     }
     
     fileprivate var body: some View {
@@ -65,10 +95,10 @@ private struct CustomTabBarView: View {
             Spacer()
             
             Button (action: {
-                    homeViewModel.selectedTab = .search
+                    mainViewModel.selectedTab = .search
                 }, label: {
                     Image(
-                        homeViewModel.selectedTab == .search
+                        mainViewModel.selectedTab == .search
                         ? "search_selected"
                         : "search"
                     )
@@ -77,10 +107,10 @@ private struct CustomTabBarView: View {
             Spacer()
             
             Button (action: {
-                    homeViewModel.selectedTab = .collection
+                    mainViewModel.selectedTab = .collection
                 }, label: {
                     Image(
-                        homeViewModel.selectedTab == .collection
+                        mainViewModel.selectedTab == .collection
                         ? "collection_selected"
                         : "collection"
                     )
