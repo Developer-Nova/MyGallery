@@ -29,7 +29,7 @@ struct MainView: View {
                         }
                     }
                 }
-        }
+        } //: if Condition
     }
 }
 
@@ -64,8 +64,6 @@ private struct NavigationStackAndTabView: View {
                     switch path {
                     case .photoDescriptionView(let photo):
                         PhotoDescriptionView(photo: photo)
-
-                        // Todo - homeView 의 이미지를 선택했을때도 photo 객체 넘겨주기 PhotoDescriptionView 를 재사용하기 위함
                     }
                 }
                 
@@ -92,6 +90,18 @@ private struct CustomTabBarView: View {
     
     fileprivate var body: some View {
         HStack {
+            Spacer()
+            
+            Button (action: {
+                    mainViewModel.selectedTab = .home
+                }, label: {
+                    Image(
+                        mainViewModel.selectedTab == .home
+                        ? "home_selected"
+                        : "home"
+                    )
+                }) //: Button
+            
             Spacer()
             
             Button (action: {
