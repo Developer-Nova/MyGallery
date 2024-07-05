@@ -121,9 +121,7 @@ private struct PhotoScrollView: View {
                     CustomProgressView()
                 } else {
                     Button(action: {
-                        withAnimation {
-                            searchViewModel.morePhotoList(of: searchViewModel.selection)
-                        }
+                        searchViewModel.morePhotoList(of: searchViewModel.selection)
                     }, label: {
                         Image("synchronization")
                     })
