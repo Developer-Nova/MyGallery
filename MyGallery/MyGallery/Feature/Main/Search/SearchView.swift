@@ -27,7 +27,7 @@ struct SearchView: View {
         .onAppear {
             if searchViewModel.isInitialAppear {
                 searchViewModel.changeInitialAppear()
-                searchViewModel.clearSearchBarAndLoadImages()
+                searchViewModel.getNewPhotoList()
             }
         }
         .onChange(of: mainViewModel.selectedTab) { _, newValue in
@@ -62,7 +62,7 @@ private struct SearchBarView: View {
             .submitLabel(.search)
             .autocorrectionDisabled()
             .onSubmit {
-                searchViewModel.photoList.removeAll()
+                searchViewModel.removeAllToPhotoList()
                 searchViewModel.getSearchPhotoList()
             }
             
