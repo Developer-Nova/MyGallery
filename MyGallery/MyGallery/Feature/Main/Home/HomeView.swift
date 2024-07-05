@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
+    @StateObject private var homeViewModel = HomeViewModel()
+    
     var body: some View {
-        Text("Home View")
+        VStack {
+            Text("Home View")
+        }
+        .applyBackgroundColor()
     }
 }
 
 #Preview {
     HomeView()
+        .applyBackgroundColor()
+        .environment(\.backgroundColor, .customBlack0)
 }
