@@ -61,6 +61,10 @@ private struct MainContentView: View {
                     switch path {
                     case .photoDescriptionView(let photo):
                         PhotoDescriptionView(photo: photo)
+                            .navigationBarBackButtonHidden()
+                    case .searchPhotoView:
+                        SearchView()
+                            .navigationBarBackButtonHidden()
                     }
                 }
                 
