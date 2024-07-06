@@ -84,6 +84,7 @@ private struct TitleView: View {
 
 // MARK: - PopularPhotoContentView
 private struct PopularPhotoTabVeiw: View {
+    @EnvironmentObject private var pathModel: Path
     @ObservedObject private var homeViewModel: HomeViewModel
     
     fileprivate init(homeViewModel: HomeViewModel) {
@@ -91,36 +92,52 @@ private struct PopularPhotoTabVeiw: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            TabView(selection: $homeViewModel.currentIndex) {
-                ForEach(homeViewModel.photoList.indices, id: \.self) { index in
-                    Image(uiImage: homeViewModel.photoList[index].image)
-                        .resizable()
-                        .scaledToFill()
-                        .aspectRatio(contentMode: .fill)
-                        .clipped()
-                } //: ForEach
-            } //: TabView
-            .frame(height: 250)
-            .tabViewStyle(.page(indexDisplayMode: .never))
+        ZStack(alignment: .topLeading) {
+            ZStack(alignment: .bottomTrailing) {
+                TabView(selection: $homeViewModel.currentIndex) {
+                    ForEach(homeViewModel.photoList.indices, id: \.self) { index in
+                        Image(uiImage: homeViewModel.photoList[index].image)
+                            .resizable()
+                            .scaledToFill()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                            .onTapGesture {
+                                pathModel.paths.append(.photoDescriptionView(photo: homeViewModel.photoList[index]))
+                            }
+                    } //: ForEach
+                } //: TabView
+                .frame(height: 250)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                
+                
+                Text("\(homeViewModel.currentIndex + 1) / \(homeViewModel.checkTheCountOfPhotoList())")
+                    .font(.caption)
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .foregroundStyle(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25.0)
+                            .foregroundStyle(.black.opacity(0.5))
+                    )
+                    .padding([.trailing, .bottom], 10)
+            } //: ZStack
+            .onReceive(homeViewModel.popularPhotoTimer) { _ in
+                withAnimation {
+                    homeViewModel.currentIndex = (homeViewModel.currentIndex + 1) % homeViewModel.checkTheCountOfPhotoList()
+                }
+            }
             
-            
-            Text("\(homeViewModel.currentIndex + 1) / \(homeViewModel.checkTheCountOfPhotoList())")
-                .font(.caption)
-                .padding(5)
-                .padding(.horizontal, 5)
+            Text("Popular")
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding(7)
                 .foregroundStyle(.white)
                 .background(
-                    RoundedRectangle(cornerRadius: 25.0)
+                    RoundedRectangle(cornerRadius: 15)
                         .foregroundStyle(.black.opacity(0.5))
                 )
-                .padding([.trailing, .bottom], 10)
+                .padding([.top, .leading], 5)
         } //: ZStack
-        .onReceive(homeViewModel.popularPhotoTimer) { _ in
-            withAnimation {
-                homeViewModel.currentIndex = (homeViewModel.currentIndex + 1) % homeViewModel.checkTheCountOfPhotoList()
-            }
-        }
     }
 }
 
