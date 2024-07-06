@@ -30,6 +30,7 @@ struct CustomProgressView: View {
             
             Spacer()
         } //: VStack
+        .applyBackgroundColor()
     }
 }
 
