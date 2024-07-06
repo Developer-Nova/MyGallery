@@ -50,9 +50,6 @@ private struct MainContentView: View {
                         HomeView()
                             .tag(Tab.home)
                         
-                        SearchView()
-                            .tag(Tab.search)
-                        
                         CollectionView()
                             .tag(Tab.collection)
                     } //: Group
