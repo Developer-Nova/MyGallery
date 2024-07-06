@@ -17,7 +17,7 @@ struct MainView: View {
     
     var body: some View {
         if !mainViewModel.showSplashView {
-            NavigationStackAndTabView(mainViewModel: mainViewModel)
+            MainContentView(mainViewModel: mainViewModel)
                 .environmentObject(pathModel)
         } else {
             SplashView()
@@ -34,7 +34,7 @@ struct MainView: View {
 }
 
 // MARK: - NavigationStackAndTabView
-private struct NavigationStackAndTabView: View {
+private struct MainContentView: View {
     @EnvironmentObject private var pathModel: Path
     @ObservedObject private var mainViewModel: MainViewModel
     
