@@ -72,7 +72,7 @@ private struct MainContentView: View {
                     Spacer()
                     
                     CustomTabBarView(mainViewModel: mainViewModel)
-                        .padding(.bottom, -10)
+                        .padding(.bottom, -4)
                 } //: VStack
             } //: ZStack
             .ignoresSafeArea(.keyboard)
