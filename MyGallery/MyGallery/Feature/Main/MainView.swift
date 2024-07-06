@@ -101,18 +101,8 @@ private struct CustomTabBarView: View {
                         ? "home_selected"
                         : "home"
                     )
-                }) //: Button
-            
-            Spacer()
-            
-            Button (action: {
-                    mainViewModel.selectedTab = .search
-                }, label: {
-                    Image(
-                        mainViewModel.selectedTab == .search
-                        ? "search_selected"
-                        : "search"
-                    )
+                    .resizable()
+                    .frame(width: 30, height: 30)
                 }) //: Button
             
             Spacer()
@@ -125,6 +115,8 @@ private struct CustomTabBarView: View {
                         ? "collection_selected"
                         : "collection"
                     )
+                    .resizable()
+                    .frame(width: 30, height: 30)
                 }) //: Button
             
             Spacer()
