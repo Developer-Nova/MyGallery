@@ -7,14 +7,16 @@
 
 struct NewPhotoListRequestDTO: RequestDTO {
     var page: Int
-    var perPage: Int = 30
+    var perPage: Int
     var orderBy: OrderBy
     
     init(
         page: Int = 1,
+        perPage: Int = 30,
         orderBy: OrderBy = .latest
     ) {
         self.page = page
+        self.perPage = perPage
         self.orderBy = orderBy
     }
     
