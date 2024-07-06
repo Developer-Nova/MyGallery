@@ -13,6 +13,28 @@ struct HomeView: View {
     var body: some View {
         VStack {
             Text("Home View")
+// MARK: - HomeContentView
+private struct HomeContentView: View {
+    @ObservedObject private var homeViewModel: HomeViewModel
+    
+    fileprivate init(homeViewModel: HomeViewModel) {
+        self.homeViewModel = homeViewModel
+    }
+    
+    fileprivate var body: some View {
+        ScrollView {
+            TitleView()
+                .padding(.bottom)
+
+            PopularPhotoContentVeiw(homeViewModel: homeViewModel)
+            
+            Spacer()
+        } //: ScrollView
+        .onAppear {
+            if homeViewModel.isInitialAppear {
+                homeViewModel.getPopularPhotoList()
+                homeViewModel.changeInitialAppear()
+            }
         }
         .applyBackgroundColor()
     }
