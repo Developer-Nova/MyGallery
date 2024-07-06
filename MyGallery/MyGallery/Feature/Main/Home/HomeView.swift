@@ -31,7 +31,6 @@ private struct HomeContentView: View {
     fileprivate var body: some View {
         ScrollView {
             TitleView()
-                .padding(.bottom)
 
             PopularPhotoTabVeiw(homeViewModel: homeViewModel)
             
@@ -74,14 +73,10 @@ private struct TitleView: View {
                 }) //: Button
                 .padding(.trailing, 7)
             } //: HStack
-            .font(.title)
+            .font(.system(size: 30, weight: .bold))
             .fontWeight(.bold)
             .foregroundStyle(Color.white)
             .padding(.horizontal)
-            
-            Rectangle()
-                .frame(height: 2)
-                .foregroundStyle(Color.gray.opacity(0.2))
         } //: VStack
         .padding(.top, 10)
     }
