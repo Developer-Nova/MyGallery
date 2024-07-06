@@ -15,13 +15,13 @@ final class NetworkService {
     
     private init() { }
     
-    func fetchNewPhotoList(page: Int) -> AnyPublisher<[UIImage], NetworkError> {
-        let requestDTO = NewPhotoListRequestDTO(page: page)
+    func fetchNewPhotoList(page: Int = 1, orderBy: OrderBy = .latest) -> AnyPublisher<[UIImage], NetworkError> {
+        let requestDTO = NewPhotoListRequestDTO(page: page, orderBy: orderBy)
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos, type: [PhotoResponseDTO].self)
         
         return self.networkProvider.request(endpoint: endpoint)
             .flatMap { photos in
-                Publishers.MergeMany(photos.map { self.conversionImage(with: $0.urls.small) })
+                Publishers.MergeMany(photos.map { self.conversionImage(with: $0.urls.regular) })
                     .collect()
             }
             .eraseToAnyPublisher()
@@ -39,7 +39,7 @@ final class NetworkService {
                         .eraseToAnyPublisher()
                 }
                 
-                return Publishers.MergeMany(searchResult.results.map { self.conversionImage(with: $0.urls.small)})
+                return Publishers.MergeMany(searchResult.results.map { self.conversionImage(with: $0.urls.regular)})
                     .collect()
                     .eraseToAnyPublisher()
             }
