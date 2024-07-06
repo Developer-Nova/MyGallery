@@ -71,7 +71,7 @@ extension SearchViewModel {
     }
     
     func getNewPhotoList() {
-        self.isLoading = true
+        self.isLoading.toggle()
         self.selection = .newPhoto
         
         networkService.fetchNewPhotoList(page: currentPage)
@@ -94,7 +94,7 @@ extension SearchViewModel {
     }
     
     func getSearchPhotoList() {
-        self.isLoading = true
+        self.isLoading.toggle()
         self.selection = .searchPhoto
         
         networkService.fetchSearchPhotoList(about: searchText, page: currentPage)
