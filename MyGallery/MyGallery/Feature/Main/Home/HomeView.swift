@@ -58,6 +58,49 @@ private struct TitleView: View {
     }
 }
 
+// MARK: - PopularPhotoContentView
+private struct PopularPhotoContentVeiw: View {
+    @ObservedObject private var homeViewModel: HomeViewModel
+    
+    fileprivate init(homeViewModel: HomeViewModel) {
+        self.homeViewModel = homeViewModel
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("인기 사진")
+                .foregroundStyle(Color.white)
+                .font(.system(size: 20, weight: .bold))
+                .padding(.leading)
+            
+            ZStack(alignment: .bottomTrailing) {
+                TabView(selection: $homeViewModel.currentIndex) {
+                    ForEach(0..<homeViewModel.photoList.count, id: \.self) { index in
+                        Image(uiImage: homeViewModel.photoList[index].image)
+                            .resizable()
+                            .scaledToFill()
+                            .aspectRatio(contentMode: .fill)
+                            .clipped()
+                    } //: ForEach
+                } //: TabView
+                .frame(height: 250)
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                
+                Text("\(homeViewModel.currentIndex + 1) / \(homeViewModel.checkTheCountOfPhotoList())")
+                    .font(.caption)
+                    .padding(5)
+                    .padding(.horizontal, 5)
+                    .foregroundStyle(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 25.0)
+                            .foregroundStyle(.black.opacity(0.5))
+                    )
+                    .padding([.trailing, .bottom], 10)
+            } //: ZStack
+        } //: VStack
+    }
+}
+
 #Preview {
     HomeView()
         .applyBackgroundColor()
