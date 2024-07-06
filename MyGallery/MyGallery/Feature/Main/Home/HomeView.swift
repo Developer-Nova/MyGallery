@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var pathModel: Path
     @StateObject private var homeViewModel = HomeViewModel()
     
     var body: some View {
-        VStack {
-            Text("Home View")
+        if !homeViewModel.isLoading {
+            HomeContentView(homeViewModel: homeViewModel)
+        } else {
+            CustomProgressView()
+        } //: if Condition
+    }
+}
+
 // MARK: - HomeContentView
 private struct HomeContentView: View {
     @ObservedObject private var homeViewModel: HomeViewModel
@@ -127,4 +134,5 @@ private struct PopularPhotoContentVeiw: View {
     HomeView()
         .applyBackgroundColor()
         .environment(\.backgroundColor, .customBlack0)
+        .environmentObject(Path())
 }
