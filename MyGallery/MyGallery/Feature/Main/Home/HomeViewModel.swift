@@ -12,6 +12,7 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var photoList: [Photo]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
+    @Published private(set) var popularPhotoTimer: Publishers.Autoconnect<Timer.TimerPublisher>
     @Published var currentIndex: Int
     
     private var cancellables: Set<AnyCancellable>
@@ -21,12 +22,14 @@ final class HomeViewModel: ObservableObject {
         photoList: [Photo] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
+        popularPhotoTimer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 2, on: .main, in: .common).autoconnect(),
         currentIndex: Int = 0,
         cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     ) {
         self.photoList = photoList
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
+        self.popularPhotoTimer = popularPhotoTimer
         self.currentIndex = currentIndex
         self.cancellables = cancellables
     }
