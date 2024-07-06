@@ -47,7 +47,7 @@ extension HomeViewModel {
     func getPopularPhotoList() {
         self.isLoading.toggle()
         
-        self.nerworkService.fetchNewPhotoList(orderBy: .popular)
+        self.nerworkService.fetchNewPhotoList(orderBy: .popular, perPage: 15)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
