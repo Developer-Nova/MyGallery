@@ -104,7 +104,7 @@ private struct PopularPhotoTabVeiw: View {
             
             ZStack(alignment: .bottomTrailing) {
                 TabView(selection: $homeViewModel.currentIndex) {
-                    ForEach(0..<homeViewModel.photoList.count, id: \.self) { index in
+                    ForEach(homeViewModel.photoList.indices, id: \.self) { index in
                         Image(uiImage: homeViewModel.photoList[index].image)
                             .resizable()
                             .scaledToFill()
@@ -114,6 +114,11 @@ private struct PopularPhotoTabVeiw: View {
                 } //: TabView
                 .frame(height: 250)
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                .onReceive(homeViewModel.popularPhotoTimer) { _ in
+                    withAnimation {
+                        homeViewModel.currentIndex = (homeViewModel.currentIndex + 1) % homeViewModel.checkTheCountOfPhotoList()
+                    }
+                }
                 
                 Text("\(homeViewModel.currentIndex + 1) / \(homeViewModel.checkTheCountOfPhotoList())")
                     .font(.caption)
