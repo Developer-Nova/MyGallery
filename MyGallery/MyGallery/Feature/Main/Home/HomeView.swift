@@ -33,7 +33,7 @@ private struct HomeContentView: View {
             TitleView()
                 .padding(.bottom)
 
-            PopularPhotoContentVeiw(homeViewModel: homeViewModel)
+            PopularPhotoTabVeiw(homeViewModel: homeViewModel)
             
             Spacer()
         } //: ScrollView
@@ -88,7 +88,7 @@ private struct TitleView: View {
 }
 
 // MARK: - PopularPhotoContentView
-private struct PopularPhotoContentVeiw: View {
+private struct PopularPhotoTabVeiw: View {
     @ObservedObject private var homeViewModel: HomeViewModel
     
     fileprivate init(homeViewModel: HomeViewModel) {
