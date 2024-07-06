@@ -15,8 +15,8 @@ final class NetworkService {
     
     private init() { }
     
-    func fetchNewPhotoList(page: Int = 1, orderBy: OrderBy = .latest) -> AnyPublisher<[UIImage], NetworkError> {
-        let requestDTO = NewPhotoListRequestDTO(page: page, orderBy: orderBy)
+    func fetchNewPhotoList(page: Int = 1, orderBy: OrderBy = .latest, perPage: Int = 30) -> AnyPublisher<[UIImage], NetworkError> {
+        let requestDTO = NewPhotoListRequestDTO(page: page, perPage: perPage, orderBy: orderBy)
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos, type: [PhotoResponseDTO].self)
         
         return self.networkProvider.request(endpoint: endpoint)
