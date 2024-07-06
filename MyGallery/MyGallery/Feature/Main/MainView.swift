@@ -121,12 +121,11 @@ private struct CustomTabBarView: View {
             
             Spacer()
         } //: HStack
-        .frame(height: 70)
+        .frame(height: 60)
         .background {
             RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.white, lineWidth: 1.5)
+                .stroke(Color.gray, lineWidth: 1.0)
                 .fill(Color.customBlack1)
-                .shadow(color: .white.opacity(0.5), radius: 4, y: 1)
         }
         .padding(.horizontal)
     }
