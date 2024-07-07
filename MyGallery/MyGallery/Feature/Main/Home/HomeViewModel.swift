@@ -14,7 +14,7 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
     @Published private(set) var popularPhotoTimer: Publishers.Autoconnect<Timer.TimerPublisher>
-    @Published private(set) var currentIndex: Int
+    @Published var currentIndex: Int
     
     private var cancellables: Set<AnyCancellable>
     private let nerworkService = NetworkService.shared
