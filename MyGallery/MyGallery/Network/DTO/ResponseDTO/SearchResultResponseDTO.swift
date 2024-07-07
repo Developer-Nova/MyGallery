@@ -20,7 +20,7 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - Result
-    struct Result: ResponseDTO {
+    struct Result: Decodable {
         let id: String
         let alternativeSlugs: AlternativeSlugs
         let createdAt: String
