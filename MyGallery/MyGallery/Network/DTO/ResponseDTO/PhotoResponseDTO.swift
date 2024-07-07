@@ -5,8 +5,6 @@
 //  Created by Nova on 5/31/24.
 //
 
-import Foundation
-
 // MARK: - PhotoResponseDTO
 struct PhotoResponseDTO: ResponseDTO {
     let id: String

@@ -5,8 +5,6 @@
 //  Created by Nova on 6/18/24.
 //
 
-import Foundation
-
 // MARK: - SearchResultResponseDTO
 struct SearchResultResponseDTO: ResponseDTO {
     let total: Int
