@@ -19,8 +19,13 @@ final class HomeViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable>
     private let nerworkService = NetworkService.shared
     
+    var columns: [GridItem] {
+        Array(repeating: .init(.flexible(), spacing: 1), count: 2)
+    }
+
     init(
         photoList: [Photo] = [],
+        topicList: [TopicResponseDTO] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
         popularPhotoTimer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 2, on: .main, in: .common).autoconnect(),
