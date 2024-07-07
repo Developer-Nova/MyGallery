@@ -28,6 +28,7 @@ final class HomeViewModel: ObservableObject {
         cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     ) {
         self.photoList = photoList
+        self.topicList = topicList
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
         self.popularPhotoTimer = popularPhotoTimer
@@ -37,6 +38,10 @@ final class HomeViewModel: ObservableObject {
 }
 
 extension HomeViewModel {
+    func cyclePhotoListIndex() {
+        self.currentIndex = (self.currentIndex + 1) % self.checkTheCountOfPhotoList()
+    }
+    
     func checkTheCountOfPhotoList() -> Int {
         self.photoList.count
     }
