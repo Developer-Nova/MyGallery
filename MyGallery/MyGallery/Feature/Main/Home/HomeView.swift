@@ -34,6 +34,8 @@ private struct HomeContentView: View {
 
             PopularPhotoTabVeiw(homeViewModel: homeViewModel)
             
+            TopicButtonView(homeViewModel: homeViewModel)
+            
             Spacer()
         } //: ScrollView
         .onAppear {
@@ -127,7 +129,7 @@ private struct PopularPhotoTabVeiw: View {
                 }
             }
             
-            Text("Popular")
+            Text("New")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(7)
