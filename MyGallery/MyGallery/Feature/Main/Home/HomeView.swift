@@ -125,7 +125,7 @@ private struct PopularPhotoTabVeiw: View {
             } //: ZStack
             .onReceive(homeViewModel.popularPhotoTimer) { _ in
                 withAnimation {
-                    homeViewModel.currentIndex = (homeViewModel.currentIndex + 1) % homeViewModel.checkTheCountOfPhotoList()
+                    homeViewModel.cyclePhotoListIndex()
                 }
             }
             
