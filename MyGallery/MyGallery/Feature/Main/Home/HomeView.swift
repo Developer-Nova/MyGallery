@@ -209,7 +209,7 @@ private struct TopicButtonView: View {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundStyle(.purple.opacity(0.3))
         )
-        .padding(.vertical, 5)
+        .padding(5)
     }
 }
 
