@@ -141,6 +141,78 @@ private struct PopularPhotoTabVeiw: View {
     }
 }
 
+// MARK: - TopicButtonView
+private struct TopicButtonView: View {
+    @ObservedObject private var homeViewModel: HomeViewModel
+    
+    fileprivate init(homeViewModel: HomeViewModel) {
+        self.homeViewModel = homeViewModel
+    }
+    
+    fileprivate var body: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text("Topics")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .padding(7)
+                    .foregroundStyle(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 15)
+                            .foregroundStyle(.black.opacity(0.5))
+                    )
+                    .padding([.top, .leading], 5)
+                
+                Spacer()
+                
+                Button(action: {
+                    // Todo - 전체 topic view 띄워주기
+                }, label: {
+                    HStack {
+                        Text("더보기")
+                            .font(.system(size: 15))
+                        
+                        Image("moreTopics")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18)
+                    } //: HStack
+                    .foregroundStyle(.gray)
+                })
+                .padding(.trailing, 7)
+            } //: HStack
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHGrid(rows: homeViewModel.columns, spacing: 10) {
+                    ForEach(homeViewModel.topicList, id: \.id) { topic in
+                        Button(action: {
+                            // Todo - 해당 topic 으로 검색
+                        }, label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 25.0)
+                                    .frame(height: 40)
+                                    .foregroundStyle(.customPurple0)
+                                
+                                Text("\(topic.title)")
+                                    .font(.system(size: 17))
+                                    .padding()
+                                    .foregroundStyle(.white)
+                            } //: ZStack
+                        }) //: Button
+                    } //: ForEach
+                } //: LazyHGrid
+                .padding(.horizontal, 5)
+            } //: ScrollView
+            .padding([.horizontal, .bottom], 5)
+        } //: VStack
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(.purple.opacity(0.3))
+        )
+        .padding(.vertical, 5)
+    }
+}
+
 #Preview {
     HomeView()
         .applyBackgroundColor()
