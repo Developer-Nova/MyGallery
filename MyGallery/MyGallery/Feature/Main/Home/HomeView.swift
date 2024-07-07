@@ -40,7 +40,7 @@ private struct HomeContentView: View {
         } //: ScrollView
         .onAppear {
             if homeViewModel.isInitialAppear {
-                homeViewModel.getPopularPhotoList()
+                homeViewModel.getPopularPhotosAndTopics()
                 homeViewModel.changeInitialAppear()
             }
         }
