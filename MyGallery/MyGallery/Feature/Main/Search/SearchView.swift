@@ -44,16 +44,6 @@ private struct SearchBarView: View {
     
     fileprivate var body: some View {
         HStack {
-            Button(action: {
-                pathModel.paths.removeLast()
-            },label: {
-                Image("back")
-                    .resizable()
-                    .frame(width: 25, height: 25)
-                    .padding(.bottom)
-                    .padding(.leading, 7)
-            }) //: Button
-            
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Color.customGray2)

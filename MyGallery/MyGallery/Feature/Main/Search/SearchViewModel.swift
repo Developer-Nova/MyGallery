@@ -115,4 +115,9 @@ extension SearchViewModel {
             }
             .store(in: &cancellables)
     }
+    
+    //    private func getTopicList() -> AnyPublisher<[TopicResponseDTO], NetworkError> {
+    //        self.nerworkService.fetchTopicList()
+    //            .eraseToAnyPublisher()
+    //    }
 }
