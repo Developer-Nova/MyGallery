@@ -104,12 +104,12 @@ private struct CustomTabBarView: View {
             Spacer()
             
             Button (action: {
-                    mainViewModel.selectedTab = .collection
+                    mainViewModel.selectedTab = .search
                 }, label: {
                     Image(
-                        mainViewModel.selectedTab == .collection
-                        ? "collection_selected"
-                        : "collection"
+                        mainViewModel.selectedTab == .search
+                        ? "search_selected"
+                        : "search"
                     )
                     .resizable()
                     .frame(width: 30, height: 30)
