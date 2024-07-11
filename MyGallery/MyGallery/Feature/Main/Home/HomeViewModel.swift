@@ -10,35 +10,31 @@ import Combine
 
 final class HomeViewModel: ObservableObject {
     @Published private(set) var photoList: [Photo]
-    @Published private(set) var topicList: [TopicResponseDTO]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
-    @Published private(set) var popularPhotoTimer: Publishers.Autoconnect<Timer.TimerPublisher>
-    @Published var currentIndex: Int
     
+    private var currentPage: Int
     private var cancellables: Set<AnyCancellable>
-    private let nerworkService = NetworkService.shared
+    private let networkService: NetworkService
     
     var columns: [GridItem] {
-        Array(repeating: .init(.flexible(), spacing: 1), count: 2)
+        Array(repeating: .init(.flexible(), spacing: 3), count: 2)
     }
 
     init(
         photoList: [Photo] = [],
-        topicList: [TopicResponseDTO] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
-        popularPhotoTimer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 2, on: .main, in: .common).autoconnect(),
-        currentIndex: Int = 0,
-        cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
+        currentPage: Int = 1,
+        cancellables: Set<AnyCancellable> = Set<AnyCancellable>(),
+        networkService: NetworkService = .shared
     ) {
         self.photoList = photoList
-        self.topicList = topicList
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
-        self.popularPhotoTimer = popularPhotoTimer
-        self.currentIndex = currentIndex
+        self.currentPage = currentPage
         self.cancellables = cancellables
+        self.networkService = networkService
     }
 }
 
