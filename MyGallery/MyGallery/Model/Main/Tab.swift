@@ -9,5 +9,5 @@ import Foundation
 
 enum Tab {
     case home
-    case collection
+    case search
 }
