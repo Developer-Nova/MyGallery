@@ -47,10 +47,16 @@ extension HomeViewModel {
         self.isInitialAppear.toggle()
     }
     
-    func getPopularPhotosAndTopics() {
+    func morePhotoList() {
+        self.currentPage += 1
+        
+        getPopularPhotoList()
+    }
+    
+    func getPopularPhotoList() {
         self.isLoading.toggle()
         
-        Publishers.CombineLatest(self.getPopularPhotoList(), self.getTopicList())
+        self.networkService.fetchNewPhotoList(page: self.currentPage, orderBy: .latest)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -60,23 +66,12 @@ extension HomeViewModel {
                     print(error)
                     self.isLoading.toggle()
                 }
-            } receiveValue: { image, topic in
+            } receiveValue: { image in
                 withAnimation {
                     self.isLoading.toggle()
                     self.photoList.append(contentsOf: image.map { Photo(image: $0)})
-                    self.topicList.append(contentsOf: topic)
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    private func getPopularPhotoList() -> AnyPublisher<[UIImage], NetworkError> {
-        self.nerworkService.fetchNewPhotoList(orderBy: .latest, perPage: 15)
-            .eraseToAnyPublisher()
-    }
-    
-    private func getTopicList() -> AnyPublisher<[TopicResponseDTO], NetworkError> {
-        self.nerworkService.fetchTopicList()
-            .eraseToAnyPublisher()
     }
 }
