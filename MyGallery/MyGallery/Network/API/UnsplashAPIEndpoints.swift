@@ -12,7 +12,7 @@ enum UnsplashAPIEndpoints {
     // MARK: - APIKey
     private static let accessKey = UnsplashAPI.accessKey
     
-    static func getPhotoListEndpoint<T>(query photoRequestDTO: RequestDTO, path: String, type: T.Type) -> Endpoint<T> {
+    static func getPhotoListEndpoint<T>(query photoRequestDTO: RequestDTO? = nil, path: String, type: T.Type) -> Endpoint<T> {
         return Endpoint(
             baseURL: baseURL,
             path: path,
