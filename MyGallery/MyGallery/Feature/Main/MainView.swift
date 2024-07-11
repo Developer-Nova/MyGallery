@@ -11,10 +11,6 @@ struct MainView: View {
     @StateObject private var pathModel = Path()
     @StateObject private var mainViewModel = MainViewModel()
     
-    init() {
-        UITabBar.appearance().backgroundImage = UIImage()
-    }
-    
     var body: some View {
         if !mainViewModel.showSplashView {
             MainContentView(mainViewModel: mainViewModel)
@@ -50,10 +46,10 @@ private struct MainContentView: View {
                         HomeView()
                             .tag(Tab.home)
                         
-                        CollectionView()
-                            .tag(Tab.collection)
+                        SearchView()
+                            .tag(Tab.search)
                     } //: Group
-                    .toolbar(.hidden, for: .tabBar)
+                    .toolbarBackground(.hidden, for: .tabBar)
                 } //: TabView
                 .environmentObject(pathModel)
                 .environmentObject(mainViewModel)
