@@ -54,6 +54,20 @@ final class NetworkService {
             .eraseToAnyPublisher()
     }
     
+    func fetchTotalStats() -> AnyPublisher<TotalStatsResponseDTO, NetworkError> {
+        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(path: UnsplashAPI.Path.totalStats, type: TotalStatsResponseDTO.self)
+
+        return self.networkProvider.request(endpoint: endpoint)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchMonthStats() -> AnyPublisher<MonthStatsResponseDTO, NetworkError> {
+        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(path: UnsplashAPI.Path.monthStats, type: MonthStatsResponseDTO.self)
+
+        return self.networkProvider.request(endpoint: endpoint)
+            .eraseToAnyPublisher()
+    }
+    
     private func conversionImage(with urlString: String) -> AnyPublisher<UIImage, NetworkError> {
         guard let url = URL(string: urlString) else {
             return Fail(error: NetworkError.invalidResponse).eraseToAnyPublisher()
