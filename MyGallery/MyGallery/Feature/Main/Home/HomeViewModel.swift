@@ -39,12 +39,8 @@ final class HomeViewModel: ObservableObject {
 }
 
 extension HomeViewModel {
-    func cyclePhotoListIndex() {
-        self.currentIndex = (self.currentIndex + 1) % self.checkTheCountOfPhotoList()
-    }
-    
-    func checkTheCountOfPhotoList() -> Int {
-        self.photoList.count
+    func isPhotoListEmpty() -> Bool {
+        self.photoList.isEmpty
     }
     
     func changeInitialAppear() {
