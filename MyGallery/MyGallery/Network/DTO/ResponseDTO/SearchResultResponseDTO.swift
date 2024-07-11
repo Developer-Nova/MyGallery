@@ -5,8 +5,6 @@
 //  Created by Nova on 6/18/24.
 //
 
-import Foundation
-
 // MARK: - SearchResultResponseDTO
 struct SearchResultResponseDTO: ResponseDTO {
     let total: Int
@@ -20,7 +18,7 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - Result
-    struct Result: ResponseDTO {
+    struct Result: Decodable {
         let id: String
         let alternativeSlugs: AlternativeSlugs
         let createdAt: String

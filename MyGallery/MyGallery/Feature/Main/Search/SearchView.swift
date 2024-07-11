@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SearchView: View {
     @EnvironmentObject private var pathModel: Path
-    @EnvironmentObject private var mainViewModel: MainViewModel
     @StateObject private var searchViewModel = SearchViewModel()
     
     var body: some View {
@@ -22,17 +21,12 @@ struct SearchView: View {
                 NoImagesView()
             } else {
                 PhotoScrollView(searchViewModel: searchViewModel)
-            }
+            } //: if Condition
         } //: VStack
         .onAppear {
             if searchViewModel.isInitialAppear {
                 searchViewModel.changeInitialAppear()
-                searchViewModel.clearSearchBarAndLoadImages()
-            }
-        }
-        .onChange(of: mainViewModel.selectedTab) { _, newValue in
-            if newValue == .search {
-                searchViewModel.clearSearchBarAndLoadImages()
+                searchViewModel.getNewPhotoList()
             }
         }
         .applyBackgroundColor()
@@ -41,6 +35,7 @@ struct SearchView: View {
 
 // MARK: - SearchBarView
 private struct SearchBarView: View {
+    @EnvironmentObject private var pathModel: Path
     @ObservedObject private var searchViewModel: SearchViewModel
     
     fileprivate init(searchViewModel: SearchViewModel) {
@@ -49,39 +44,42 @@ private struct SearchBarView: View {
     
     fileprivate var body: some View {
         HStack {
-            Image(systemName: "magnifyingglass")
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(Color.customGray2)
+                
+                TextField(
+                    "Search",
+                    text: $searchViewModel.searchText,
+                    prompt: Text("Search for photos")
+                                .foregroundStyle(Color.customGray2)
+                )
                 .foregroundStyle(Color.customGray2)
-            
-            TextField(
-                "Search",
-                text: $searchViewModel.searchText,
-                prompt: Text("Search for photos")
+                .submitLabel(.search)
+                .autocorrectionDisabled()
+                .onSubmit {
+                    searchViewModel.removeAllToPhotoList()
+                    searchViewModel.getSearchPhotoList()
+                }
+                
+                if !searchViewModel.searchText.isEmpty {
+                    Button(action: {
+                        searchViewModel.clearSearchBarAndLoadImages()
+                        hideKeyboard()
+                    }, label: {
+                        Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(Color.customGray2)
+                    })
+                } //: if Condition
+            } //: HStack
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 25)
+                    .foregroundStyle(Color.customGray1)
             )
-            .foregroundStyle(Color.customGray2)
-            .submitLabel(.search)
-            .autocorrectionDisabled()
-            .onSubmit {
-                searchViewModel.photoList.removeAll()
-                searchViewModel.getSearchPhotoList()
-            }
-            
-            if !searchViewModel.searchText.isEmpty {
-                Button(action: {
-                    searchViewModel.clearSearchBarAndLoadImages()
-                    hideKeyboard()
-                }, label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(Color.customGray2)
-                })
-            }
+            .padding([.bottom, .trailing])
         } //: HStack
-        .padding()
-        .background(
-            RoundedRectangle(cornerRadius: 25)
-                .foregroundStyle(Color.customGray1)
-        )
-        .padding()
+        .padding(.top, 10)
     }
 }
 
@@ -121,18 +119,15 @@ private struct PhotoScrollView: View {
                     CustomProgressView()
                 } else {
                     Button(action: {
-                        withAnimation {
-                            searchViewModel.morePhotoList(of: searchViewModel.selection)
-                        }
+                        searchViewModel.morePhotoList(of: searchViewModel.selection)
                     }, label: {
                         Image("synchronization")
                     })
-                }
+                } //: if Condition
             } //: Group
             .padding(.top, 30)
             
             Spacer()
-                .frame(height: 80)
         } //: ScrollView
     }
 }
@@ -170,7 +165,6 @@ private struct NoImagesView: View {
     SearchView()
         .environment(\.backgroundColor, .customBlack0)
         .environmentObject(Path())
-        .environmentObject(MainViewModel())
 }
 
 #Preview("NoImagesView") {

@@ -6,12 +6,18 @@
 //
 
 struct NewPhotoListRequestDTO: RequestDTO {
-    var page: Int? = 1
-    var perPage: Int = 30
-    var orderBy: OrderBy = .latest
+    var page: Int
+    var perPage: Int
+    var orderBy: OrderBy
     
-    init(page: Int? = nil) {
+    init(
+        page: Int = 1,
+        perPage: Int = 30,
+        orderBy: OrderBy = .latest
+    ) {
         self.page = page
+        self.perPage = perPage
+        self.orderBy = orderBy
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -19,10 +25,10 @@ struct NewPhotoListRequestDTO: RequestDTO {
         case perPage = "per_page"
         case orderBy = "order_by"
     }
-    
-    enum OrderBy: String, Encodable {
-        case latest
-        case oldest
-        case popular
-    }
+}
+
+enum OrderBy: String, Encodable {
+    case latest
+    case oldest
+    case popular
 }

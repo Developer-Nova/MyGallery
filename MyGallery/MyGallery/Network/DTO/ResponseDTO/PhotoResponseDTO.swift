@@ -5,8 +5,6 @@
 //  Created by Nova on 5/31/24.
 //
 
-import Foundation
-
 // MARK: - PhotoResponseDTO
 struct PhotoResponseDTO: ResponseDTO {
     let id: String
@@ -17,7 +15,7 @@ struct PhotoResponseDTO: ResponseDTO {
     let color: String
     let blurHash: String?
     let description: String?
-    let altDescription: String
+    let altDescription: String?
     let urls: Urls
     let links: Links
     let likes: Int

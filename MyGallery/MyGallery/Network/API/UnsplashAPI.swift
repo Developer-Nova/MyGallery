@@ -19,5 +19,8 @@ enum UnsplashAPI {
     enum Path {
         static let photos = "/photos"
         static let search = "/search/photos"
+        static let topics = "/topics"
+        static let totalStats = "/stats/total"
+        static let monthStats = "/stats/month"
     }
 }

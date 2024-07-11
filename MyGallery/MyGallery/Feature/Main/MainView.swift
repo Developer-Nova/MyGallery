@@ -11,13 +11,9 @@ struct MainView: View {
     @StateObject private var pathModel = Path()
     @StateObject private var mainViewModel = MainViewModel()
     
-    init() {
-        UITabBar.appearance().backgroundImage = UIImage()
-    }
-    
     var body: some View {
         if !mainViewModel.showSplashView {
-            NavigationStackAndTabView(mainViewModel: mainViewModel)
+            MainContentView(mainViewModel: mainViewModel)
                 .environmentObject(pathModel)
         } else {
             SplashView()
@@ -25,16 +21,16 @@ struct MainView: View {
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
-                            mainViewModel.showSplashView.toggle()
+                            mainViewModel.changeShowSplashView()
                         }
                     }
                 }
-        }
+        } //: if Condition
     }
 }
 
 // MARK: - NavigationStackAndTabView
-private struct NavigationStackAndTabView: View {
+private struct MainContentView: View {
     @EnvironmentObject private var pathModel: Path
     @ObservedObject private var mainViewModel: MainViewModel
     
@@ -52,11 +48,8 @@ private struct NavigationStackAndTabView: View {
                         
                         SearchView()
                             .tag(Tab.search)
-                        
-                        CollectionView()
-                            .tag(Tab.collection)
                     } //: Group
-                    .toolbar(.hidden, for: .tabBar)
+                    .toolbarBackground(.hidden, for: .tabBar)
                 } //: TabView
                 .environmentObject(pathModel)
                 .environmentObject(mainViewModel)
@@ -64,8 +57,10 @@ private struct NavigationStackAndTabView: View {
                     switch path {
                     case .photoDescriptionView(let photo):
                         PhotoDescriptionView(photo: photo)
-
-                        // Todo - homeView 의 이미지를 선택했을때도 photo 객체 넘겨주기 PhotoDescriptionView 를 재사용하기 위함
+                            .navigationBarBackButtonHidden()
+                    case .searchPhotoView:
+                        SearchView()
+                            .navigationBarBackButtonHidden()
                     }
                 }
                 
@@ -73,7 +68,7 @@ private struct NavigationStackAndTabView: View {
                     Spacer()
                     
                     CustomTabBarView(mainViewModel: mainViewModel)
-                        .padding(.bottom, -10)
+                        .padding(.bottom, -4)
                 } //: VStack
             } //: ZStack
             .ignoresSafeArea(.keyboard)
@@ -95,6 +90,20 @@ private struct CustomTabBarView: View {
             Spacer()
             
             Button (action: {
+                    mainViewModel.selectedTab = .home
+                }, label: {
+                    Image(
+                        mainViewModel.selectedTab == .home
+                        ? "home_selected"
+                        : "home"
+                    )
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                }) //: Button
+            
+            Spacer()
+            
+            Button (action: {
                     mainViewModel.selectedTab = .search
                 }, label: {
                     Image(
@@ -102,28 +111,17 @@ private struct CustomTabBarView: View {
                         ? "search_selected"
                         : "search"
                     )
-                }) //: Button
-            
-            Spacer()
-            
-            Button (action: {
-                    mainViewModel.selectedTab = .collection
-                }, label: {
-                    Image(
-                        mainViewModel.selectedTab == .collection
-                        ? "collection_selected"
-                        : "collection"
-                    )
+                    .resizable()
+                    .frame(width: 30, height: 30)
                 }) //: Button
             
             Spacer()
         } //: HStack
-        .frame(height: 70)
+        .frame(height: 60)
         .background {
             RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.white, lineWidth: 1.5)
+                .stroke(Color.gray, lineWidth: 1.0)
                 .fill(Color.customBlack1)
-                .shadow(color: .white.opacity(0.5), radius: 4, y: 1)
         }
         .padding(.horizontal)
     }

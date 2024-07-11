@@ -9,10 +9,10 @@ import SwiftUI
 import Combine
 
 final class SearchViewModel: ObservableObject {
-    @Published var photoList: [Photo]
-    @Published var searchText: String
+    @Published private(set) var photoList: [Photo]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
+    @Published var searchText: String
     
     private(set) var selection: Selection
     private var currentPage: Int
@@ -44,6 +44,10 @@ final class SearchViewModel: ObservableObject {
 }
 
 extension SearchViewModel {
+    func removeAllToPhotoList() {
+        self.photoList.removeAll()
+    }
+    
     func changeInitialAppear() {
         self.isInitialAppear.toggle()
     }
@@ -51,7 +55,7 @@ extension SearchViewModel {
     func clearSearchBarAndLoadImages() {
         self.searchText = ""
         self.currentPage = 1
-        self.photoList.removeAll()
+        self.removeAllToPhotoList()
         self.getNewPhotoList()
     }
     
@@ -67,7 +71,7 @@ extension SearchViewModel {
     }
     
     func getNewPhotoList() {
-        self.isLoading = true
+        self.isLoading.toggle()
         self.selection = .newPhoto
         
         networkService.fetchNewPhotoList(page: currentPage)
@@ -78,6 +82,7 @@ extension SearchViewModel {
                     break
                 case .failure(let error):
                     print(error)
+                    self.isLoading.toggle()
                 }
             } receiveValue: { images in
                 withAnimation {
@@ -89,7 +94,7 @@ extension SearchViewModel {
     }
     
     func getSearchPhotoList() {
-        self.isLoading = true
+        self.isLoading.toggle()
         self.selection = .searchPhoto
         
         networkService.fetchSearchPhotoList(about: searchText, page: currentPage)
@@ -100,6 +105,7 @@ extension SearchViewModel {
                     break
                 case .failure(let error):
                     print(error)
+                    self.isLoading.toggle()
                 }
             } receiveValue: { images in
                 withAnimation {
@@ -109,4 +115,9 @@ extension SearchViewModel {
             }
             .store(in: &cancellables)
     }
+    
+    //    private func getTopicList() -> AnyPublisher<[TopicResponseDTO], NetworkError> {
+    //        self.nerworkService.fetchTopicList()
+    //            .eraseToAnyPublisher()
+    //    }
 }

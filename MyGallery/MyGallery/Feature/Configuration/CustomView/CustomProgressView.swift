@@ -24,12 +24,13 @@ struct CustomProgressView: View {
                         .linear(duration: 0.7)
                         .repeatForever(autoreverses: false)
                     ) {
-                        self.isAnimating = true
+                        self.isAnimating.toggle()
                     }
                 }
             
             Spacer()
         } //: VStack
+        .applyBackgroundColor()
     }
 }
 
