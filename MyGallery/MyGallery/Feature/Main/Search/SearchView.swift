@@ -60,9 +60,9 @@ private struct SearchBarView: View {
                 .submitLabel(.search)
                 .autocorrectionDisabled()
                 .focused($textFieldIsFocused)
-                .onChange(of: textFieldIsFocused) { _, newValue in
+                .onChange(of: textFieldIsFocused) {
                     withAnimation {
-                        searchViewModel.isFocused = newValue
+                        searchViewModel.changeIsFocused()
                     }
                 }
                 .onSubmit {
@@ -90,8 +90,7 @@ private struct SearchBarView: View {
             if searchViewModel.isFocused {
                 Button(action: {
                     withAnimation {
-                        searchViewModel.changeIsFocused()
-                        textFieldIsFocused.toggle()
+                        self.textFieldIsFocused.toggle()
                     }
                 }, label: {
                     Text("Cancel")
