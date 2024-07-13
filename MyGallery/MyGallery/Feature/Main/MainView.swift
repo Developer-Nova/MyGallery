@@ -52,7 +52,6 @@ private struct MainContentView: View {
                     .toolbarBackground(.hidden, for: .tabBar)
                 } //: TabView
                 .environmentObject(pathModel)
-                .environmentObject(mainViewModel)
                 .navigationDestination(for: PathType.self) { path in
                     switch path {
                     case .photoDescriptionView(let photo):
