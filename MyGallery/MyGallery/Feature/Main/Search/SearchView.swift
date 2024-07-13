@@ -37,6 +37,7 @@ struct SearchView: View {
 private struct SearchBarView: View {
     @EnvironmentObject private var pathModel: Path
     @ObservedObject private var searchViewModel: SearchViewModel
+    @FocusState private var textFieldIsFocused: Bool
     
     fileprivate init(searchViewModel: SearchViewModel) {
         self.searchViewModel = searchViewModel
