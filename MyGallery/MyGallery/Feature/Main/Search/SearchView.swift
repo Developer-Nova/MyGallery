@@ -48,16 +48,23 @@ private struct SearchBarView: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(Color.customGray2)
+                    .padding(.leading, 7)
                 
                 TextField(
                     "Search",
                     text: $searchViewModel.searchText,
-                    prompt: Text("Search for photos")
+                    prompt: Text("Search for English")
                                 .foregroundStyle(Color.customGray2)
                 )
                 .foregroundStyle(Color.customGray2)
                 .submitLabel(.search)
                 .autocorrectionDisabled()
+                .focused($textFieldIsFocused)
+                .onChange(of: textFieldIsFocused) { _, newValue in
+                    withAnimation {
+                        searchViewModel.isFocused = newValue
+                    }
+                }
                 .onSubmit {
                     searchViewModel.removeAllToPhotoList()
                     searchViewModel.getSearchPhotoList()
@@ -73,14 +80,28 @@ private struct SearchBarView: View {
                     })
                 } //: if Condition
             } //: HStack
-            .padding()
+            .padding(10)
             .background(
                 RoundedRectangle(cornerRadius: 25)
                     .foregroundStyle(Color.customGray1)
             )
-            .padding([.bottom, .trailing])
+            
+            
+            if searchViewModel.isFocused {
+                Button(action: {
+                    withAnimation {
+                        searchViewModel.changeIsFocused()
+                        textFieldIsFocused.toggle()
+                    }
+                }, label: {
+                    Text("Cancel")
+                        .foregroundStyle(.white)
+                })
+                .padding([.vertical, .leading], 10)
+            } //: if Condition
         } //: HStack
         .padding(.top, 10)
+        .padding([.bottom, .horizontal])
     }
 }
 
