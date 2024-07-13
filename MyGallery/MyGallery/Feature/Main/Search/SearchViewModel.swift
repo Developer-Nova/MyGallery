@@ -12,6 +12,7 @@ final class SearchViewModel: ObservableObject {
     @Published private(set) var photoList: [Photo]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
+    @Published  var isFocused: Bool
     @Published var searchText: String
     
     private(set) var selection: Selection
@@ -26,17 +27,19 @@ final class SearchViewModel: ObservableObject {
     
     init(
         photoList: [Photo] = [Photo](),
-        searchText: String = "",
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
+        isFocused: Bool = false,
+        searchText: String = "",
         selection: Selection = Selection.newPhoto,
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     ) {
         self.photoList = photoList
-        self.searchText = searchText
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
+        self.isFocused = isFocused
+        self.searchText = searchText
         self.selection = selection
         self.currentPage = currentPage
         self.cancellables = cancellables
@@ -44,6 +47,10 @@ final class SearchViewModel: ObservableObject {
 }
 
 extension SearchViewModel {
+    func changeIsFocused() {
+        self.isFocused.toggle()
+    }
+    
     func removeAllToPhotoList() {
         self.photoList.removeAll()
     }
