@@ -86,7 +86,6 @@ private struct SearchBarView: View {
                     .foregroundStyle(Color.customGray1)
             )
             
-            
             if searchViewModel.isFocused {
                 Button(action: {
                     withAnimation {
@@ -104,9 +103,7 @@ private struct SearchBarView: View {
     }
 }
 
-// MARK: - PhotoScrollView
-private struct PhotoScrollView: View {
-    @EnvironmentObject private var pathModel: Path
+private struct TopicView: View {
     @ObservedObject private var searchViewModel: SearchViewModel
     
     fileprivate init(searchViewModel: SearchViewModel) {
@@ -114,24 +111,34 @@ private struct PhotoScrollView: View {
     }
     
     fileprivate var body: some View {
-        ScrollView(.vertical) {
-            LazyVGrid(columns: searchViewModel.columns, spacing: 3) {
-                ForEach(searchViewModel.photoList, id: \.id) { photo in
-                    Rectangle()
-                        .overlay {
-                            Image(uiImage: photo.image)
-                                .resizable()
-                                .scaledToFill()
-                        }
-                        .background(
-                            Color.gray
-                        )
-                        .aspectRatio(0.7, contentMode: .fill)
-                        .clipped()
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            pathModel.paths.append(.photoDescriptionView(photo: photo))
-                        }
+        ScrollView(showsIndicators: false) {
+            HStack {
+                Text("Topics")
+                    .font(.system(size: 25, weight: .bold))
+                    .foregroundStyle(.white)
+                
+                Spacer()
+            } //: HStack
+            .padding(.horizontal)
+            
+            LazyVGrid(columns: searchViewModel.columns, spacing: 10) {
+                ForEach(searchViewModel.topicList, id: \.id) { topic in
+                    Button(action: {
+                        // Todo - topic 관련 사진 보여주기
+                    }, label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .overlay {
+                                    // Todo - coverphoto 이미지
+                                }
+                                .foregroundStyle(.red)
+                            
+                            Text(topic.title)
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundStyle(.white)
+                        } //: ZStack
+                        .frame(width: 180, height: 150)
+                    }) //: Button
                 } //: ForEach
             } //: LazyVGrid
             
@@ -139,20 +146,14 @@ private struct PhotoScrollView: View {
                 if searchViewModel.isLoading {
                     CustomProgressView()
                 } else {
-                    Button(action: {
-                        searchViewModel.morePhotoList(of: searchViewModel.selection)
-                    }, label: {
-                        Image("synchronization")
-                    })
+                    MoreButtonView(title: "More Topics") {
+                        // Todo - topic 추가 네트워킹
+                    }
                 } //: if Condition
             } //: Group
-            .padding(.top, 30)
-            
-            Spacer()
+            .padding(.top, 25)
+            .padding(.bottom, 40)
         } //: ScrollView
-    }
-}
-
         .frame(maxWidth: 380)
     }
 }
