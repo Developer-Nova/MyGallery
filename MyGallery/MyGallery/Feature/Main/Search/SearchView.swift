@@ -14,22 +14,25 @@ struct SearchView: View {
     var body: some View {
         VStack {
             SearchBarView(searchViewModel: searchViewModel)
+            
+            TopicView(searchViewModel: searchViewModel)
         
-            if searchViewModel.isLoading && searchViewModel.photoList.isEmpty {
-                CustomProgressView()
-            } else if searchViewModel.photoList.isEmpty {
-                NoImagesView()
-            } else {
-                PhotoScrollView(searchViewModel: searchViewModel)
-            } //: if Condition
+//            if searchViewModel.isLoading && searchViewModel.photoList.isEmpty {
+//                CustomProgressView()
+//            } else if searchViewModel.photoList.isEmpty {
+//                NoImageView()
+//            } else {
+//                PhotoView(searchViewModel: searchViewModel)
+//            } //: if Condition
         } //: VStack
+        .applyBackgroundColor()
         .onAppear {
             if searchViewModel.isInitialAppear {
                 searchViewModel.changeInitialAppear()
-                searchViewModel.getNewPhotoList()
-            }
+//                searchViewModel.getNewPhotoList()
+                searchViewModel.getTopicList()
+            } //: if Condition
         }
-        .applyBackgroundColor()
     }
 }
 
