@@ -34,13 +34,13 @@ private struct HomeContentView: View {
 
             PhotoScrollView(homeViewModel: homeViewModel)
         } //: VStack
+        .applyBackgroundColor()
         .onAppear {
             if homeViewModel.isInitialAppear {
                 homeViewModel.getPopularPhotoList()
                 homeViewModel.changeInitialAppear()
-            }
+            } //: if Condition
         }
-        .applyBackgroundColor()
     }
 }
 
@@ -85,6 +85,10 @@ private struct PhotoScrollView: View {
                             }
                             .aspectRatio(0.6, contentMode: .fill)
                             .clipped()
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                pathModel.paths.append(.photoDescriptionView(photo: photo))
+                            }
                         
                         Text("사진 작업자") // Todo - 실제 사진 작가 넣어주기
                             .font(.system(size: 15, weight: .regular))
@@ -98,41 +102,19 @@ private struct PhotoScrollView: View {
                 if homeViewModel.isLoading {
                     CustomProgressView()
                 } else {
-                    MoreButtonView(homeViewModel: homeViewModel)
+                    MoreButtonView(title: "More Photos") {
+                        homeViewModel.morePhotoList()
+                    }
                 } //: if Condition
             } //: Group
-            .padding(.top, 10)
-            .padding(.bottom, 20)
+            .padding(.top, 25)
+            .padding(.bottom, 40)
         } //: ScrollView
-    }
-}
-
-private struct MoreButtonView: View {
-    @ObservedObject private var homeViewModel: HomeViewModel
-    
-    fileprivate init(homeViewModel: HomeViewModel) {
-        self.homeViewModel = homeViewModel
-    }
-    
-    fileprivate var body: some View {
-        Button(action: {
-            homeViewModel.morePhotoList()
-        }, label: {
-            Text("More Photos")
-                .padding(10)
-                .padding(.horizontal)
-                .background(
-                    RoundedRectangle(cornerRadius: 15)
-                        .foregroundStyle(.gray.opacity(0.3))
-                )
-                .foregroundStyle(.customGray2)
-        }) //: Button
     }
 }
 
 #Preview {
     HomeView()
-        .applyBackgroundColor()
         .environment(\.backgroundColor, .customBlack0)
         .environmentObject(Path())
 }
