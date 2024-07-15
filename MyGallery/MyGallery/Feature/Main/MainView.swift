@@ -67,7 +67,6 @@ private struct MainContentView: View {
                     Spacer()
                     
                     CustomTabBarView(mainViewModel: mainViewModel)
-                        .padding(.bottom, -4)
                 } //: VStack
             } //: ZStack
             .ignoresSafeArea(.keyboard)
@@ -85,44 +84,65 @@ private struct CustomTabBarView: View {
     }
     
     fileprivate var body: some View {
-        HStack {
-            Spacer()
+        VStack {
+            Divider()
+                .frame(height: 0.7)
+                .background(.white.opacity(0.5))
             
-            Button (action: {
+            HStack {
+                Spacer()
+                
+                Button (action: {
                     mainViewModel.selectedTab = .home
                 }, label: {
-                    Image(
-                        mainViewModel.selectedTab == .home
-                        ? "home_selected"
-                        : "home"
-                    )
-                    .resizable()
-                    .frame(width: 30, height: 30)
+                    VStack {
+                        Image(
+                            mainViewModel.selectedTab == .home
+                            ? "home_selected"
+                            : "home"
+                        )
+                        .resizable()
+                        .frame(width: 23, height: 23)
+                        
+                        Text("Home")
+                            .font(.system(size: 10))
+                            .foregroundStyle(
+                                mainViewModel.selectedTab == .home
+                                ? .white
+                                : .white.opacity(0.5)
+                            )
+                    } //: VStack
                 }) //: Button
-            
-            Spacer()
-            
-            Button (action: {
+                
+                Spacer()
+                
+                Button (action: {
                     mainViewModel.selectedTab = .search
                 }, label: {
-                    Image(
-                        mainViewModel.selectedTab == .search
-                        ? "search_selected"
-                        : "search"
-                    )
-                    .resizable()
-                    .frame(width: 30, height: 30)
+                    VStack {
+                        Image(
+                            mainViewModel.selectedTab == .search
+                            ? "search_selected"
+                            : "search"
+                        )
+                        .resizable()
+                        .frame(width: 23, height: 23)
+                        
+                        Text("Search")
+                            .font(.system(size: 10))
+                            .foregroundStyle(
+                                mainViewModel.selectedTab == .search
+                                ? .white
+                                : .white.opacity(0.5)
+                            )
+                    } //: VStack
                 }) //: Button
-            
-            Spacer()
-        } //: HStack
-        .frame(height: 60)
-        .background {
-            RoundedRectangle(cornerRadius: 24)
-                .stroke(Color.gray, lineWidth: 1.0)
-                .fill(Color.customBlack1)
-        }
-        .padding(.horizontal)
+                
+                Spacer()
+            } //: HStack
+            .frame(height: 40)
+        } //: VStack
+        .background(.customBlack1)
     }
 }
 
