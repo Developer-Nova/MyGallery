@@ -76,7 +76,8 @@ private struct SearchBarView: View {
                 if !searchViewModel.searchText.isEmpty {
                     Button(action: {
                         searchViewModel.clearSearchBarAndLoadImages()
-                        hideKeyboard()
+                        searchViewModel.changeSelectionView(by: .recentSearchView)
+                        self.textFieldIsFocused = true
                     }, label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(Color.customGray2)
