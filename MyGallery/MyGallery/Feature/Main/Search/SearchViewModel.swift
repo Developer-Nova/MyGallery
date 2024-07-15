@@ -10,32 +10,34 @@ import Combine
 
 final class SearchViewModel: ObservableObject {
     @Published private(set) var photoList: [Photo]
+    @Published private(set) var topicList: [TopicResponseDTO]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
-    @Published  var isFocused: Bool
+    @Published var isFocused: Bool
     @Published var searchText: String
     
     private(set) var selection: Selection
     private var currentPage: Int
     private var cancellables: Set<AnyCancellable>
     private let networkService = NetworkService.shared
-   
     
     var columns: [GridItem] {
-        Array(repeating: .init(.flexible(), spacing: 3), count: 3)
+        Array(repeating: .init(.flexible()), count: 2)
     }
     
     init(
-        photoList: [Photo] = [Photo](),
+        photoList: [Photo] = [],
+        topicList: [TopicResponseDTO] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
         isFocused: Bool = false,
         searchText: String = "",
-        selection: Selection = Selection.newPhoto,
+        selection: Selection = .newPhoto,
         currentPage: Int = 1,
-        cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
+        cancellables: Set<AnyCancellable> = []
     ) {
         self.photoList = photoList
+        self.topicList = topicList
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
         self.isFocused = isFocused
@@ -123,8 +125,21 @@ extension SearchViewModel {
             .store(in: &cancellables)
     }
     
-    //    private func getTopicList() -> AnyPublisher<[TopicResponseDTO], NetworkError> {
-    //        self.nerworkService.fetchTopicList()
-    //            .eraseToAnyPublisher()
-    //    }
+    func getTopicList() {
+        self.networkService.fetchTopicList()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { topic in
+                withAnimation {
+                    self.topicList.append(contentsOf: topic)
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
