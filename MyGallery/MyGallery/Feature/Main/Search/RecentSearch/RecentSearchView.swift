@@ -8,8 +8,47 @@
 import SwiftUI
 
 struct RecentSearchView: View {
+    @ObservedObject private var searchViewModel: SearchViewModel
+    
+    init(searchViewModel: SearchViewModel) {
+        self.searchViewModel = searchViewModel
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            HStack {
+                Text("최근 검색어")
+                    .font(.system(size: 20, weight: .semibold))
+                    .foregroundStyle(.white)
+                
+                Spacer()
+                
+                if !searchViewModel.recentSearchText.isEmpty {
+                    Button(action: {
+                        searchViewModel.changeIsDeleteRecentSearchText()
+                    }, label: {
+                        Text("Delete")
+                            .font(.system(size: 15))
+                            .foregroundStyle(.white)
+                    }) //: Button
+                } //: if Condition
+            } //: HStack
+            .padding()
+            .confirmationDialog("", isPresented: $searchViewModel.isDeleteRecentSearchText) {
+                Button("Delete all", role: .destructive) {
+                    searchViewModel.removeAllToRecentSearchText()
+                } //: Button
+            } message: {
+                Text("Do you want to delete all recent searches?")
+            }
+            
+            ForEach(searchViewModel.recentSearchText, id: \.self) { searchText in
+                RecentSearchCellView(searchText: searchText)
+            } //: ForEach
+        } //: ScrollView
+    }
+}
+
 // MARK: - RecentSearchCellView
 private struct RecentSearchCellView: View {
     private var searchText: String
