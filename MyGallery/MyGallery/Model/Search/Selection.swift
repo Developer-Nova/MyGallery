@@ -6,6 +6,7 @@
 //
 
 enum Selection {
-    case newPhoto
-    case searchPhoto
+    case topicView
+    case recentSearchView
+    case searchResultsView
 }
