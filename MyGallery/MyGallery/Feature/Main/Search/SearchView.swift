@@ -107,6 +107,7 @@ private struct SearchBarView: View {
     }
 }
 
+// MARK: - TopicView
 private struct TopicView: View {
     @ObservedObject private var searchViewModel: SearchViewModel
     
@@ -158,7 +159,7 @@ private struct TopicView: View {
             .padding(.top, 25)
             .padding(.bottom, 40)
         } //: ScrollView
-        .frame(maxWidth: 380)
+        .frame(maxWidth: 370)
     }
 }
 
