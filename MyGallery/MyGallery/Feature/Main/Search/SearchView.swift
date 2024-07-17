@@ -15,21 +15,23 @@ struct SearchView: View {
         VStack {
             SearchBarView(searchViewModel: searchViewModel)
             
-            TopicView(searchViewModel: searchViewModel)
-        
-//            if searchViewModel.isLoading && searchViewModel.photoList.isEmpty {
-//                CustomProgressView()
-//            } else if searchViewModel.photoList.isEmpty {
-//                NoImageView()
-//            } else {
-//                PhotoView(searchViewModel: searchViewModel)
-//            } //: if Condition
+            if searchViewModel.isLoading && searchViewModel.topicList.isEmpty {
+                CustomProgressView()
+            } else {
+                switch searchViewModel.selection {
+                case .topicView:
+                    TopicView(searchViewModel: searchViewModel)
+                case .recentSearchView:
+                    RecentSearchView(searchViewModel: searchViewModel)
+                case .searchResultsView:
+                    SearchResultsView()
+                }
+            } //: if Condition
         } //: VStack
         .applyBackgroundColor()
         .onAppear {
             if searchViewModel.isInitialAppear {
                 searchViewModel.changeInitialAppear()
-//                searchViewModel.getNewPhotoList()
                 searchViewModel.getTopicList()
             } //: if Condition
         }
@@ -62,26 +64,34 @@ private struct SearchBarView: View {
                 .foregroundStyle(Color.customGray2)
                 .submitLabel(.search)
                 .autocorrectionDisabled()
+                .keyboardType(.alphabet)
                 .focused($textFieldIsFocused)
-                .onChange(of: textFieldIsFocused) {
+                .onChange(of: self.textFieldIsFocused) { _, newValue in
                     withAnimation {
                         searchViewModel.changeIsFocused()
                     }
+                    
+                    if newValue == true {
+                        searchViewModel.changeSelectionView(by: .recentSearchView)
+                    } //: if Condition
                 }
                 .onSubmit {
-                    searchViewModel.removeAllToPhotoList()
-                    searchViewModel.getSearchPhotoList()
+                    if !searchViewModel.searchText.isEmpty {
+                        searchViewModel.removeAllToPhotoList()
+                        self.textFieldIsFocused.toggle()
+                        searchViewModel.changeSelectionView(by: .searchResultsView)
+                        searchViewModel.addRecentSearchText(to: searchViewModel.searchText)
+                    }
                 }
-                
+            
                 if !searchViewModel.searchText.isEmpty {
                     Button(action: {
                         searchViewModel.clearSearchBarAndLoadImages()
-                        searchViewModel.changeSelectionView(by: .recentSearchView)
                         self.textFieldIsFocused = true
                     }, label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundStyle(Color.customGray2)
-                    })
+                    }) //: Button
                 } //: if Condition
             } //: HStack
             .padding(10)
@@ -92,13 +102,13 @@ private struct SearchBarView: View {
             
             if searchViewModel.isFocused {
                 Button(action: {
-                    withAnimation {
-                        self.textFieldIsFocused.toggle()
-                    }
+                    self.textFieldIsFocused.toggle()
+                    searchViewModel.clearSearchBarAndLoadImages()
+                    searchViewModel.changeSelectionView(by: .topicView)
                 }, label: {
                     Text("Cancel")
                         .foregroundStyle(.white)
-                })
+                }) //: Button
                 .padding([.vertical, .leading], 10)
             } //: if Condition
         } //: HStack
