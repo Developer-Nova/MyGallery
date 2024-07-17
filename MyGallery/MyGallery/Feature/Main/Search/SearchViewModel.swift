@@ -11,8 +11,10 @@ import Combine
 final class SearchViewModel: ObservableObject {
     @Published private(set) var photoList: [Photo]
     @Published private(set) var topicList: [TopicResponseDTO]
+    @Published private(set) var recentSearchText: [String]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
+    @Published var showDeleteRecentSearchTextDialog: Bool
     @Published var isFocused: Bool
     @Published var searchText: String
     
@@ -28,18 +30,22 @@ final class SearchViewModel: ObservableObject {
     init(
         photoList: [Photo] = [],
         topicList: [TopicResponseDTO] = [],
+        recentSearchText: [String] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
+        isDeleteRecentSearchText: Bool = false,
         isFocused: Bool = false,
         searchText: String = "",
-        selection: Selection = .newPhoto,
+        selection: Selection = .topicView,
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = []
     ) {
         self.photoList = photoList
         self.topicList = topicList
+        self.recentSearchText = recentSearchText
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
+        self.showDeleteRecentSearchTextDialog = isDeleteRecentSearchText
         self.isFocused = isFocused
         self.searchText = searchText
         self.selection = selection
@@ -49,6 +55,18 @@ final class SearchViewModel: ObservableObject {
 }
 
 extension SearchViewModel {
+    func removeAllToRecentSearchText() {
+        self.recentSearchText.removeAll()
+    }
+    
+    func changeShowDeleteRecentSearchTextDialog() {
+        self.showDeleteRecentSearchTextDialog.toggle()
+    }
+    
+    func addRecentSearchText(to searchText: String) {
+        self.recentSearchText.append(searchText)
+    }
+    
     func changeIsFocused() {
         self.isFocused.toggle()
     }
@@ -68,20 +86,24 @@ extension SearchViewModel {
         self.getNewPhotoList()
     }
     
-    func morePhotoList(of selection: Selection) {
-        self.currentPage += 1
-        
-        switch selection {
-        case .newPhoto:
-            getNewPhotoList()
-        case .searchPhoto:
-            getSearchPhotoList()
-        }
+    func changeSelectionView(by selection: Selection) {
+        self.selection = selection
     }
+    
+//    func morePhotoList(of selection: Selection) {
+//        self.currentPage += 1
+//        
+//        switch selection {
+//        case .newPhoto:
+//            getNewPhotoList()
+//        case .searchPhoto:
+//            getSearchPhotoList()
+//        }
+//    }
     
     func getNewPhotoList() {
         self.isLoading.toggle()
-        self.selection = .newPhoto
+//        self.selection = .newPhoto
         
         networkService.fetchNewPhotoList(page: currentPage)
             .receive(on: DispatchQueue.main)
@@ -104,7 +126,7 @@ extension SearchViewModel {
     
     func getSearchPhotoList() {
         self.isLoading.toggle()
-        self.selection = .searchPhoto
+//        self.selection = .searchPhoto
         
         networkService.fetchSearchPhotoList(about: searchText, page: currentPage)
             .receive(on: DispatchQueue.main)
