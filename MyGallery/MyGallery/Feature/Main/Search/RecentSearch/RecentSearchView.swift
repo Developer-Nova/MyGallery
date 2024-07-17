@@ -25,7 +25,7 @@ struct RecentSearchView: View {
                 
                 if !searchViewModel.recentSearchText.isEmpty {
                     Button(action: {
-                        searchViewModel.changeIsDeleteRecentSearchText()
+                        searchViewModel.changeShowDeleteRecentSearchTextDialog()
                     }, label: {
                         Text("Delete")
                             .font(.system(size: 15))
@@ -34,7 +34,7 @@ struct RecentSearchView: View {
                 } //: if Condition
             } //: HStack
             .padding()
-            .confirmationDialog("", isPresented: $searchViewModel.isDeleteRecentSearchText) {
+            .confirmationDialog("", isPresented: $searchViewModel.showDeleteRecentSearchTextDialog) {
                 Button("Delete all", role: .destructive) {
                     searchViewModel.removeAllToRecentSearchText()
                 } //: Button
