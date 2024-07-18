@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PhotoDescriptionView: View {
+    @EnvironmentObject private var pathModel: Path
     private var photo: Photo
     
     init(photo: Photo) {
@@ -15,10 +16,47 @@ struct PhotoDescriptionView: View {
     }
     
     var body: some View {
-        Image(uiImage: photo.image)
+        HStack {
+            Button(action: {
+                pathModel.paths.removeLast()
+            }, label: {
+                Image("back")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 20, height: 20)
+            }) //: Button
+            
+            Spacer()
+            
+            Text("이미지 제목")
+                .foregroundStyle(.white)
+                .font(.system(size: 18))
+            
+            Spacer()
+            
+            Button(action: {
+                // Todo - 공유 버튼
+            }, label: {
+                Image("share")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 25, height: 25)
+            }) //: Button
+        } //: HStack
+        .padding(10)
+        
+        ScrollView {
+            Image(uiImage: photo.image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .scaledToFit()
+                .clipped()
+        } //: ScrollView
     }
 }
 
 #Preview {
     PhotoDescriptionView(photo: .init(image: UIImage(systemName: "star.fill")!))
+        .applyBackgroundColor()
+        .environment(\.backgroundColor, .customBlack0)
 }
