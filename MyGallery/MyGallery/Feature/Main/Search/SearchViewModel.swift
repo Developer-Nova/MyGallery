@@ -148,6 +148,8 @@ extension SearchViewModel {
     }
     
     func getTopicList() {
+        self.isLoading.toggle()
+        
         self.networkService.fetchTopicList()
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -156,9 +158,11 @@ extension SearchViewModel {
                     break
                 case .failure(let error):
                     print(error)
+                    self.isLoading.toggle()
                 }
             } receiveValue: { topic in
                 withAnimation {
+                    self.isLoading.toggle()
                     self.topicList.append(contentsOf: topic)
                 }
             }
