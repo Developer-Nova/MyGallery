@@ -15,7 +15,7 @@ struct SearchView: View {
         VStack {
             SearchBarView(searchViewModel: searchViewModel)
             
-            if searchViewModel.isLoading && searchViewModel.topicList.isEmpty {
+            if searchViewModel.isLoading {
                 CustomProgressView()
             } else {
                 switch searchViewModel.selection {
