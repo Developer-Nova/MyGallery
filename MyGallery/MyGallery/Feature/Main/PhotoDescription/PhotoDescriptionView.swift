@@ -43,7 +43,8 @@ struct PhotoDescriptionView: View {
                     .frame(width: 25, height: 25)
             }) //: Button
         } //: HStack
-        .padding(10)
+        .padding(.horizontal)
+        .padding(.vertical, 10)
         
         ScrollView {
             Image(uiImage: photo.image)
