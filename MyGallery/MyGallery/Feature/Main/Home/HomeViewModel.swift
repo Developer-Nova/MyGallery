@@ -17,7 +17,7 @@ final class HomeViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable>
     private let networkService: NetworkService
     
-    var columns: [GridItem] {
+    var photosColumns: [GridItem] {
         Array(repeating: .init(.flexible(), spacing: 3), count: 2)
     }
 
