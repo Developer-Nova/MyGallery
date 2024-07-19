@@ -35,3 +35,43 @@ final class SearchResultsTabViewModel: ObservableObject {
         self.cancellables = cancellables
     }
 }
+
+extension SearchResultsTabViewModel {
+    func clearSearchBarAndRemoveAllToPhotoList() {
+        self.searchText = ""
+        self.currentPage = 1
+        self.removeAllToPhotoList()
+    }
+    
+    func morePhotoList() {
+        self.currentPage += 1
+        
+        getSearchPhotoList()
+    }
+    
+    func removeAllToPhotoList() {
+        self.photoList.removeAll()
+    }
+    
+    func getSearchPhotoList() {
+        self.isLoading.toggle()
+        
+        networkService.fetchSearchPhotoList(about: searchText, page: currentPage)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(error)
+                    self.isLoading.toggle()
+                }
+            } receiveValue: { images in
+                withAnimation {
+                    self.isLoading.toggle()
+                    self.photoList.append(contentsOf: images.map { Photo(image: $0) })
+                }
+            }
+            .store(in: &cancellables)
+    }
+}
