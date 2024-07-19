@@ -74,7 +74,7 @@ private struct PhotoScrollView: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            LazyVGrid(columns: homeViewModel.columns, spacing: 3) {
+            LazyVGrid(columns: homeViewModel.photosColumns, spacing: 3) {
                 ForEach(homeViewModel.photoList, id: \.id) { photo in
                     ZStack(alignment: .bottomLeading) {
                         Rectangle()
