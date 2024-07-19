@@ -9,45 +9,39 @@ import SwiftUI
 import Combine
 
 final class SearchViewModel: ObservableObject {
-    @Published private(set) var photoList: [Photo]
     @Published private(set) var topicList: [TopicResponseDTO]
     @Published private(set) var recentSearchText: [String]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
     @Published var showDeleteRecentSearchTextDialog: Bool
     @Published var isFocused: Bool
-    @Published var searchText: String
     
     private(set) var selection: Selection
     private var currentPage: Int
     private var cancellables: Set<AnyCancellable>
     private let networkService = NetworkService.shared
     
-    var columns: [GridItem] {
+    var topicsColumns: [GridItem] {
         Array(repeating: .init(.flexible()), count: 2)
     }
     
     init(
-        photoList: [Photo] = [],
         topicList: [TopicResponseDTO] = [],
         recentSearchText: [String] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
         isDeleteRecentSearchText: Bool = false,
         isFocused: Bool = false,
-        searchText: String = "",
         selection: Selection = .topicView,
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = []
     ) {
-        self.photoList = photoList
         self.topicList = topicList
         self.recentSearchText = recentSearchText
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
         self.showDeleteRecentSearchTextDialog = isDeleteRecentSearchText
         self.isFocused = isFocused
-        self.searchText = searchText
         self.selection = selection
         self.currentPage = currentPage
         self.cancellables = cancellables
@@ -71,80 +65,12 @@ extension SearchViewModel {
         self.isFocused.toggle()
     }
     
-    func removeAllToPhotoList() {
-        self.photoList.removeAll()
-    }
-    
     func changeInitialAppear() {
         self.isInitialAppear.toggle()
     }
     
-    func clearSearchBarAndLoadImages() {
-        self.searchText = ""
-        self.currentPage = 1
-        self.removeAllToPhotoList()
-        self.getNewPhotoList()
-    }
-    
     func changeSelectionView(by selection: Selection) {
         self.selection = selection
-    }
-    
-//    func morePhotoList(of selection: Selection) {
-//        self.currentPage += 1
-//        
-//        switch selection {
-//        case .newPhoto:
-//            getNewPhotoList()
-//        case .searchPhoto:
-//            getSearchPhotoList()
-//        }
-//    }
-    
-    func getNewPhotoList() {
-        self.isLoading.toggle()
-//        self.selection = .newPhoto
-        
-        networkService.fetchNewPhotoList(page: currentPage)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print(error)
-                    self.isLoading.toggle()
-                }
-            } receiveValue: { images in
-                withAnimation {
-                    self.isLoading.toggle()
-                    self.photoList.append(contentsOf: images.map { Photo(image: $0) })
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    func getSearchPhotoList() {
-        self.isLoading.toggle()
-//        self.selection = .searchPhoto
-        
-        networkService.fetchSearchPhotoList(about: searchText, page: currentPage)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print(error)
-                    self.isLoading.toggle()
-                }
-            } receiveValue: { images in
-                withAnimation {
-                    self.isLoading.toggle()
-                    self.photoList.append(contentsOf: images.map { Photo(image: $0) })
-                }
-            }
-            .store(in: &cancellables)
     }
     
     func getTopicList() {
