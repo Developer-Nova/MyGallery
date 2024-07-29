@@ -17,6 +17,13 @@ struct PhotoView: View {
     
     var body: some View {
         ScrollView(.vertical) {
+            HStack {
+                Text(searchResultsTabViewModel.total)
+                
+                Text(searchResultsTabViewModel.totalPage)
+            }
+            .foregroundStyle(.gray)
+            
             LazyVGrid(columns: searchResultsTabViewModel.photosColumns, spacing: 3) {
                 ForEach(searchResultsTabViewModel.photoList, id: \.id) { photo in
                     Rectangle()

@@ -36,7 +36,7 @@ struct PhotoDescriptionView: View {
                 Spacer()
                 
                 Button(action: {
-                    // Todo - 공유 버튼
+                    // Todo - 공유 버튼 기능
                 }, label: {
                     Image("share")
                         .resizable()
