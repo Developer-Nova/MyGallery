@@ -18,6 +18,16 @@ final class SearchResultsTabViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable>
     private let networkService = NetworkService.shared
     
+    var total: String {
+        // Todo - formatter 사용해서 숫자 쉼표 적용하기
+
+        "Total: " + String(self.searchResult?.total ?? 0)
+    }
+    
+    var totalPage: String {
+        "Total page: " + String(self.searchResult?.totalPages ?? 0)
+    }
+    
     var photosColumns: [GridItem] {
         Array(repeating: .init(.flexible(), spacing: 3), count: 3)
     }
