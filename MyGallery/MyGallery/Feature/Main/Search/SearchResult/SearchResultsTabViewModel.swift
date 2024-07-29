@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 
 final class SearchResultsTabViewModel: ObservableObject {
+    @Published private var searchResult: SearchResultResponseDTO?
     @Published private(set) var photoList: [Photo]
     @Published private(set) var isLoading: Bool
     @Published var searchText: String
