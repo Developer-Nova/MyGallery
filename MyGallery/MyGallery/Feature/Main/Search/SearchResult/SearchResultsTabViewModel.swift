@@ -33,13 +33,15 @@ final class SearchResultsTabViewModel: ObservableObject {
     }
     
     init(
-        photoList: [Photo] = [],
+        searchResult: SearchResultResponseDTO? = nil ,
+        photo: [Photo] = [],
         isLoading: Bool = false,
         searchText: String = "",
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = []
     ) {
-        self.photoList = photoList
+        self.searchResult = searchResult
+        self.photoList = photo
         self.isLoading = isLoading
         self.searchText = searchText
         self.currentPage = currentPage
@@ -57,7 +59,7 @@ extension SearchResultsTabViewModel {
     func morePhotoList() {
         self.currentPage += 1
         
-        getSearchPhotoList()
+        self.getSearchPhotoList()
     }
     
     func removeAllToPhotoList() {
@@ -77,10 +79,29 @@ extension SearchResultsTabViewModel {
                     print(error)
                     self.isLoading.toggle()
                 }
-            } receiveValue: { images in
+            } receiveValue: { searchResult in
                 withAnimation {
                     self.isLoading.toggle()
-                    self.photoList.append(contentsOf: images.map { Photo(image: $0) })
+                    self.searchResult = searchResult
+                    self.searchResult?.results.forEach { self.loadImage(by: $0.urls.regular) }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func loadImage(by url: String) {
+        networkService.conversionImage(with: url)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { image in
+                withAnimation {
+                    self.photoList.append(Photo(image: image))
                 }
             }
             .store(in: &cancellables)
