@@ -30,7 +30,7 @@ struct TopicResponseDTO: ResponseDTO {
 }
 
 // MARK: - CoverPhoto
-struct CoverPhoto: Decodable {
+struct CoverPhoto: ResponseDTO {
     let id: String
     let slug: String
     let alternativeSlugs: AlternativeSlugs
@@ -66,16 +66,16 @@ struct CoverPhoto: Decodable {
 }
 
 // MARK: - AlternativeSlugs
-struct AlternativeSlugs: Decodable {
+struct AlternativeSlugs: ResponseDTO {
     let ko: String
 }
 
-enum AssetType: String, Decodable {
+enum AssetType: String, ResponseDTO {
     case photo = "photo"
 }
 
 // MARK: - CoverPhotoLinks
-struct CoverPhotoLinks: Decodable {
+struct CoverPhotoLinks: ResponseDTO {
     let download: String
     let downloadLocation: String
 
@@ -86,7 +86,7 @@ struct CoverPhotoLinks: Decodable {
 }
 
 // MARK: - Urls
-struct Urls: Decodable {
+struct Urls: ResponseDTO {
     let raw: String
     let full: String
     let regular: String
@@ -105,16 +105,12 @@ struct Urls: Decodable {
 }
 
 // MARK: - TopicLinks
-struct TopicLinks: Decodable {
+struct TopicLinks: ResponseDTO {
     let photos: String
-
-    enum CodingKeys: String, CodingKey {
-        case photos
-    }
 }
 
 // MARK: - PreviewPhoto
-struct PreviewPhoto: Decodable {
+struct PreviewPhoto: ResponseDTO {
     let id: String
     let slug: String
     let createdAt: String

@@ -18,7 +18,7 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - Result
-    struct Result: Decodable {
+    struct Result: ResponseDTO {
         let id: String
         let alternativeSlugs: AlternativeSlugs
         let createdAt: String
@@ -55,16 +55,16 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - AlternativeSlugs
-    struct AlternativeSlugs: Decodable {
+    struct AlternativeSlugs: ResponseDTO {
         let ko: String
     }
     
-    enum AssetType: String, Decodable {
+    enum AssetType: String, ResponseDTO {
         case photo = "photo"
     }
     
     // MARK: - Links
-    struct Links: Decodable {
+    struct Links: ResponseDTO {
         let downloadLocation: String
         
         private enum CodingKeys: String, CodingKey {
@@ -73,7 +73,7 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - Urls
-    struct Urls: Decodable {
+    struct Urls: ResponseDTO {
         let raw: String
         let full: String
         let regular: String
@@ -92,7 +92,7 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - User
-    struct User: Decodable {
+    struct User: ResponseDTO {
         let id: String
         let username: String
         let name: String
@@ -119,7 +119,7 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - UserLinks
-    struct UserLinks: Decodable {
+    struct UserLinks: ResponseDTO {
         let linksSelf: String
         let html: String
         let photos: String
@@ -140,14 +140,14 @@ struct SearchResultResponseDTO: ResponseDTO {
     }
     
     // MARK: - ProfileImage
-    struct ProfileImage: Decodable {
+    struct ProfileImage: ResponseDTO {
         let small: String
         let medium: String
         let large: String
     }
     
     // MARK: - Social
-    struct Social: Decodable {
+    struct Social: ResponseDTO {
         let instagramUsername: String?
         let portfolioURL: String?
         let twitterUsername: String?
