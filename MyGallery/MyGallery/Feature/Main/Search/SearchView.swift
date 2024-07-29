@@ -10,10 +10,11 @@ import SwiftUI
 struct SearchView: View {
     @EnvironmentObject private var pathModel: Path
     @StateObject private var searchViewModel = SearchViewModel()
+    @StateObject private var searchResultsTabViewModel = SearchResultsTabViewModel()
     
     var body: some View {
         VStack {
-            SearchBarView(searchViewModel: searchViewModel)
+            SearchBarView(searchViewModel: searchViewModel, searchResultsTabViewModel: searchResultsTabViewModel)
             
             if searchViewModel.isLoading {
                 CustomProgressView()
@@ -24,7 +25,7 @@ struct SearchView: View {
                 case .recentSearchView:
                     RecentSearchView(searchViewModel: searchViewModel)
                 case .searchResultsView:
-                    SearchResultsView()
+                    SearchResultsTabView(searchResultsTabViewModel: searchResultsTabViewModel)
                 }
             } //: if Condition
         } //: VStack
@@ -42,10 +43,16 @@ struct SearchView: View {
 private struct SearchBarView: View {
     @EnvironmentObject private var pathModel: Path
     @ObservedObject private var searchViewModel: SearchViewModel
+    @ObservedObject private var searchResultsTabViewModel: SearchResultsTabViewModel
     @FocusState private var textFieldIsFocused: Bool
     
-    fileprivate init(searchViewModel: SearchViewModel) {
+    fileprivate init(
+        searchViewModel: SearchViewModel,
+        searchResultsTabViewModel: SearchResultsTabViewModel
+        
+    ) {
         self.searchViewModel = searchViewModel
+        self.searchResultsTabViewModel = searchResultsTabViewModel
     }
     
     fileprivate var body: some View {
@@ -57,7 +64,7 @@ private struct SearchBarView: View {
                 
                 TextField(
                     "Search",
-                    text: $searchViewModel.searchText,
+                    text: $searchResultsTabViewModel.searchText,
                     prompt: Text("Search for English")
                                 .foregroundStyle(Color.customGray2)
                 )
@@ -75,18 +82,24 @@ private struct SearchBarView: View {
                         searchViewModel.changeSelectionView(by: .recentSearchView)
                     } //: if Condition
                 }
-                .onSubmit {
-                    if !searchViewModel.searchText.isEmpty {
-                        searchViewModel.removeAllToPhotoList()
-                        self.textFieldIsFocused.toggle()
-                        searchViewModel.changeSelectionView(by: .searchResultsView)
-                        searchViewModel.addRecentSearchText(to: searchViewModel.searchText)
+                .onChange(of: searchResultsTabViewModel.searchText) { _, newValue in
+                    if newValue == "" {
+                        searchResultsTabViewModel.clearSearchBarAndRemoveAllToPhotoList()
                     }
                 }
-            
-                if !searchViewModel.searchText.isEmpty {
+                .onSubmit {
+                    if !searchResultsTabViewModel.searchText.isEmpty {
+                        self.textFieldIsFocused.toggle()
+                        searchViewModel.addRecentSearchText(to: searchResultsTabViewModel.searchText)
+                        searchViewModel.changeSelectionView(by: .searchResultsView)
+                        searchResultsTabViewModel.removeAllToPhotoList()
+                        searchResultsTabViewModel.getSearchPhotoList()
+                    } //: if Condition
+                }
+                
+                if !searchResultsTabViewModel.searchText.isEmpty {
                     Button(action: {
-                        searchViewModel.clearSearchBarAndLoadImages()
+                        searchResultsTabViewModel.clearSearchBarAndRemoveAllToPhotoList()
                         self.textFieldIsFocused = true
                     }, label: {
                         Image(systemName: "xmark.circle.fill")
@@ -103,7 +116,7 @@ private struct SearchBarView: View {
             if searchViewModel.isFocused {
                 Button(action: {
                     self.textFieldIsFocused.toggle()
-                    searchViewModel.clearSearchBarAndLoadImages()
+                    searchResultsTabViewModel.clearSearchBarAndRemoveAllToPhotoList()
                     searchViewModel.changeSelectionView(by: .topicView)
                 }, label: {
                     Text("Cancel")
@@ -136,7 +149,7 @@ private struct TopicView: View {
             } //: HStack
             .padding(.horizontal)
             
-            LazyVGrid(columns: searchViewModel.columns, spacing: 10) {
+            LazyVGrid(columns: searchViewModel.topicsColumns, spacing: 10) {
                 ForEach(searchViewModel.topicList, id: \.id) { topic in
                     Button(action: {
                         // Todo - topic 관련 사진 보여주기
