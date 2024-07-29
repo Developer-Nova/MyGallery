@@ -27,22 +27,11 @@ final class NetworkService {
             .eraseToAnyPublisher()
     }
     
-    func fetchSearchPhotoList(about searchText: String, page: Int) -> AnyPublisher<[UIImage], NetworkError> {
+    func fetchSearchPhotoList(about searchText: String, page: Int) -> AnyPublisher<SearchResultResponseDTO, NetworkError> {
         let requestDTO = SearchPhotoListRequestDTO(query: searchText, page: page)
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.search, type: SearchResultResponseDTO.self)
         
         return self.networkProvider.request(endpoint: endpoint)
-            .flatMap { searchResult -> AnyPublisher<[UIImage], NetworkError> in
-                if searchResult.results.isEmpty {
-                    return Just([])
-                        .setFailureType(to: NetworkError.self)
-                        .eraseToAnyPublisher()
-                }
-                
-                return Publishers.MergeMany(searchResult.results.map { self.conversionImage(with: $0.urls.regular)})
-                    .collect()
-                    .eraseToAnyPublisher()
-            }
             .eraseToAnyPublisher()
     }
     
@@ -68,7 +57,7 @@ final class NetworkService {
             .eraseToAnyPublisher()
     }
     
-    private func conversionImage(with urlString: String) -> AnyPublisher<UIImage, NetworkError> {
+    func conversionImage(with urlString: String) -> AnyPublisher<UIImage, NetworkError> {
         guard let url = URL(string: urlString) else {
             return Fail(error: NetworkError.invalidResponse).eraseToAnyPublisher()
         }
@@ -78,7 +67,7 @@ final class NetworkService {
                 guard let image = UIImage(data: data) else {
                     throw NetworkError.unknown
                 }
-                
+              
                 return image
             }
             .mapError { _ in
