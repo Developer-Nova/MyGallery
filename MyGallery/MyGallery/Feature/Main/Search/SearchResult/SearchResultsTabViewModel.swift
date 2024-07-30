@@ -69,7 +69,7 @@ extension SearchResultsTabViewModel {
     func getSearchPhotoList() {
         self.isLoading.toggle()
         
-        networkService.fetchSearchPhotoList(about: searchText, page: currentPage)
+        networkService.fetchSearchPhotoList(about: self.searchText, page: self.currentPage)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
