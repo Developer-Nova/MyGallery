@@ -169,20 +169,9 @@ private struct TopicView: View {
                     }) //: Button
                 } //: ForEach
             } //: LazyVGrid
-            
-            Group {
-                if searchViewModel.isLoading {
-                    CustomProgressView()
-                } else {
-                    MoreButtonView(title: "More Topics") {
-                        // Todo - topic 추가 네트워킹
-                    }
-                } //: if Condition
-            } //: Group
-            .padding(.top, 25)
-            .padding(.bottom, 40)
         } //: ScrollView
         .frame(maxWidth: 370)
+        .padding(.bottom, 20)
     }
 }
 
