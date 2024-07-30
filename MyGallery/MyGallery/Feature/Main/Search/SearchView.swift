@@ -150,16 +150,21 @@ private struct TopicView: View {
             .padding(.horizontal)
             
             LazyVGrid(columns: searchViewModel.topicsColumns, spacing: 10) {
-                ForEach(searchViewModel.topicList, id: \.id) { topic in
+                ForEach(searchViewModel.topicList, id: \.0.id) { topic, photo in
                     Button(action: {
                         // Todo - topic 관련 사진 보여주기
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
                                 .overlay {
-                                    // Todo - coverphoto 이미지
+                                    Image(uiImage: photo.image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 180, height: 150)
+                                        .background(.gray)
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                                        .clipped()
                                 }
-                                .foregroundStyle(.red)
                             
                             Text(topic.title)
                                 .font(.system(size: 15, weight: .semibold))
