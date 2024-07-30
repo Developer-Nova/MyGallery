@@ -15,7 +15,7 @@ struct TopicListRequestDTO: RequestDTO {
         ids: String? = nil,
         page: Int = 1,
         perPage: Int = 20,
-        orderBy: OrderBy = .latest
+        orderBy: OrderBy = .featured
     ) {
         self.ids = ids
         self.page = page
