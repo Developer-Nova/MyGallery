@@ -174,9 +174,9 @@ private struct TopicView: View {
                     }) //: Button
                 } //: ForEach
             } //: LazyVGrid
+            .padding(.bottom, 20)
         } //: ScrollView
         .frame(maxWidth: 370)
-        .padding(.bottom, 20)
     }
 }
 
