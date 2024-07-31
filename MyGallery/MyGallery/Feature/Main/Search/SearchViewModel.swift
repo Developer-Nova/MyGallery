@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 final class SearchViewModel: ObservableObject {
-    @Published private(set) var topicList: [TopicResponseDTO]
+    @Published private(set) var topicList: [(TopicResponseDTO, Photo)]
     @Published private(set) var recentSearchText: [String]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
@@ -17,7 +17,6 @@ final class SearchViewModel: ObservableObject {
     @Published var isFocused: Bool
     
     private(set) var selection: Selection
-    private var currentPage: Int
     private var cancellables: Set<AnyCancellable>
     private let networkService = NetworkService.shared
     
@@ -26,14 +25,13 @@ final class SearchViewModel: ObservableObject {
     }
     
     init(
-        topicList: [TopicResponseDTO] = [],
+        topicList: [(TopicResponseDTO, Photo)] = [],
         recentSearchText: [String] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
         isDeleteRecentSearchText: Bool = false,
         isFocused: Bool = false,
         selection: Selection = .topicView,
-        currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = []
     ) {
         self.topicList = topicList
@@ -43,7 +41,6 @@ final class SearchViewModel: ObservableObject {
         self.showDeleteRecentSearchTextDialog = isDeleteRecentSearchText
         self.isFocused = isFocused
         self.selection = selection
-        self.currentPage = currentPage
         self.cancellables = cancellables
     }
 }
@@ -89,7 +86,25 @@ extension SearchViewModel {
             } receiveValue: { topic in
                 withAnimation {
                     self.isLoading.toggle()
-                    self.topicList.append(contentsOf: topic)
+                    topic.forEach { self.loadImage(with: $0, for: $0.coverPhoto.urls.regular) }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func loadImage(with: TopicResponseDTO, for url: String) {
+        self.networkService.conversionImage(with: url)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { image in
+                withAnimation {
+                    self.topicList.append((with, Photo(image: image)))
                 }
             }
             .store(in: &cancellables)
