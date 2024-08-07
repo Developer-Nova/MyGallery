@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TopicPhotoView: View {
+struct TopicPhotoScrollView: View {
     @EnvironmentObject private var pathModel: Path
     @EnvironmentObject private var searchViewModel: SearchViewModel
     private var topicTitle: String
@@ -68,7 +68,7 @@ struct TopicPhotoView: View {
 }
 
 #Preview {
-    TopicPhotoView(topicTitle: "Title")
+    TopicPhotoScrollView(topicTitle: "Title")
         .applyBackgroundColor()
         .environment(\.backgroundColor, .customBlack0)
         .environmentObject(Path())

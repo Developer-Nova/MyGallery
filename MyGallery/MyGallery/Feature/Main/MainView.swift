@@ -63,7 +63,7 @@ private struct MainContentView: View {
                         SearchView()
                             .navigationBarBackButtonHidden()
                     case .topicPhotoView(let title):
-                        TopicPhotoView(topicTitle: title)
+                        TopicPhotoScrollView(topicTitle: title)
                             .navigationBarBackButtonHidden()
                     }
                 }
