@@ -56,11 +56,14 @@ private struct MainContentView: View {
                 .environmentObject(pathModel)
                 .navigationDestination(for: PathType.self) { path in
                     switch path {
-                    case .photoDescriptionView(let photo):
-                        PhotoDescriptionView(photo: photo)
+                    case .photoDescriptionView(let photoObject, let image):
+                        PhotoDescriptionView(photo: photoObject, image: image)
                             .navigationBarBackButtonHidden()
                     case .searchPhotoView:
                         SearchView()
+                            .navigationBarBackButtonHidden()
+                    case .topicPhotoView(let title):
+                        TopicPhotoView(topicTitle: title)
                             .navigationBarBackButtonHidden()
                     }
                 }
