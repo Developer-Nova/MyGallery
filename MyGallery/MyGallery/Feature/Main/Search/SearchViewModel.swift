@@ -115,14 +115,16 @@ extension SearchViewModel {
             } receiveValue: { topic in
                 withAnimation {
                     self.isLoading.toggle()
-                    topic.forEach { self.loadImage(with: $0, for: $0.coverPhoto.urls.regular) }
+                    topic.forEach { self.topicList.append($0) }
                 }
             }
             .store(in: &cancellables)
     }
     
-    private func loadImage(with: TopicResponseDTO, for url: String) {
-        self.networkService.conversionImage(with: url)
+    func getTopicPhotoList() {
+        self.isLoading.toggle()
+        
+        self.networkService.fetchTopicPhotoList(id: self.topicId, page: self.currentPage)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -130,10 +132,12 @@ extension SearchViewModel {
                     break
                 case .failure(let error):
                     print(error)
+                    self.isLoading.toggle()
                 }
-            } receiveValue: { image in
+            } receiveValue: { photo in
                 withAnimation {
-                    self.topicList.append((with, Photo(image: image)))
+                    self.isLoading.toggle()
+                    photo.forEach { self.photoList.append($0) }
                 }
             }
             .store(in: &cancellables)
