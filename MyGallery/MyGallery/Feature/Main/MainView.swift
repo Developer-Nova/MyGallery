@@ -10,11 +10,13 @@ import SwiftUI
 struct MainView: View {
     @StateObject private var pathModel = Path()
     @StateObject private var mainViewModel = MainViewModel()
+    @StateObject private var searchViewModel = SearchViewModel()
     
     var body: some View {
         if !mainViewModel.showSplashView {
             MainContentView(mainViewModel: mainViewModel)
                 .environmentObject(pathModel)
+                .environmentObject(searchViewModel)
         } else {
             SplashView()
                 .transition(.opacity)
