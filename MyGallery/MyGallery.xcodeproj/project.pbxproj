@@ -10,9 +10,10 @@
 		3C005F2D2C3A725100DF7C2C /* TopicListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C005F2C2C3A725100DF7C2C /* TopicListRequestDTO.swift */; };
 		3C005F2F2C3A75EF00DF7C2C /* TopicResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C005F2E2C3A75EF00DF7C2C /* TopicResponseDTO.swift */; };
 		3C005F312C3AE77600DF7C2C /* StatsResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C005F302C3AE77600DF7C2C /* StatsResponseDTO.swift */; };
-		3C0FF8872C5A252D00CD71F5 /* TopicPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FF8862C5A252D00CD71F5 /* TopicPhotoView.swift */; };
+		3C0FF8872C5A252D00CD71F5 /* TopicPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FF8862C5A252D00CD71F5 /* TopicPhotoScrollView.swift */; };
 		3C0FF88A2C6109DC00CD71F5 /* HashableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FF8892C6109DC00CD71F5 /* HashableImage.swift */; };
 		3C0FF88C2C62434D00CD71F5 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FF88B2C62434D00CD71F5 /* CustomNavigationBar.swift */; };
+		3C0FF88E2C63972A00CD71F5 /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0FF88D2C63972A00CD71F5 /* TopicView.swift */; };
 		3C2B89302C09F06A0069CCA6 /* MyGalleryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B892F2C09F06A0069CCA6 /* MyGalleryApp.swift */; };
 		3C2B89322C09F06A0069CCA6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2B89312C09F06A0069CCA6 /* MainView.swift */; };
 		3C2B89342C09F06B0069CCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C2B89332C09F06B0069CCA6 /* Assets.xcassets */; };
@@ -67,9 +68,10 @@
 		3C005F2C2C3A725100DF7C2C /* TopicListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicListRequestDTO.swift; sourceTree = "<group>"; };
 		3C005F2E2C3A75EF00DF7C2C /* TopicResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicResponseDTO.swift; sourceTree = "<group>"; };
 		3C005F302C3AE77600DF7C2C /* StatsResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsResponseDTO.swift; sourceTree = "<group>"; };
-		3C0FF8862C5A252D00CD71F5 /* TopicPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicPhotoView.swift; sourceTree = "<group>"; };
+		3C0FF8862C5A252D00CD71F5 /* TopicPhotoScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicPhotoScrollView.swift; sourceTree = "<group>"; };
 		3C0FF8892C6109DC00CD71F5 /* HashableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashableImage.swift; sourceTree = "<group>"; };
 		3C0FF88B2C62434D00CD71F5 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		3C0FF88D2C63972A00CD71F5 /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		3C2B892C2C09F06A0069CCA6 /* MyGallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGallery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C2B892F2C09F06A0069CCA6 /* MyGalleryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGalleryApp.swift; sourceTree = "<group>"; };
 		3C2B89312C09F06A0069CCA6 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -137,7 +139,8 @@
 		3C0FF8852C5A250C00CD71F5 /* Topic */ = {
 			isa = PBXGroup;
 			children = (
-				3C0FF8862C5A252D00CD71F5 /* TopicPhotoView.swift */,
+				3C0FF88D2C63972A00CD71F5 /* TopicView.swift */,
+				3C0FF8862C5A252D00CD71F5 /* TopicPhotoScrollView.swift */,
 			);
 			path = Topic;
 			sourceTree = "<group>";
@@ -584,8 +587,9 @@
 				3CD839AB2C0F3066005BC2F0 /* Endpoint.swift in Sources */,
 				3C2B893F2C09F9BA0069CCA6 /* PhotoResponseDTO.swift in Sources */,
 				3CD839A22C0F1F3D005BC2F0 /* Requestable.swift in Sources */,
-				3C0FF8872C5A252D00CD71F5 /* TopicPhotoView.swift in Sources */,
+				3C0FF8872C5A252D00CD71F5 /* TopicPhotoScrollView.swift in Sources */,
 				3C2B89322C09F06A0069CCA6 /* MainView.swift in Sources */,
+				3C0FF88E2C63972A00CD71F5 /* TopicView.swift in Sources */,
 				3C623DEE2C36EFB000E28A51 /* SplashView.swift in Sources */,
 				3CD839A72C0F23FC005BC2F0 /* Encodable+.swift in Sources */,
 				3C67453C2C0C9E4B0036BD42 /* UnsplashAPI.swift in Sources */,
