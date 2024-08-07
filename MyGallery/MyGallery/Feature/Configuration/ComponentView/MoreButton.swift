@@ -1,5 +1,5 @@
 //
-//  MoreButtonView.swift
+//  MoreButton.swift
 //  MyGallery
 //
 //  Created by Nova on 7/15/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MoreButtonView: View {
+struct MoreButton: View {
     let title: String
     let action: () -> Void
     
@@ -36,5 +36,5 @@ struct MoreButtonView: View {
 }
 
 #Preview {
-    MoreButtonView(title: "title", action: { print("action") })
+    MoreButton(title: "title", action: { print("action") })
 }
