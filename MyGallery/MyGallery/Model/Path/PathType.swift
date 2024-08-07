@@ -5,7 +5,10 @@
 //  Created by Nova on 6/8/24.
 //
 
+import SwiftUI
+
 enum PathType: Hashable {
-    case photoDescriptionView(photo: Photo)
+    case photoDescriptionView(photoObject: PhotoResponseDTO, image: HashableImage)
     case searchPhotoView
+    case topicPhotoView(topicTitle: String)
 }
