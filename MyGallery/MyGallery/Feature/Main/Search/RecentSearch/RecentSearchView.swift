@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct RecentSearchView: View {
-    @ObservedObject private var searchViewModel: SearchViewModel
-    
-    init(searchViewModel: SearchViewModel) {
-        self.searchViewModel = searchViewModel
-    }
+    @EnvironmentObject private var searchViewModel: SearchViewModel
     
     var body: some View {
         ScrollView {
@@ -86,9 +82,10 @@ private struct RecentSearchCellView: View {
 }
 
 #Preview {
-    RecentSearchView(searchViewModel: SearchViewModel())
+    RecentSearchView()
         .applyBackgroundColor()
         .environment(\.backgroundColor, .customBlack0)
+        .environmentObject(SearchViewModel())
 }
 
 #Preview("CellView") {
