@@ -23,7 +23,7 @@ struct TopicPhotoScrollView: View {
             CustomNavigationBar(title: self.topicTitle, isDisplayRightButton: false, leftButtonAction: {
                 pathModel.paths.removeLast()
                 searchViewModel.removeAllToPhotoList()
-            })
+            }) //: CustomNavigationBar
             
             ScrollView(.vertical) {
                 LazyVGrid(columns: searchViewModel.topicsPhotosColumns, spacing: 3) {
