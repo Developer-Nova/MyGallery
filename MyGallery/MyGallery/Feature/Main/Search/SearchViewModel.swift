@@ -89,6 +89,16 @@ extension SearchViewModel {
         self.selection = selection
     }
     
+    func morePhotoList() {
+        self.currentPage += 1
+        
+        self.getTopicPhotoList()
+    }
+    
+    func setTopicId(id: String) {
+        self.topicId = id
+    }
+    
     func getTopicList() {
         self.isLoading.toggle()
         
