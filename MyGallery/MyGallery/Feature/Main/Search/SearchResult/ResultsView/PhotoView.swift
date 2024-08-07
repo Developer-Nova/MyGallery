@@ -25,22 +25,26 @@ struct PhotoView: View {
             .foregroundStyle(.gray)
             
             LazyVGrid(columns: searchResultsTabViewModel.photosColumns, spacing: 3) {
-                ForEach(searchResultsTabViewModel.photoList, id: \.id) { photo in
+                ForEach(searchResultsTabViewModel.searchResult.results, id: \.id) { photo in
                     Rectangle()
                         .overlay {
-                            Image(uiImage: photo.image)
-                                .resizable()
-                                .scaledToFill()
+                            AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .background(
+                                        Color.gray
+                                    )
+                                    .contentShape(Rectangle())
+                                    .onTapGesture {
+                                        pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: HashableImage(image: image)))
+                                    }
+                            } placeholder: {
+                                CustomProgressView()
+                            }
                         }
-                        .background(
-                            Color.gray
-                        )
                         .aspectRatio(0.7, contentMode: .fill)
                         .clipped()
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            pathModel.paths.append(.photoDescriptionView(photo: photo))
-                        }
                 } //: ForEach
             } //: LazyVGrid
             
@@ -48,7 +52,7 @@ struct PhotoView: View {
                 if searchResultsTabViewModel.isLoading {
                     CustomProgressView()
                 } else {
-                    MoreButtonView(title: "More Photos") {
+                    MoreButton(title: "More Photos") {
                         searchResultsTabViewModel.morePhotoList()
                     }
                 } //: if Condition
