@@ -145,20 +145,27 @@ private struct TopicView: View {
             .padding(.horizontal)
             
             LazyVGrid(columns: searchViewModel.topicsColumns, spacing: 10) {
-                ForEach(searchViewModel.topicList, id: \.0.id) { topic, photo in
+                ForEach(searchViewModel.topicList, id: \.id) { topic in
                     Button(action: {
-                        // Todo - topic 관련 사진 보여주기
+                        self.pathModel.paths.append(.topicPhotoView(topicTitle: topic.title))
+                        self.searchViewModel.setTopicId(id: topic.id)
+                        self.searchViewModel.getTopicPhotoList()
                     }, label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 20)
+                                .foregroundStyle(.black)
                                 .overlay {
-                                    Image(uiImage: photo.image)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 180, height: 150)
-                                        .background(.gray)
-                                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                                        .clipped()
+                                    AsyncImage(url: URL(string: topic.coverPhoto.urls.regular)) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 180, height: 150)
+                                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                                            .clipped()
+                                            .opacity(0.7)
+                                    } placeholder: {
+                                        CustomProgressView()
+                                    } //: AsyncImage
                                 }
                             
                             Text(topic.title)
@@ -179,4 +186,5 @@ private struct TopicView: View {
     SearchView()
         .environment(\.backgroundColor, .customBlack0)
         .environmentObject(Path())
+        .environmentObject(SearchViewModel())
 }
