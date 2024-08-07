@@ -5,7 +5,7 @@
 //  Created by Nova on 6/4/24.
 //
 
-struct NewPhotoListRequestDTO: RequestDTO {
+struct PhotoListRequestDTO: RequestDTO {
     var page: Int
     var perPage: Int
     var orderBy: OrderBy
