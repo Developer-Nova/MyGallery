@@ -10,5 +10,5 @@ import SwiftUI
 enum PathType: Hashable {
     case photoDescriptionView(photoObject: PhotoResponseDTO, image: HashableImage)
     case searchPhotoView
-    case topicPhotoView(topicTitle: String)
+    case topicPhotoScrollView(topicTitle: String)
 }
