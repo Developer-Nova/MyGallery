@@ -25,7 +25,7 @@ struct TopicView: View {
             LazyVGrid(columns: searchViewModel.topicsColumns, spacing: 10) {
                 ForEach(searchViewModel.topicList, id: \.id) { topic in
                     Button(action: {
-                        self.pathModel.paths.append(.topicPhotoView(topicTitle: topic.title))
+                        self.pathModel.paths.append(.topicPhotoScrollView(topicTitle: topic.title))
                         self.searchViewModel.setTopicId(id: topic.id)
                         self.searchViewModel.getTopicPhotoList()
                     }, label: {
