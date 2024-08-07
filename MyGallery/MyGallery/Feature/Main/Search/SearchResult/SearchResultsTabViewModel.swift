@@ -9,8 +9,7 @@ import SwiftUI
 import Combine
 
 final class SearchResultsTabViewModel: ObservableObject {
-    @Published private var searchResult: SearchResultResponseDTO?
-    @Published private(set) var photoList: [Photo]
+    @Published private(set) var searchResult: SearchResultResponseDTO
     @Published private(set) var isLoading: Bool
     @Published var searchText: String
     
@@ -21,11 +20,11 @@ final class SearchResultsTabViewModel: ObservableObject {
     var total: String {
         // Todo - formatter 사용해서 숫자 쉼표 적용하기
 
-        "Total: " + String(self.searchResult?.total ?? 0)
+        "Total: " + String(self.searchResult.total)
     }
     
     var totalPage: String {
-        "Total page: " + String(self.searchResult?.totalPages ?? 0)
+        "Total page: " + String(self.searchResult.totalPages)
     }
     
     var photosColumns: [GridItem] {
@@ -33,15 +32,13 @@ final class SearchResultsTabViewModel: ObservableObject {
     }
     
     init(
-        searchResult: SearchResultResponseDTO? = nil ,
-        photo: [Photo] = [],
+        searchResult: SearchResultResponseDTO = .toModel(),
         isLoading: Bool = false,
         searchText: String = "",
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = []
     ) {
         self.searchResult = searchResult
-        self.photoList = photo
         self.isLoading = isLoading
         self.searchText = searchText
         self.currentPage = currentPage
@@ -63,7 +60,7 @@ extension SearchResultsTabViewModel {
     }
     
     func removeAllToPhotoList() {
-        self.photoList.removeAll()
+        self.searchResult.results.removeAll()
     }
     
     func getSearchPhotoList() {
@@ -83,25 +80,6 @@ extension SearchResultsTabViewModel {
                 withAnimation {
                     self.isLoading.toggle()
                     self.searchResult = searchResult
-                    self.searchResult?.results.forEach { self.loadImage(by: $0.urls.regular) }
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func loadImage(by url: String) {
-        networkService.conversionImage(with: url)
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print(error)
-                }
-            } receiveValue: { image in
-                withAnimation {
-                    self.photoList.append(Photo(image: image))
                 }
             }
             .store(in: &cancellables)

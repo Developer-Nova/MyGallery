@@ -18,7 +18,7 @@ struct SearchResultsTabView: View {
         VStack {
             // Todo - 상단 탭뷰 Photo, Collection, User
             
-            if searchResultsTabViewModel.isLoading && searchResultsTabViewModel.photoList.isEmpty {
+            if searchResultsTabViewModel.isLoading && searchResultsTabViewModel.searchResult.results.isEmpty {
                 CustomProgressView()
             } else {
                 PhotoView(searchResultsTabViewModel: searchResultsTabViewModel)
