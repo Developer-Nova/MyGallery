@@ -9,21 +9,21 @@ import SwiftUI
 
 struct SearchView: View {
     @EnvironmentObject private var pathModel: Path
-    @StateObject private var searchViewModel = SearchViewModel()
+    @EnvironmentObject private var searchViewModel:SearchViewModel
     @StateObject private var searchResultsTabViewModel = SearchResultsTabViewModel()
     
     var body: some View {
         VStack {
-            SearchBarView(searchViewModel: searchViewModel, searchResultsTabViewModel: searchResultsTabViewModel)
+            SearchBarView(searchResultsTabViewModel: searchResultsTabViewModel)
             
             if searchViewModel.isLoading {
                 CustomProgressView()
             } else {
                 switch searchViewModel.selection {
                 case .topicView:
-                    TopicView(searchViewModel: searchViewModel)
+                    TopicView()
                 case .recentSearchView:
-                    RecentSearchView(searchViewModel: searchViewModel)
+                    RecentSearchView()
                 case .searchResultsView:
                     SearchResultsTabView(searchResultsTabViewModel: searchResultsTabViewModel)
                 }
@@ -42,16 +42,14 @@ struct SearchView: View {
 // MARK: - SearchBarView
 private struct SearchBarView: View {
     @EnvironmentObject private var pathModel: Path
-    @ObservedObject private var searchViewModel: SearchViewModel
+    @EnvironmentObject private var searchViewModel: SearchViewModel
     @ObservedObject private var searchResultsTabViewModel: SearchResultsTabViewModel
     @FocusState private var textFieldIsFocused: Bool
     
     fileprivate init(
-        searchViewModel: SearchViewModel,
         searchResultsTabViewModel: SearchResultsTabViewModel
         
     ) {
-        self.searchViewModel = searchViewModel
         self.searchResultsTabViewModel = searchResultsTabViewModel
     }
     
@@ -132,11 +130,8 @@ private struct SearchBarView: View {
 
 // MARK: - TopicView
 private struct TopicView: View {
-    @ObservedObject private var searchViewModel: SearchViewModel
-    
-    fileprivate init(searchViewModel: SearchViewModel) {
-        self.searchViewModel = searchViewModel
-    }
+    @EnvironmentObject private var pathModel: Path
+    @EnvironmentObject private var searchViewModel: SearchViewModel
     
     fileprivate var body: some View {
         ScrollView(showsIndicators: false) {
