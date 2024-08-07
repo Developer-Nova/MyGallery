@@ -9,7 +9,8 @@ import SwiftUI
 import Combine
 
 final class SearchViewModel: ObservableObject {
-    @Published private(set) var topicList: [(TopicResponseDTO, Photo)]
+    @Published private(set) var topicList: [TopicResponseDTO]
+    @Published private(set) var photoList: [PhotoResponseDTO]
     @Published private(set) var recentSearchText: [String]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
@@ -17,31 +18,45 @@ final class SearchViewModel: ObservableObject {
     @Published var isFocused: Bool
     
     private(set) var selection: Selection
+    private var currentPage: Int
+    private var topicId: String
     private var cancellables: Set<AnyCancellable>
-    private let networkService = NetworkService.shared
+    private let networkService: NetworkService
     
     var topicsColumns: [GridItem] {
         Array(repeating: .init(.flexible()), count: 2)
     }
     
+    var topicsPhotosColumns: [GridItem] {
+        Array(repeating: .init(.flexible(), spacing: 3), count: 3)
+    }
+    
     init(
-        topicList: [(TopicResponseDTO, Photo)] = [],
+        topicList: [TopicResponseDTO] = [],
+        photoList: [PhotoResponseDTO] = [],
         recentSearchText: [String] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
         isDeleteRecentSearchText: Bool = false,
         isFocused: Bool = false,
         selection: Selection = .topicView,
-        cancellables: Set<AnyCancellable> = []
+        currentPage: Int = 1,
+        topicId: String = "",
+        cancellables: Set<AnyCancellable> = [],
+        networkService: NetworkService = .shared
     ) {
         self.topicList = topicList
+        self.photoList = photoList
         self.recentSearchText = recentSearchText
         self.isLoading = isLoading
         self.isInitialAppear = isInitialAppear
         self.showDeleteRecentSearchTextDialog = isDeleteRecentSearchText
         self.isFocused = isFocused
         self.selection = selection
+        self.currentPage = currentPage
+        self.topicId = topicId
         self.cancellables = cancellables
+        self.networkService = networkService
     }
 }
 
