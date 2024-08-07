@@ -9,46 +9,25 @@ import SwiftUI
 
 struct PhotoDescriptionView: View {
     @EnvironmentObject private var pathModel: Path
-    private var photo: Photo
+    @StateObject private var photoDescriptionViewModel = PhotoDescriptionViewModel()
+    private var photo: PhotoResponseDTO
+    private var image: HashableImage
     
-    init(photo: Photo) {
+    init(photo: PhotoResponseDTO, image: HashableImage) {
         self.photo = photo
+        self.image = image
     }
     
     var body: some View {
         VStack {
-            HStack {
-                Button(action: {
-                    pathModel.paths.removeLast()
-                }, label: {
-                    Image("back")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 20, height: 20)
-                }) //: Button
-                
-                Spacer()
-                
-                Text("이미지 제목")
-                    .foregroundStyle(.white)
-                    .font(.system(size: 18))
-                
-                Spacer()
-                
-                Button(action: {
-                    // Todo - 공유 버튼 기능
-                }, label: {
-                    Image("share")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 25, height: 25)
-                }) //: Button
-            } //: HStack
-            .padding(.horizontal)
-            .padding(.vertical, 10)
+            CustomNavigationBar(title: photo.user.name, leftButtonAction:  {
+                pathModel.paths.removeLast()
+            }, rightButtonAction: {
+                // Todo - 공유 기능
+            })
             
             ScrollView {
-                Image(uiImage: photo.image)
+                self.image.image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .scaledToFit()
@@ -60,7 +39,7 @@ struct PhotoDescriptionView: View {
 }
 
 #Preview {
-    PhotoDescriptionView(photo: .init(image: UIImage(systemName: "star.fill")!))
+    PhotoDescriptionView(photo: .toModel(), image: HashableImage(image: Image(systemName: "star.fill")))
         .applyBackgroundColor()
         .environment(\.backgroundColor, .customBlack0)
 }
