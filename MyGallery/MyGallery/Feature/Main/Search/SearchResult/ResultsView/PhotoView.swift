@@ -25,7 +25,7 @@ struct PhotoView: View {
             .foregroundStyle(.gray)
             
             LazyVGrid(columns: searchResultsTabViewModel.photosColumns, spacing: 3) {
-                ForEach(searchResultsTabViewModel.searchResult.results, id: \.id) { photo in
+                ForEach(searchResultsTabViewModel.searchPhotoList, id: \.id) { photo in
                     Rectangle()
                         .overlay {
                             AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in

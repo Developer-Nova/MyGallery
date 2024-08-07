@@ -10,6 +10,7 @@ import Combine
 
 final class SearchResultsTabViewModel: ObservableObject {
     @Published private(set) var searchResult: SearchResultResponseDTO
+    @Published private(set) var searchPhotoList: [PhotoResponseDTO]
     @Published private(set) var isLoading: Bool
     @Published var searchText: String
     
@@ -33,12 +34,14 @@ final class SearchResultsTabViewModel: ObservableObject {
     
     init(
         searchResult: SearchResultResponseDTO = .toModel(),
+        searchPhotoList: [PhotoResponseDTO] = [],
         isLoading: Bool = false,
         searchText: String = "",
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = []
     ) {
         self.searchResult = searchResult
+        self.searchPhotoList = searchPhotoList
         self.isLoading = isLoading
         self.searchText = searchText
         self.currentPage = currentPage
@@ -60,7 +63,7 @@ extension SearchResultsTabViewModel {
     }
     
     func removeAllToPhotoList() {
-        self.searchResult.results.removeAll()
+        self.searchPhotoList.removeAll()
     }
     
     func getSearchPhotoList() {
@@ -80,6 +83,7 @@ extension SearchResultsTabViewModel {
                 withAnimation {
                     self.isLoading.toggle()
                     self.searchResult = searchResult
+                    searchResult.results.forEach { self.searchPhotoList.append($0) }
                 }
             }
             .store(in: &cancellables)
