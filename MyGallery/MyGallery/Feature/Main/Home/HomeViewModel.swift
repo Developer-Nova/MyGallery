@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 final class HomeViewModel: ObservableObject {
-    @Published private(set) var photoList: [Photo]
+    @Published private(set) var photoList: [PhotoResponseDTO]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
     
@@ -22,7 +22,7 @@ final class HomeViewModel: ObservableObject {
     }
 
     init(
-        photoList: [Photo] = [],
+        photoList: [PhotoResponseDTO] = [],
         isLoading: Bool = false,
         isInitialAppear: Bool = true,
         currentPage: Int = 1,
@@ -56,7 +56,7 @@ extension HomeViewModel {
     func getPopularPhotoList() {
         self.isLoading.toggle()
         
-        self.networkService.fetchNewPhotoList(page: self.currentPage, orderBy: .latest)
+        self.networkService.fetchPhotoList(page: self.currentPage, orderBy: .latest)
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 switch completion {
@@ -66,10 +66,10 @@ extension HomeViewModel {
                     print(error)
                     self.isLoading.toggle()
                 }
-            } receiveValue: { image in
+            } receiveValue: { photo in
                 withAnimation {
                     self.isLoading.toggle()
-                    self.photoList.append(contentsOf: image.map { Photo(image: $0)})
+                    photo.forEach { self.photoList.append($0) }
                 }
             }
             .store(in: &cancellables)
