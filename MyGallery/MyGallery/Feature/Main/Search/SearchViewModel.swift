@@ -61,6 +61,10 @@ final class SearchViewModel: ObservableObject {
 }
 
 extension SearchViewModel {
+    func removeAllToPhotoList() {
+        self.photoList.removeAll()
+    }
+    
     func removeAllToRecentSearchText() {
         self.recentSearchText.removeAll()
     }
