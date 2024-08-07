@@ -15,15 +15,18 @@ final class NetworkService {
     
     private init() { }
     
-    func fetchNewPhotoList(page: Int = 1, orderBy: OrderBy = .latest, perPage: Int = 30) -> AnyPublisher<[UIImage], NetworkError> {
-        let requestDTO = NewPhotoListRequestDTO(page: page, perPage: perPage, orderBy: orderBy)
-        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos, type: [PhotoResponseDTO].self)
+    func fetchPhoto(id: String) -> AnyPublisher<PhotoResponseDTO, NetworkError> {
+        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(path: UnsplashAPI.Path.photos(id: id), type: PhotoResponseDTO.self)
+            
+        return self.networkProvider.request(endpoint: endpoint)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchPhotoList(page: Int = 1, perPage: Int = 30, orderBy: OrderBy = .latest) -> AnyPublisher<[PhotoResponseDTO], NetworkError> {
+        let requestDTO = PhotoListRequestDTO(page: page, perPage: perPage, orderBy: orderBy)
+        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.photos(), type: [PhotoResponseDTO].self)
         
         return self.networkProvider.request(endpoint: endpoint)
-            .flatMap { photos in
-                Publishers.MergeMany(photos.map { self.conversionImage(with: $0.urls.regular) })
-                    .collect()
-            }
             .eraseToAnyPublisher()
     }
     
@@ -38,6 +41,14 @@ final class NetworkService {
     func fetchTopicList() -> AnyPublisher<[TopicResponseDTO], NetworkError> {
         let requestDTO = TopicListRequestDTO()
         let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.topics, type: [TopicResponseDTO].self)
+        
+        return self.networkProvider.request(endpoint: endpoint)
+            .eraseToAnyPublisher()
+    }
+    
+    func fetchTopicPhotoList(id: String, page: Int = 1, perPage: Int = 30, orderBy: OrderBy = .latest) -> AnyPublisher<[PhotoResponseDTO], NetworkError> {
+        let requestDTO = PhotoListRequestDTO(page: page, perPage: perPage, orderBy: orderBy)
+        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.topicsPhotos(id: id), type: [PhotoResponseDTO].self)
         
         return self.networkProvider.request(endpoint: endpoint)
             .eraseToAnyPublisher()
