@@ -28,25 +28,32 @@ struct TopicPhotoScrollView: View {
             ScrollView(.vertical) {
                 LazyVGrid(columns: searchViewModel.topicsPhotosColumns, spacing: 3) {
                     ForEach(searchViewModel.photoList, id: \.id) { photo in
-                        Rectangle()
-                            .overlay {
-                                AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .background(
-                                            Color.gray
-                                        )
-                                        .contentShape(Rectangle())
-                                        .onTapGesture {
-                                            pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: .init(image: image)))
-                                        }
-                                } placeholder: {
-                                    CustomProgressView()
-                                } //: AsyncImage
-                            }
-                            .aspectRatio(0.7, contentMode: .fill)
-                            .clipped()
+                        ZStack(alignment: .bottomLeading) {
+                            Rectangle()
+                                .overlay {
+                                    AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .background(
+                                                Color.gray
+                                            )
+                                            .onTapGesture {
+                                                pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: .init(image: image)))
+                                            }
+                                    } placeholder: {
+                                        CustomProgressView()
+                                    } //: AsyncImage
+                                }
+                                .aspectRatio(0.7, contentMode: .fill)
+                                .contentShape(Rectangle())
+                                .clipped()
+                            
+                            Text(photo.user.name)
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundStyle(.white)
+                                .padding([.bottom, .leading], 7)
+                        } //: ZStack
                     } //: ForEach
                 } //: LazyVGrid
                 
