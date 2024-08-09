@@ -21,8 +21,11 @@ struct PhotoView: View {
                 Text(searchResultsTabViewModel.total)
                 
                 Text(searchResultsTabViewModel.totalPage)
+                
+                Spacer()
             }
             .foregroundStyle(.gray)
+            .padding(.horizontal)
             
             LazyVGrid(columns: searchResultsTabViewModel.photosColumns, spacing: 3) {
                 ForEach(searchResultsTabViewModel.searchPhotoList, id: \.id) { photo in
