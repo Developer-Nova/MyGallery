@@ -29,25 +29,32 @@ struct PhotoView: View {
             
             LazyVGrid(columns: searchResultsTabViewModel.photosColumns, spacing: 3) {
                 ForEach(searchResultsTabViewModel.searchPhotoList, id: \.id) { photo in
-                    Rectangle()
-                        .overlay {
-                            AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .background(
-                                        Color.gray
-                                    )
-                                    .contentShape(Rectangle())
-                                    .onTapGesture {
-                                        pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: HashableImage(image: image)))
-                                    }
-                            } placeholder: {
-                                CustomProgressView()
+                    ZStack(alignment: .bottomLeading) {
+                        Rectangle()
+                            .overlay {
+                                AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .background(
+                                            Color.gray
+                                        )
+                                        .onTapGesture {
+                                            pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: HashableImage(image: image)))
+                                        }
+                                } placeholder: {
+                                    CustomProgressView()
+                                }
                             }
-                        }
-                        .aspectRatio(0.7, contentMode: .fill)
-                        .clipped()
+                            .aspectRatio(0.7, contentMode: .fill)
+                            .contentShape(Rectangle())
+                            .clipped()
+                        
+                        Text(photo.user.name)
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundStyle(.white)
+                            .padding([.bottom, .leading], 7)
+                    } //: ZStack
                 } //: ForEach
             } //: LazyVGrid
             
