@@ -23,7 +23,7 @@ struct TopicView: View {
             .padding(.horizontal)
             
             LazyVGrid(columns: searchViewModel.topicsColumns, spacing: 10) {
-                ForEach(searchViewModel.topicList, id: \.id) { topic in
+                ForEach(searchViewModel.topicList, id: \.0.id) { topic, uiImage in
                     Button(action: {
                         self.pathModel.paths.append(.topicPhotoScrollView(topicTitle: topic.title))
                         self.searchViewModel.setTopicId(id: topic.id)
@@ -33,17 +33,13 @@ struct TopicView: View {
                             RoundedRectangle(cornerRadius: 20)
                                 .foregroundStyle(.black)
                                 .overlay {
-                                    AsyncImage(url: URL(string: topic.coverPhoto.urls.regular)) { image in
-                                        image
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 180, height: 150)
-                                            .clipShape(RoundedRectangle(cornerRadius: 20))
-                                            .clipped()
-                                            .opacity(0.7)
-                                    } placeholder: {
-                                        CustomProgressView()
-                                    } //: AsyncImage
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 180, height: 150)
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                                        .clipped()
+                                        .opacity(0.7)
                                 }
                             
                             Text(topic.title)
