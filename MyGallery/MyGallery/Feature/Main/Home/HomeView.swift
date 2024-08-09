@@ -83,7 +83,6 @@ private struct PhotoScrollView: View {
                                     image
                                         .resizable()
                                         .scaledToFill()
-                                        .contentShape(Rectangle())
                                         .onTapGesture {
                                             pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: .init(image: image)))
                                         }
@@ -92,11 +91,12 @@ private struct PhotoScrollView: View {
                                 }
                             }
                             .aspectRatio(0.6, contentMode: .fill)
+                            .contentShape(Rectangle())
                             .clipped()
                             
                         
-                        Text("사진 작업자") // Todo - 실제 사진 작가 넣어주기
-                            .font(.system(size: 15, weight: .regular))
+                        Text(photo.user.name)
+                            .font(.system(size: 15, weight: .bold))
                             .foregroundStyle(.white)
                             .padding([.bottom, .leading], 7)
                     } //: ZStack
