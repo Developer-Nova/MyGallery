@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 final class SearchViewModel: ObservableObject {
-    @Published private(set) var topicList: [TopicResponseDTO]
+    @Published private(set) var topicList: [(TopicResponseDTO, UIImage)]
     @Published private(set) var photoList: [PhotoResponseDTO]
     @Published private(set) var recentSearchText: [String]
     @Published private(set) var isLoading: Bool
@@ -32,7 +32,7 @@ final class SearchViewModel: ObservableObject {
     }
     
     init(
-        topicList: [TopicResponseDTO] = [],
+        topicList: [(TopicResponseDTO, UIImage)] = [],
         photoList: [PhotoResponseDTO] = [],
         recentSearchText: [String] = [],
         isLoading: Bool = false,
@@ -115,7 +115,7 @@ extension SearchViewModel {
             } receiveValue: { topic in
                 withAnimation {
                     self.isLoading.toggle()
-                    topic.forEach { self.topicList.append($0) }
+                    topic.forEach { self.loadImage(topic: $0) }
                 }
             }
             .store(in: &cancellables)
@@ -139,6 +139,22 @@ extension SearchViewModel {
                     self.isLoading.toggle()
                     photo.forEach { self.photoList.append($0) }
                 }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func loadImage(topic: TopicResponseDTO) {
+        self.networkService.conversionImage(with: topic.coverPhoto.urls.regular)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { uiImage in
+                self.topicList.append((topic, uiImage))
             }
             .store(in: &cancellables)
     }
