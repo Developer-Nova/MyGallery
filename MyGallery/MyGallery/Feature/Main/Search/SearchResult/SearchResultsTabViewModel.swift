@@ -19,13 +19,11 @@ final class SearchResultsTabViewModel: ObservableObject {
     private let networkService = NetworkService.shared
     
     var total: String {
-        // Todo - formatter 사용해서 숫자 쉼표 적용하기
-
-        "Total: " + String(self.searchResult.total)
+        "Total: " + String(self.searchResult.total.formatWithComma())
     }
     
     var totalPage: String {
-        "Total page: " + String(self.searchResult.totalPages)
+        "Page: " + String(self.searchResult.totalPages.formatWithComma())
     }
     
     var photosColumns: [GridItem] {
