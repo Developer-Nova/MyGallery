@@ -16,12 +16,25 @@ struct SearchResultsTabView: View {
     
     var body: some View {
         VStack {
-            // Todo - 상단 탭뷰 Photo, Collection, User
+            Picker("SearchInfo", selection: $searchResultsTabViewModel.selectedPicker) {
+                ForEach(TabInfo.allCases, id: \.self) { tabInfo in
+                    Text(tabInfo.rawValue)
+                }
+            } //: Picker
+            .pickerStyle(.segmented)
+            .padding()
             
             if searchResultsTabViewModel.isLoading && searchResultsTabViewModel.searchResult.results.isEmpty {
                 CustomProgressView()
             } else {
-                PhotoView(searchResultsTabViewModel: searchResultsTabViewModel)
+                switch searchResultsTabViewModel.selectedPicker {
+                case .photo:
+                    PhotoView(searchResultsTabViewModel: searchResultsTabViewModel)
+                case .user:
+                    UserView()
+                case .collection:
+                    CollectionView()
+                }
             } //: if Condition
         } //: VStack
         .applyBackgroundColor()
@@ -30,5 +43,6 @@ struct SearchResultsTabView: View {
 
 #Preview {
     SearchResultsTabView(searchResultsTabViewModel: SearchResultsTabViewModel())
+        .applyBackgroundColor()
         .environment(\.backgroundColor, .customBlack0)
 }
