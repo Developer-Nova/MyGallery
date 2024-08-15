@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 final class HomeViewModel: ObservableObject {
-    @Published private(set) var photoList: [PhotoResponseDTO]
+    @Published var photoList: [PhotoResponseDTO]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
     
