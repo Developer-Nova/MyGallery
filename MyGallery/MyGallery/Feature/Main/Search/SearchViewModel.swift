@@ -10,7 +10,7 @@ import Combine
 
 final class SearchViewModel: ObservableObject {
     @Published private(set) var topicList: [(TopicResponseDTO, UIImage)]
-    @Published private(set) var photoList: [PhotoResponseDTO]
+    @Published var photoList: [PhotoResponseDTO]
     @Published private(set) var recentSearchText: [String]
     @Published private(set) var isLoading: Bool
     @Published private(set) var isInitialAppear: Bool
