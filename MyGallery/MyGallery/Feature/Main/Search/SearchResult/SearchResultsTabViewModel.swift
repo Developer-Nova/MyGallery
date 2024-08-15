@@ -10,7 +10,7 @@ import Combine
 
 final class SearchResultsTabViewModel: ObservableObject {
     @Published private(set) var searchResult: SearchResultResponseDTO
-    @Published private(set) var searchPhotoList: [PhotoResponseDTO]
+    @Published var searchPhotoList: [PhotoResponseDTO]
     @Published private(set) var isLoading: Bool
     @Published var searchText: String
     

@@ -16,7 +16,7 @@ struct PhotoView: View {
     }
     
     var body: some View {
-        ScrollView(.vertical) {
+        PhotoScrollView(photoList: self.$searchResultsTabViewModel.searchPhotoList, columns: self.searchResultsTabViewModel.photosColumns, spacing: 3) {
             HStack {
                 Text(searchResultsTabViewModel.total)
                 
@@ -26,38 +26,7 @@ struct PhotoView: View {
             }
             .foregroundStyle(.gray)
             .padding(.horizontal)
-            
-            LazyVGrid(columns: searchResultsTabViewModel.photosColumns, spacing: 3) {
-                ForEach(searchResultsTabViewModel.searchPhotoList, id: \.id) { photo in
-                    ZStack(alignment: .bottomLeading) {
-                        Rectangle()
-                            .overlay {
-                                AsyncImage(url: URL(string: photo.photoUrls.regular)) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .background(
-                                            Color.gray
-                                        )
-                                        .onTapGesture {
-                                            pathModel.paths.append(.photoDescriptionView(photoObject: photo, image: HashableImage(image: image)))
-                                        }
-                                } placeholder: {
-                                    CustomProgressView()
-                                }
-                            }
-                            .aspectRatio(0.7, contentMode: .fill)
-                            .contentShape(Rectangle())
-                            .clipped()
-                        
-                        Text(photo.user.name)
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundStyle(.white)
-                            .padding([.bottom, .leading], 7)
-                    } //: ZStack
-                } //: ForEach
-            } //: LazyVGrid
-            
+        } bottomContent: {
             Group {
                 if searchResultsTabViewModel.isLoading {
                     CustomProgressView()
@@ -69,7 +38,7 @@ struct PhotoView: View {
             } //: Group
             .padding(.top, 25)
             .padding(.bottom, 40)
-        } //: ScrollView
+        } //: PhotoScrollView
     }
 }
 
