@@ -10,13 +10,14 @@ import Combine
 
 final class SearchResultsTabViewModel: ObservableObject {
     @Published private(set) var searchResult: SearchResultResponseDTO
-    @Published var searchPhotoList: [PhotoResponseDTO]
     @Published private(set) var isLoading: Bool
+    @Published var selectedPicker: TabInfo
+    @Published var searchPhotoList: [PhotoResponseDTO]
     @Published var searchText: String
     
     private var currentPage: Int
     private var cancellables: Set<AnyCancellable>
-    private let networkService = NetworkService.shared
+    private let networkService: NetworkService
     
     var total: String {
         "Total: " + String(self.searchResult.total.formatWithComma())
@@ -32,18 +33,22 @@ final class SearchResultsTabViewModel: ObservableObject {
     
     init(
         searchResult: SearchResultResponseDTO = .toModel(),
-        searchPhotoList: [PhotoResponseDTO] = [],
         isLoading: Bool = false,
+        selectedPicker: TabInfo = .photo,
+        searchPhotoList: [PhotoResponseDTO] = [],
         searchText: String = "",
         currentPage: Int = 1,
-        cancellables: Set<AnyCancellable> = []
+        cancellables: Set<AnyCancellable> = [],
+        networkService: NetworkService = .shared
     ) {
         self.searchResult = searchResult
-        self.searchPhotoList = searchPhotoList
         self.isLoading = isLoading
+        self.selectedPicker = selectedPicker
+        self.searchPhotoList = searchPhotoList
         self.searchText = searchText
         self.currentPage = currentPage
         self.cancellables = cancellables
+        self.networkService = networkService
     }
 }
 
