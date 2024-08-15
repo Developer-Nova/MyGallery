@@ -58,4 +58,8 @@ struct TopicView: View {
 
 #Preview {
     TopicView()
+        .applyBackgroundColor()
+        .environment(\.backgroundColor, .customBlack0)
+        .environmentObject(SearchViewModel())
+        .environmentObject(Path())
 }
