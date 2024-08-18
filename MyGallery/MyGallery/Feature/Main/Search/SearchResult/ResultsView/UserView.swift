@@ -9,8 +9,10 @@ import SwiftUI
 
 struct UserView: View {
     var body: some View {
-        Text("UserView")
-            .foregroundStyle(.white)
+        ScrollView {
+            Text("UserView")
+                .foregroundStyle(.white)
+        } //: ScrollView
     }
 }
 

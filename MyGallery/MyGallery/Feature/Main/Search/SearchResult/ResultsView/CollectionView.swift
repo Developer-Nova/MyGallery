@@ -9,8 +9,10 @@ import SwiftUI
 
 struct CollectionView: View {
     var body: some View {
-        Text("CollectionView")
-            .foregroundStyle(.white)
+        ScrollView {
+            Text("CollectionView")
+                .foregroundStyle(.white)
+        } //: ScrollView
     }
 }
 
