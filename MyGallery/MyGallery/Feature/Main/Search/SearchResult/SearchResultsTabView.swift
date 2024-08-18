@@ -12,6 +12,9 @@ struct SearchResultsTabView: View {
     
     init(searchResultsTabViewModel: SearchResultsTabViewModel) {
         self.searchResultsTabViewModel = searchResultsTabViewModel
+        UISegmentedControl.appearance().backgroundColor = .customGray1
+        UISegmentedControl.appearance().selectedSegmentTintColor = .darkGray
+        UISegmentedControl.appearance().setTitleTextAttributes([.foregroundColor: UIColor.customGray2], for: .normal)
     }
     
     var body: some View {
@@ -22,7 +25,7 @@ struct SearchResultsTabView: View {
                 }
             } //: Picker
             .pickerStyle(.segmented)
-            .padding()
+            .padding(.horizontal)
             
             if searchResultsTabViewModel.isLoading && searchResultsTabViewModel.searchResult.results.isEmpty {
                 CustomProgressView()

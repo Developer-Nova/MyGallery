@@ -57,14 +57,14 @@ private struct SearchBarView: View {
         HStack {
             HStack {
                 Image(systemName: "magnifyingglass")
-                    .foregroundStyle(Color.customGray2)
+                    .foregroundStyle(.customGray2)
                     .padding(.leading, 7)
                 
                 TextField(
                     "Search",
                     text: $searchResultsTabViewModel.searchText,
                     prompt: Text("Search for English")
-                                .foregroundStyle(Color.customGray2)
+                                .foregroundStyle(.customGray2)
                 )
                 .foregroundStyle(Color.customGray2)
                 .submitLabel(.search)
@@ -108,7 +108,7 @@ private struct SearchBarView: View {
             .padding(10)
             .background(
                 RoundedRectangle(cornerRadius: 25)
-                    .foregroundStyle(Color.customGray1)
+                    .foregroundStyle(.customGray1)
             )
             
             if searchViewModel.isFocused {
