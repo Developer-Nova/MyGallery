@@ -30,9 +30,9 @@ final class NetworkService {
             .eraseToAnyPublisher()
     }
     
-    func fetchSearchPhotoList(about searchText: String, page: Int) -> AnyPublisher<SearchResultResponseDTO, NetworkError> {
+    func fetchSearchPhotoList(about searchText: String, page: Int) -> AnyPublisher<SearchPhotoResponseDTO, NetworkError> {
         let requestDTO = SearchPhotoListRequestDTO(query: searchText, page: page)
-        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.search, type: SearchResultResponseDTO.self)
+        let endpoint = UnsplashAPIEndpoints.getPhotoListEndpoint(query: requestDTO, path: UnsplashAPI.Path.search, type: SearchPhotoResponseDTO.self)
         
         return self.networkProvider.request(endpoint: endpoint)
             .eraseToAnyPublisher()

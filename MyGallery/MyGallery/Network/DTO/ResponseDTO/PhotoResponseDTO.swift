@@ -8,6 +8,7 @@
 // MARK: - PhotoResponseDTO
 struct PhotoResponseDTO: ResponseDTO {
     let id: String
+    let title: String?
     let alternativeSlugs: AlternativeSlug
     let createdAt: String
     let width: Int
@@ -28,6 +29,7 @@ struct PhotoResponseDTO: ResponseDTO {
     
     private enum CodingKeys: String, CodingKey {
         case id
+        case title
         case alternativeSlugs = "alternative_slugs"
         case createdAt = "created_at"
         case width
@@ -146,6 +148,7 @@ struct Social: ResponseDTO {
 extension PhotoResponseDTO {
     static func toModel() -> PhotoResponseDTO {
         .init(id: "",
+              title: "",
               alternativeSlugs: AlternativeSlug(ko: ""),
               createdAt: "",
               width: 0,

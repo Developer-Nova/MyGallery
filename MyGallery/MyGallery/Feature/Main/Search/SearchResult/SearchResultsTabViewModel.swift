@@ -9,10 +9,12 @@ import SwiftUI
 import Combine
 
 final class SearchResultsTabViewModel: ObservableObject {
-    @Published private(set) var searchResult: SearchResultResponseDTO
+    @Published private(set) var searchResult: SearchPhotoResponseDTO
     @Published private(set) var isLoading: Bool
     @Published var selectedPicker: TabInfo
     @Published var searchPhotoList: [PhotoResponseDTO]
+    @Published var searchCollectionList: [PhotoResponseDTO]
+    @Published var searchUserList: [PhotoResponseDTO]
     @Published var searchText: String
     
     private var currentPage: Int
@@ -32,10 +34,12 @@ final class SearchResultsTabViewModel: ObservableObject {
     }
     
     init(
-        searchResult: SearchResultResponseDTO = .toModel(),
+        searchResult: SearchPhotoResponseDTO = .toModel(),
         isLoading: Bool = false,
         selectedPicker: TabInfo = .photo,
         searchPhotoList: [PhotoResponseDTO] = [],
+        searchCollectionList: [PhotoResponseDTO] = [],
+        searchUserList: [PhotoResponseDTO] = [],
         searchText: String = "",
         currentPage: Int = 1,
         cancellables: Set<AnyCancellable> = [],
@@ -45,6 +49,8 @@ final class SearchResultsTabViewModel: ObservableObject {
         self.isLoading = isLoading
         self.selectedPicker = selectedPicker
         self.searchPhotoList = searchPhotoList
+        self.searchCollectionList = searchCollectionList
+        self.searchUserList = searchUserList
         self.searchText = searchText
         self.currentPage = currentPage
         self.cancellables = cancellables
